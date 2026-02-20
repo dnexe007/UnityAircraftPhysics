@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class WingsForce : MonoBehaviour
 {
-    public WingProfile WingParams;
+    public WingLiftProfile WingParams;
 
     private Rigidbody rb;
     private PlaneInfo info;

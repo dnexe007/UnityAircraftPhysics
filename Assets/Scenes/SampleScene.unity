@@ -1477,26 +1477,49 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WingParams:
-    attackAngleParams:
-      NegativeStall:
-        attackAngle: -20
-        forceMult: 0.2
-      NegativePeak:
-        attackAngle: -15
-        forceMult: -0.5
-      Center:
-        attackAngle: 0
-        forceMult: 0
-      PositivePeak:
-        attackAngle: 15
-        forceMult: 1
-      PositiveStall:
-        attackAngle: 25
-        forceMult: 0.2
-      StallForceLimit: 6
-    NoFlapsStallSpeed: 100
-    FullFlapsStallSpeed: 60
-  ForcePointsWidth: 10
+    AttackAngleParams:
+      LiftMultOverAOA:
+      - {x: -25, y: 0.2}
+      - {x: -18, y: -0.5}
+      - {x: 0, y: 0}
+      - {x: 15, y: 1}
+      - {x: 25, y: 0.2}
+    PeakLiftOverSpeed:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 100
+        value: 9.81
+        inSlope: 0.3182437
+        outSlope: 0.3182437
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.1797979
+        outWeight: 0
+      - serializedVersion: 3
+        time: 200
+        value: 100
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    StallLiftLimit: 2.5
+    FlapsLiftMult: 3
+  ForcePointsWidth: 5
   FlapsValue: 0
 --- !u!114 &1917292392
 MonoBehaviour:

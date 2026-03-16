@@ -4,59 +4,29 @@ using UnityEngine;
 [Serializable]
 public class WingLiftProfile
 {
-    [SerializeField] private AnimationCurve PeakLiftOverSpeed = new(
-        new(0, 0),
-        new(100, 9.81f),
-        new(200, 100)
-    );
-
-    [SerializeField] private float StallLiftClamp = 2;
-
-    [SerializeField] private Vector2[] LiftMultOverAOA = {
-        new(-25, 0.2f),
-        new(-18, -0.5f),
+    [SerializeField] private AnimationCurve LiftMultOverAOA = new(
+        new(-25, -0.1f),
+        new(-15, -0.5f),
         new(0, 0),
         new(15, 1),
-        new(25, 0.2f)
-    };
+        new(25, 0.1f)
+    );
+    [SerializeField] private float FlapsZeroStallSpeed = 100;
+    [SerializeField] private float FlapsFullStallSpeed = 60;
 
-    [SerializeField] private float MaxFlapsLiftMult = 3;
+    private float FlapsForceMult => Physics.gravity.magnitude / CalculatePeakLift(FlapsFullStallSpeed);
 
-    private float ApplyAngleOfAttack(float peakLift, float angleOfAttack)
+    private float CalculatePeakLift(float speed)
     {
-        for (int rightEdgeIndex = 1; rightEdgeIndex < LiftMultOverAOA.Length; rightEdgeIndex++)
-        {
-            if (angleOfAttack <= LiftMultOverAOA[rightEdgeIndex].x || rightEdgeIndex == LiftMultOverAOA.Length - 1)
-            {
-                int leftEdgeIndex = rightEdgeIndex - 1;
-
-                float leftEdgeLift = LiftMultOverAOA[leftEdgeIndex].y * peakLift;
-                float rightEdgeLift = LiftMultOverAOA[rightEdgeIndex].y * peakLift;
-
-                //apply lift limits for stall keyframes
-                if (leftEdgeIndex == 0)
-                    leftEdgeLift = Mathf.Max(leftEdgeLift, -StallLiftClamp);
-                if (rightEdgeIndex == LiftMultOverAOA.Length - 1)
-                    rightEdgeLift = Mathf.Min(rightEdgeLift, StallLiftClamp);
-
-                float lerpValue = Mathf.InverseLerp(
-                    LiftMultOverAOA[leftEdgeIndex].x,
-                    LiftMultOverAOA[rightEdgeIndex].x,
-                    angleOfAttack
-                );
-
-                return Mathf.Lerp(leftEdgeLift, rightEdgeLift, lerpValue);
-            }
-        }
-        return 0;
+        //Mathf.Pow(FlapsZeroStallSpeed, 2) * mult = gravity
+        float mult = Physics.gravity.magnitude / Mathf.Pow(FlapsZeroStallSpeed, 2);
+        return Mathf.Pow(speed, 2) * mult;
     }
 
-    public float GetWingsForce(float speed, float attackAngle, float flapsValue)
+    public float GetLift(float speed, float angleOfAttack, float flapsValue)
     {
-        float peakForce = PeakLiftOverSpeed.Evaluate(speed);
-
-        float flapsMult = Mathf.Lerp(1, MaxFlapsLiftMult, flapsValue);
-
-        return ApplyAngleOfAttack(peakForce, attackAngle) * flapsMult;
+        float flapsZeroLift = CalculatePeakLift(speed) * LiftMultOverAOA.Evaluate(angleOfAttack);
+        float flapsLiftMultiplier = Mathf.Lerp(1, FlapsForceMult, flapsValue);
+        return flapsZeroLift * flapsLiftMultiplier;
     }
 }

@@ -19,10 +19,10 @@ public class ForwardResistance : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector3 localVelocity = info.localVelocity;
+        Vector3 localVelocity = info.LocalVelocity;
         float decceleration = ResistanceOverSpeed.Evaluate(Mathf.Abs(localVelocity.z));
         localVelocity.z = Mathf.MoveTowards(localVelocity.z, 0, decceleration * Time.fixedDeltaTime);
-        Vector3 velocityDelta = transform.TransformDirection(localVelocity - info.localVelocity);
+        Vector3 velocityDelta = transform.TransformDirection(localVelocity - info.LocalVelocity);
         rb.AddForce(velocityDelta, ForceMode.VelocityChange);
     }
 }

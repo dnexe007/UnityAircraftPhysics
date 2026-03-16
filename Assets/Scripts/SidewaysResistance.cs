@@ -7,22 +7,7 @@ public class SidewaysResistance : MonoBehaviour
         new(50, 20)
     );
 
-    public AnimationCurve SteerHelperOverRoll = new(
-        new(3, 0),
-        new(25, 1)
-    );
-
     public float RotatingFactor = 0.09f;
-
-    public AnimationCurve RotFactorMultOverSteerHelper = new(
-        new(0, 1),
-        new(1, 0.1f)
-    );
-
-    public AnimationCurve ResistanceMultOverSteerHelper = new(
-        new(0, 1),
-        new(1, 4)
-    );
 
     private Rigidbody rb;
     private PlaneInfo info;
@@ -41,20 +26,15 @@ public class SidewaysResistance : MonoBehaviour
 
     private void FixedUpdate()
     {
-        float terminalSpeed = TerminalXSpeedOverZSpeed.Evaluate(info.localVelocity.z);
-        float deccelerationForce = CalculateForce(info.localVelocity.x, terminalSpeed);
+        float terminalSpeed = TerminalXSpeedOverZSpeed.Evaluate(info.LocalVelocity.z);
+        float deccelerationForce = CalculateForce(info.LocalVelocity.x, terminalSpeed);
 
 
-        float rollAngle = Vector3.Angle(transform.right, Vector3.up) - 90;
-        bool IsDriftingReversed = Mathf.Sign(rollAngle) != Mathf.Sign(info.localVelocity.x);
-        float steerHelperValue = IsDriftingReversed ? SteerHelperOverRoll.Evaluate(Mathf.Abs(rollAngle)) : 0;
 
 
-        float forceMult = ResistanceMultOverSteerHelper.Evaluate(steerHelperValue);
-        rb.AddForce(-transform.right * Mathf.Sign(info.localVelocity.x) * deccelerationForce * forceMult, ForceMode.Acceleration);
+        rb.AddForce(-transform.right * Mathf.Sign(info.LocalVelocity.x) * deccelerationForce, ForceMode.Acceleration);
 
 
-        float torqueMult = RotFactorMultOverSteerHelper.Evaluate(steerHelperValue);
-        rb.AddTorque(transform.up * deccelerationForce * Mathf.Sign(info.localVelocity.x) * RotatingFactor * torqueMult, ForceMode.Acceleration);
+        rb.AddTorque(transform.up * deccelerationForce * Mathf.Sign(info.LocalVelocity.x) * RotatingFactor, ForceMode.Acceleration);
     }
 }

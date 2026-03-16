@@ -49,7 +49,7 @@ public class TestEngines : MonoBehaviour
 
     private void OnGUI()
     {
-        SpeedMs = info.localVelocity.z;
+        SpeedMs = info.LocalVelocity.z;
         SpeedKmh = SpeedMs * MsToKmh;
         SpeedKnots = SpeedMs * MsToKnots;
 

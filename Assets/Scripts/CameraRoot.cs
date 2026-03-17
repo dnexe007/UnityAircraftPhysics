@@ -9,10 +9,12 @@ public class CameraRoot : MonoBehaviour
 
     Quaternion currentRt;
 
+    FlightData fData;
+
     private void Start()
     {
         rb = GetComponentInParent<Rigidbody>();
-        rt = GetComponentInParent<RollAndPitch>();
+        fData = GetComponentInParent<FlightData>();
         currentRt = transform.parent.rotation;
     }
 
@@ -21,13 +23,12 @@ public class CameraRoot : MonoBehaviour
     public float XAngleOffsetSpeed;
 
     public float YPositionMult;
-    RollAndPitch rt;
     private void Update()
     {
         // currentFd = Vector3.Slerp(currentFd, transform.parent.forward, SlerpSpeed * Time.deltaTime);
         //transform.forward = currentFd;
 
-        Vector3 trUp = Vector3.Cross(transform.parent.forward, rt.rightHorizontalVector);
+        Vector3 trUp = Vector3.Cross(transform.parent.forward, fData.RightHorizontalVector);
 
         Quaternion targetRt = Quaternion.LookRotation(transform.parent.forward, trUp);
 

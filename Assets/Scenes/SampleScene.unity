@@ -9681,8 +9681,6 @@ GameObject:
   - component: {fileID: 1917292395}
   - component: {fileID: 1917292393}
   - component: {fileID: 1917292396}
-  - component: {fileID: 1917292398}
-  - component: {fileID: 1917292399}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -10179,30 +10177,6 @@ MonoBehaviour:
   BasicForceFullSpeedOffset: 25
   AttackAngleFullSpeedOffset: 50
   FlapsValue: 0
---- !u!114 &1917292398
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1917292383}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed0fb63b42015224c9c12689f6f5f762, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1917292399
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1917292383}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 236b3c2bb81ead14e97b1f2c94c9cff8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1923979706
 GameObject:
   m_ObjectHideFlags: 0
@@ -10444,8 +10418,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0896d30730595943bac988a87872b75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rp: {fileID: 1917292398}
-  aoa: {fileID: 1917292399}
+  flightData: {fileID: 1917292392}
   MaxPitchRange: -487
   currentValue: 0
   PitchSpeed: 5

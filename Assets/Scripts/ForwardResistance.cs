@@ -9,12 +9,12 @@ public class ForwardResistance : MonoBehaviour
     );
 
     private Rigidbody rb;
-    private PlaneInfo info;
+    private FlightData info;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        info = GetComponent<PlaneInfo>();
+        info = GetComponent<FlightData>();
     }
 
     private void FixedUpdate()

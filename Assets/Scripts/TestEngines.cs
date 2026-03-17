@@ -7,7 +7,7 @@ public class TestEngines : MonoBehaviour
     public AnimationCurve EngineForceOverSpeed = new AnimationCurve(new Keyframe(0, 8), new Keyframe(400, 3));
 
     private Rigidbody rb;
-    private PlaneInfo info;
+    private FlightData info;
 
     public float SpeedKnots;
     public float SpeedKmh;
@@ -27,7 +27,7 @@ public class TestEngines : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        info = GetComponentInParent<PlaneInfo>();
+        info = GetComponentInParent<FlightData>();
     }
 
     public float rotationSpeed;

@@ -4,7 +4,7 @@ using UnityEngine;
 public class VerticalResistance : MonoBehaviour
 {
     private Rigidbody rb;
-    private PlaneInfo info;
+    private FlightData info;
 
 
     /*public AnimationCurve PointOffsetOverAttackAngle = new(
@@ -16,7 +16,7 @@ public class VerticalResistance : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        info = GetComponent<PlaneInfo>();
+        info = GetComponent<FlightData>();
     }
 
     public Vector3 forcePoint;

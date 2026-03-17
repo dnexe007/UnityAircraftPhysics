@@ -1,46 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class AngleOfAttack : MonoBehaviour
+public static class AngleOfAttack
 {
-    // Start is called before the first frame update
-
-    Rigidbody rb;
-
-    public float verticalAngle { get; private set; }
-
-    public float horizontalAngle { get; private set; }
-    void Start()
+    public struct AOAData
     {
-        rb = GetComponent<Rigidbody>();
+        public float vertical;
+        public float horizontal;
+
+        public AOAData(float vertical, float horizontal)
+        {
+            this.vertical = vertical;
+            this.horizontal = horizontal;
+        }
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    public static AOAData CalculateAOA(Vector3 localVelocity)
     {
-        if(rb.velocity.magnitude < 1)
-        {
-            verticalAngle = horizontalAngle = 0;
-            return;
-        }
+        if (localVelocity.sqrMagnitude < 1)
+            return new AOAData(0, 0);
 
-        verticalAngle = Vector3.SignedAngle(
-            Vector3.ProjectOnPlane(
-                rb.velocity.normalized,
-                transform.right
-            ).normalized,
-            transform.forward,
-            transform.right
-        );
 
-        horizontalAngle = Vector3.SignedAngle(
-            Vector3.ProjectOnPlane(
-                rb.velocity.normalized,
-                transform.up
-            ).normalized,
-            transform.forward,
-            transform.up
-        );
+        float vertical = -Mathf.Atan2(localVelocity.y, localVelocity.z) * Mathf.Rad2Deg;
+        float horizontal = -Mathf.Atan2(localVelocity.x, localVelocity.z) * Mathf.Rad2Deg;
+
+        return new AOAData(vertical, horizontal);
     }
 }

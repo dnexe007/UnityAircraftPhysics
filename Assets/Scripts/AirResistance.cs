@@ -6,7 +6,7 @@ public class AirResistance : MonoBehaviour
     public const float MsToKnots = 1.94384f;
 
     private Rigidbody rb;
-    private PlaneInfo info;
+    private FlightData info;
 
     private Vector3 localVelocity;
 
@@ -61,7 +61,7 @@ public class AirResistance : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        info = GetComponent<PlaneInfo>();
+        info = GetComponent<FlightData>();
     }
 
     private void FixedUpdate()

@@ -10,12 +10,12 @@ public class SidewaysResistance : MonoBehaviour
     public float RotatingFactor = 0.09f;
 
     private Rigidbody rb;
-    private PlaneInfo info;
+    private FlightData info;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        info = GetComponent<PlaneInfo>();   
+        info = GetComponent<FlightData>();   
     }
 
     private float CalculateForce(float speed, float terminalSpeed)

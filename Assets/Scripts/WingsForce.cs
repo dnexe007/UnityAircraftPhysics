@@ -5,7 +5,7 @@ public class WingsForce : MonoBehaviour
     public WingLiftProfile WingParams;
 
     private Rigidbody rb;
-    private PlaneInfo info;
+    private FlightData flightData;
     
     private Vector3 totalForce;
 
@@ -20,18 +20,17 @@ public class WingsForce : MonoBehaviour
     public float ZOffset = 3;
     public float XForce = 10;
 
-    RollAndPitch rt;
 
     private void ApplyWingForce()
     {
-        float speed = new Vector2(info.LocalVelocity.z, info.LocalVelocity.y).magnitude;
+        float speed = new Vector2(flightData.LocalVelocity.z, flightData.LocalVelocity.y).magnitude;
 
         Vector3 centerPosition = transform.TransformPoint(rb.centerOfMass);
         Vector3 offset = transform.right * ForcePointsWidth / 2;
 
 
-        Vector3 rightWingLift = transform.up * WingParams.GetLift(speed, info.AttackAngle, RightFlaps);
-        Vector3 leftWingLift = transform.up * WingParams.GetLift(speed, info.AttackAngle, LeftFlaps);
+        Vector3 rightWingLift = transform.up * WingParams.GetLift(speed, flightData.VerticalAOA, RightFlaps);
+        Vector3 leftWingLift = transform.up * WingParams.GetLift(speed, flightData.VerticalAOA, LeftFlaps);
 
         // ZOffset = rotatingFactorOverAOA.Evaluate(info.AttackAngle);
 
@@ -44,7 +43,7 @@ public class WingsForce : MonoBehaviour
 
         Vector3 zofffset = transform.forward * ZOffset;
 
-        rb.AddForceAtPosition(rt.rightHorizontalVector * rightWingSide, centerPosition + zofffset, ForceMode.Acceleration);
+        rb.AddForceAtPosition(flightData.RightHorizontalVector * rightWingSide, centerPosition + zofffset, ForceMode.Acceleration);
         rb.AddForceAtPosition(rightWingLift / 2, centerPosition + offset, ForceMode.Acceleration);
         rb.AddForceAtPosition(leftWingLift / 2, centerPosition - offset, ForceMode.Acceleration);
     }
@@ -52,8 +51,7 @@ public class WingsForce : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        info = GetComponent<PlaneInfo>();
-        rt = GetComponent<RollAndPitch>();
+        flightData = GetComponent<FlightData>();
     }
 
     private void FixedUpdate()

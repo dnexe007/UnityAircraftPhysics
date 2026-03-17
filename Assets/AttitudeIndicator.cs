@@ -3,8 +3,7 @@ using TMPro;
 
 public class AttitudeIndicator : MonoBehaviour
 {
-    [SerializeField] private RollAndPitch rp;
-    [SerializeField] public AngleOfAttack aoa;
+    [SerializeField] private FlightData flightData;
     [SerializeField] private float MaxPitchRange = -487;
     [Range(-1, 1)][SerializeField] private float currentValue;
     [SerializeField] private float PitchSpeed = 5;
@@ -36,10 +35,10 @@ public class AttitudeIndicator : MonoBehaviour
 
     private void SetDotAndAOA()
     {
-        AOAText.text = $"AOA: {-Mathf.Round(aoa.verticalAngle)}";
+        AOAText.text = $"AOA: {Mathf.Round(flightData.VerticalAOA)}";
         Vector2 dotTargetPosition = new Vector2(
-            aoa.horizontalAngle / 90,
-            -aoa.verticalAngle / 90
+            flightData.HorizontalAOA / 90,
+            flightData.VerticalAOA / 90
         ) * MaxPitchRange;
 
         dot.anchoredPosition = Vector2.Lerp(
@@ -50,12 +49,7 @@ public class AttitudeIndicator : MonoBehaviour
     }
     private void SetPitch()
     {
-        float targetPitchRange;
-
-        if (rp == null)
-            targetPitchRange = MaxPitchRange * currentValue;
-        else
-            targetPitchRange = rp.pitch / 90 * MaxPitchRange;
+        float targetPitchRange = flightData.Pitch / 90 * MaxPitchRange;
 
         currentPitchRange = Mathf.Lerp(
             currentPitchRange,
@@ -69,21 +63,12 @@ public class AttitudeIndicator : MonoBehaviour
 
     private void SetRoll()
     {
-        Vector2 targetRight = new();
-
-        targetRight.x = Mathf.Cos(Mathf.Deg2Rad * rp.roll);
-        targetRight.y = Mathf.Sin(Mathf.Deg2Rad * rp.roll);
-
-        float angleDelta = Vector3.SignedAngle(rollTransform.right, targetRight, Vector3.forward);
-
-        currentRollAngle += RollSpeed * angleDelta * Time.deltaTime;
+        currentRollAngle = Mathf.LerpAngle(currentRollAngle, flightData.Roll, RollSpeed * Time.deltaTime);
 
         if (currentRollAngle > 180) currentRollAngle -= 360;
         if (currentRollAngle < -180) currentRollAngle += 360;
 
         rollTransform.localEulerAngles = Vector3.forward * currentRollAngle;
-
-
         rollText.text = $"ROLL: {Mathf.Round(currentRollAngle)}";
     }
 }

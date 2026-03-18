@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class AngularDrag : MonoBehaviour
 {
-    public Vector3 DragForces = new(5, 5, 3);
-    public AnimationCurve ForceMultOverSpeed = new(
+    [SerializeField] private Vector3 DragForces = new(5, 5, 3);
+    [SerializeField] private AnimationCurve ForceMultOverSpeed = new(
         new(0, 0.25f),
         new(50, 1)
     );

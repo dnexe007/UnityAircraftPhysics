@@ -12,6 +12,7 @@ public class ControlSurface : MonoBehaviour
     private Rigidbody rb;
     private float currentInputValue;
 
+    [Range(-1, 1)] public float CenterValue;
     private KeyCode PositiveKeycode => (KeyCode)Enum.Parse(typeof(KeyCode), PositiveKey);
     private KeyCode NegativeKeycode => (KeyCode)Enum.Parse(typeof(KeyCode), NegativeKey);
 
@@ -34,7 +35,8 @@ public class ControlSurface : MonoBehaviour
 
     private void Update()
     {
-        float targetValue = (Input.GetKey(PositiveKeycode) ? 1 : 0) - (Input.GetKey(NegativeKeycode) ? 1 : 0);
+        float targetValue = (Input.GetKey(PositiveKeycode) ? 1 : 0) - (Input.GetKey(NegativeKeycode) ? 1 : 0) + CenterValue;
+        targetValue = Mathf.Clamp(targetValue, -1, 1);
         currentInputValue = Mathf.MoveTowards(currentInputValue, targetValue, Time.deltaTime * ValueChangeSpeed);
     }
 

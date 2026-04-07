@@ -34,4 +34,20 @@ public class COMDependentLocalPosition : MonoBehaviour
 
         transform.localPosition = position;
     }
+
+
+    [ContextMenu("apply position")]
+    public void ApplyFromEditor()
+    {
+        rb = GetComponentInParent<Rigidbody>();
+        Vector3 newPosition = rb.centerOfMass + offset;
+
+        Vector3 position = transform.localPosition;
+
+        if (enabledAxes.x) position.x = newPosition.x;
+        if (enabledAxes.y) position.y = newPosition.y;
+        if (enabledAxes.z) position.z = newPosition.z;
+
+        transform.localPosition = position;
+    }
 }

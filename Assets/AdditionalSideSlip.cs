@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AdditionalSideSlip : MonoBehaviour
 {
-    public Vector3 ForcePointOffset = new(0, -3, 0);
+    public Vector3 ForcePointOffset = new(0, 0, 0);
     public AnimationCurve SlipForceOverSpeed = new(
         new(0, 0),
         new(200, 5)

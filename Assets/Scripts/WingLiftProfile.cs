@@ -11,22 +11,18 @@ public class WingLiftProfile
         new(15, 1),
         new(25, 0.1f)
     );
-    [SerializeField] private float FlapsZeroStallSpeed = 100;
-    [SerializeField] private float FlapsFullStallSpeed = 60;
 
-    private float FlapsForceMult => Physics.gravity.magnitude / CalculatePeakLift(FlapsFullStallSpeed);
-
-    private float CalculatePeakLift(float speed)
-    {
-        //Mathf.Pow(FlapsZeroStallSpeed, 2) * mult = gravity
-        float mult = Physics.gravity.magnitude / Mathf.Pow(FlapsZeroStallSpeed, 2);
-        return Mathf.Pow(speed, 2) * mult;
-    }
+    [SerializeField] private Common.QuadDragAnchor FlapsZeroLiftAnchor = new(100, 9.81f);
+    [SerializeField] private Common.QuadDragAnchor FlapsFullLiftAnchor = new(60, 9.81f);
 
     public float GetLift(float speed, float angleOfAttack, float flapsValue)
     {
-        float flapsZeroLift = CalculatePeakLift(speed) * LiftMultOverAOA.Evaluate(angleOfAttack);
-        float flapsLiftMultiplier = Mathf.Lerp(1, FlapsForceMult, flapsValue);
-        return flapsZeroLift * flapsLiftMultiplier;
+        float flapsZeroLift = FlapsZeroLiftAnchor.GetDrag(speed);
+        float flapsFullLift = FlapsFullLiftAnchor.GetDrag(speed);
+        float currentFlapsLift = Mathf.Lerp(flapsZeroLift, flapsFullLift, flapsValue);
+
+        float angleOfAttackMult = LiftMultOverAOA.Evaluate(angleOfAttack);
+
+        return currentFlapsLift * angleOfAttackMult;
     }
 }

@@ -3,8 +3,10 @@ using System;
 
 public class ControlSurface : MonoBehaviour
 {
-    public float FullPower = 5;
-    public float FullPowerSpeed = 100;
+    public Common.QuadDragAnchor ForceAnchor = new(100, 5);
+
+    //public float FullPower = 5;
+    //public float FullPowerSpeed = 100;
     public string PositiveKey;
     public string NegativeKey;
     public float ValueChangeSpeed = 2;
@@ -27,10 +29,13 @@ public class ControlSurface : MonoBehaviour
 
         Vector3 steerDirection = - transform.up * currentInputValue * Mathf.Sign(forwardSpeed);
 
-        float multiplier = Mathf.InverseLerp(0, FullPowerSpeed, Mathf.Abs(forwardSpeed));
-        multiplier = Mathf.Clamp01(multiplier);
+        //float multiplier = Common.CalculateQuadDrag(forwardSpeed, ForceAnchor);
+        float multiplier = ForceAnchor.GetDrag(forwardSpeed);
 
-        rb.AddForceAtPosition(steerDirection * multiplier * FullPower, transform.position, ForceMode.Acceleration);
+       // float multiplier = Mathf.InverseLerp(0, FullPowerSpeed, Mathf.Abs(forwardSpeed));
+       // multiplier = Mathf.Clamp01(multiplier);
+
+        rb.AddForceAtPosition(steerDirection * multiplier, transform.position, ForceMode.Acceleration);
     }
 
     private void Update()

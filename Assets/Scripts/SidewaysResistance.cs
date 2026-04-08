@@ -27,9 +27,15 @@ public class SidewaysResistance : MonoBehaviour
     private void FixedUpdate()
     {
         float terminalSpeed = TerminalXSpeedOverZSpeed.Evaluate(info.LocalVelocity.z);
-        float deccelerationForce = CalculateForce(info.LocalVelocity.x, terminalSpeed);
+
+        /*float deccelerationForce = Common.CalculateQuadDrag(
+            info.LocalVelocity.x,
+            new(terminalSpeed, Physics.gravity.magnitude)
+        );*/
 
 
+        float deccelerationForce =
+            new Common.QuadDragAnchor(terminalSpeed, Physics.gravity.magnitude).GetDrag(info.LocalVelocity.x);
 
 
         rb.AddForce(-transform.right * Mathf.Sign(info.LocalVelocity.x) * deccelerationForce, ForceMode.Acceleration);

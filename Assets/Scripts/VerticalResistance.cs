@@ -1,57 +1,62 @@
 using UnityEngine;
-//using static Common;
 
-public class VerticalResistance : MonoBehaviour
+public class AirResistance : MonoBehaviour
 {
     private Rigidbody rb;
-    private FlightData info;
+    private FlightData fd;
 
+    public Common.QuadDragAnchor VerticalResistanceAnchor = new(50, 9.81f);
+    public Common.QuadDragAnchor SidewaysResistanceAnchor = new(60, 9.81f);
+    public Common.QuadDragAnchor SpeedStabilityAnchor = new(200, 3f);
 
-    /*public AnimationCurve PointOffsetOverAttackAngle = new(
-        new Keyframe(15, 0),
-        new Keyframe(20, -2),
-        new Keyframe(30, -3)
-    );*/
+    public Common.QuadDragAnchor ForwardResistanceAnchor = new(150, 9.81f);
+
+    public float verticalSpeed;
+    public float sidewaysSpeed;
+    public float forwardSpeed;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        info = GetComponent<FlightData>();
+        fd = GetComponent<FlightData>();
     }
-
-    public Vector3 forcePoint;
-
-    public float verticalSpeed;
-
-    public float MaxFallSpeed = 50;
-    float CalculateResistance(float speed)
-    {
-        float mult = 9.81f / Mathf.Pow(MaxFallSpeed, 2);
-        return speed * speed * mult;
-    }
-    public float PointOffset;
+   
     private void FixedUpdate()
     {
-        //float pointOffset = PointOffsetOverAttackAngle.Evaluate(info.AttackAngle);
-        float pointOffset = PointOffset;
-        forcePoint = rb.position + transform.TransformDirection(rb.centerOfMass + Vector3.forward * pointOffset);
+        verticalSpeed = fd.LocalVelocity.y;
+        float verticalResistance = VerticalResistanceAnchor.GetDrag(verticalSpeed);
 
-        Vector3 localVelocity = transform.InverseTransformDirection(rb.GetPointVelocity(forcePoint));
-        Vector3 newLocalVelocity = localVelocity;
-        verticalSpeed = Mathf.Abs(localVelocity.y);
-        float deccelerationForce = CalculateResistance(Mathf.Abs(localVelocity.y));
+        sidewaysSpeed = fd.LocalVelocity.x;
+        float sidewaysResistance = SidewaysResistanceAnchor.GetDrag(sidewaysSpeed);
 
-        newLocalVelocity.y = Mathf.MoveTowards(localVelocity.y, 0, deccelerationForce * Time.fixedDeltaTime);
+        forwardSpeed = fd.LocalVelocity.z;
+        float stabilityFactor = 1 + SpeedStabilityAnchor.GetDrag(forwardSpeed);
+        float forwardResistance = ForwardResistanceAnchor.GetDrag(sidewaysSpeed);
 
-        Vector3 velocityDelta = transform.TransformDirection(newLocalVelocity - localVelocity);
+        float newVerticalSpeed = Mathf.MoveTowards(
+            verticalSpeed,
+            0,
+            verticalResistance * Time.fixedDeltaTime * stabilityFactor
+        );
 
-        rb.AddForceAtPosition(velocityDelta, forcePoint, ForceMode.VelocityChange);
-    }
+        float newSidewaysSpeed = Mathf.MoveTowards(
+            sidewaysSpeed,
+            0,
+            sidewaysResistance * Time.fixedDeltaTime * stabilityFactor
+        );
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red; 
-        if(Application.isPlaying)
-            Gizmos.DrawWireSphere(forcePoint, 0.5f);
+        float newForwardSpeed = Mathf.MoveTowards(
+            forwardSpeed,
+            0,
+            forwardResistance * Time.fixedDeltaTime
+        );
+
+        var velocityDelta = new Vector3(
+            newSidewaysSpeed - sidewaysSpeed,
+            newVerticalSpeed - verticalSpeed,
+            newForwardSpeed - forwardSpeed
+        );
+
+        rb.AddRelativeForce(velocityDelta, ForceMode.VelocityChange);
     }
 }

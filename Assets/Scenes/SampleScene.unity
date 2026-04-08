@@ -934,6 +934,39 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 97319703}
   m_CullTransparentMesh: 1
+--- !u!1 &109753838
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 109753839}
+  m_Layer: 0
+  m_Name: Roll
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &109753839
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109753838}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 416550178}
+  - {fileID: 1515722018}
+  m_Father: {fileID: 1917292384}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &131278940
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -960,12 +993,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 9c494a6b5e06bf0479f4bf3117e4faa5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9c494a6b5e06bf0479f4bf3117e4faa5,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -740.2114
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9c494a6b5e06bf0479f4bf3117e4faa5,
         type: 3}
@@ -2090,8 +2123,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a8759ec04aca3043bca6a643aa08e38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FullPower: 7
-  FullPowerSpeed: 100
+  ForceAnchor:
+    anchorSpeed: 100
+    anchorForce: 5
   PositiveKey: S
   NegativeKey: W
   ValueChangeSpeed: 2
@@ -2317,11 +2351,11 @@ Transform:
   m_GameObject: {fileID: 416550177}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.0000008493661, w: 1}
-  m_LocalPosition: {x: 8, y: 0.9, z: -5.28}
+  m_LocalPosition: {x: 8, y: 0.9000015, z: -5.279999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1917292384}
+  m_Father: {fileID: 109753839}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &416550179
 MonoBehaviour:
@@ -2335,8 +2369,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a8759ec04aca3043bca6a643aa08e38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FullPower: 3
-  FullPowerSpeed: 100
+  ForceAnchor:
+    anchorSpeed: 100
+    anchorForce: 2
   PositiveKey: D
   NegativeKey: A
   ValueChangeSpeed: 2
@@ -7443,11 +7478,11 @@ Transform:
   m_GameObject: {fileID: 1515722017}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 1, w: 0.0000010132788}
-  m_LocalPosition: {x: -8, y: 0.9, z: -5.2800293}
+  m_LocalPosition: {x: -8, y: 0.9000015, z: -5.2800293}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1917292384}
+  m_Father: {fileID: 109753839}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!114 &1515722019
 MonoBehaviour:
@@ -7461,8 +7496,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a8759ec04aca3043bca6a643aa08e38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FullPower: 3
-  FullPowerSpeed: 100
+  ForceAnchor:
+    anchorSpeed: 100
+    anchorForce: 2
   PositiveKey: D
   NegativeKey: A
   ValueChangeSpeed: 2
@@ -8142,7 +8178,7 @@ Transform:
   m_GameObject: {fileID: 1580950006}
   serializedVersion: 2
   m_LocalRotation: {x: 0.70710707, y: -0, z: -0, w: 0.70710653}
-  m_LocalPosition: {x: 0, y: 3.24, z: -2.3205}
+  m_LocalPosition: {x: 0, y: 0.609957, z: -2.3205}
   m_LocalScale: {x: 3.96, y: 18.73675, z: 4.753292}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9608,7 +9644,6 @@ GameObject:
   - component: {fileID: 1917292386}
   - component: {fileID: 1917292391}
   - component: {fileID: 1917292394}
-  - component: {fileID: 1917292395}
   - component: {fileID: 1917292396}
   - component: {fileID: 1917292397}
   - component: {fileID: 1917292398}
@@ -9628,8 +9663,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1917292383}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.7, y: 774, z: -329}
+  m_LocalRotation: {x: -0.21141289, y: -0, z: -0, w: 0.97739685}
+  m_LocalPosition: {x: 52.499996, y: -323.5065, z: -608.96625}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -9637,13 +9672,12 @@ Transform:
   - {fileID: 1580950007}
   - {fileID: 366480138}
   - {fileID: 20876308}
-  - {fileID: 416550178}
-  - {fileID: 1515722018}
+  - {fileID: 109753839}
   - {fileID: 2121307335}
   - {fileID: 1475241942}
   - {fileID: 2016495396}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -24.41, y: 0, z: 0}
 --- !u!54 &1917292385
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9776,63 +9810,13 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    FlapsZeroStallSpeed: 100
-    FlapsFullStallSpeed: 60
-  ProjectResult: {x: 0, y: 0, z: 0}
-  ForcePointsWidth: 3
-  HorizontalForceMult: 1.5
-  RightFlaps: 1
-  LeftFlaps: 0
-  SideForceOverRoll:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 30
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  SideForceOverSpeed:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0.017214682
-      outSlope: 0.017214682
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.99797976
-    - serializedVersion: 3
-      time: 60.404037
-      value: 1
-      inSlope: 0.01686755
-      outSlope: 0.01686755
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 1
-      outWeight: 0.10419688
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  SlipZOffset: -3
-  IsRight: 0
+    FlapsZeroLiftAnchor:
+      anchorSpeed: 100
+      anchorForce: 9.81
+    FlapsFullLiftAnchor:
+      anchorSpeed: 60
+      anchorForce: 9.81
+  FlapsValue: 0
 --- !u!114 &1917292392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9857,55 +9841,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4076769006ce564bb990aa266343741, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forcePoint: {x: 0, y: 0, z: 0}
+  VerticalResistanceAnchor:
+    anchorSpeed: 50
+    anchorForce: 9.81
+  SidewaysResistanceAnchor:
+    anchorSpeed: 60
+    anchorForce: 9.81
+  SpeedStabilityAnchor:
+    anchorSpeed: 200
+    anchorForce: 30
+  ForwardResistanceAnchor:
+    anchorSpeed: 150
+    anchorForce: 9.81
   verticalSpeed: 0
-  MaxFallSpeed: 50
-  PointOffset: 0
---- !u!114 &1917292395
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1917292383}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d49966d3c43f3c48bc107450b3dc2ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ResistanceOverSpeed:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 200
-      value: 1.5
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 250
-      value: 12
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  sidewaysSpeed: 0
+  forwardSpeed: 0
 --- !u!114 &1917292396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9918,31 +9868,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d0f4e09f0abc7468c3250f9b90b43a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DragForces: {x: 5, y: 5, z: 8}
-  ForceMultOverSpeed:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0.25
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 50
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  DragForceAxesMults: {x: 1, y: 1, z: 0.5}
+  DragForce: 5
+  SpeedStabilityAnchor:
+    anchorSpeed: 200
+    anchorForce: 1
 --- !u!114 &1917292397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9967,31 +9897,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72bbe41c10b7380448f779e2fe2e845a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ForcePointOffset: {x: 0, y: 0, z: 0}
-  SlipForceOverSpeed:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 200
-      value: 5
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  SlipForceAnchor:
+    anchorSpeed: 200
+    anchorForce: 10
   SlipMultOverAngle:
     serializedVersion: 2
     m_Curve:
@@ -10500,8 +10408,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a8759ec04aca3043bca6a643aa08e38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FullPower: 5
-  FullPowerSpeed: 100
+  ForceAnchor:
+    anchorSpeed: 100
+    anchorForce: 5
   PositiveKey: E
   NegativeKey: Q
   ValueChangeSpeed: 2
@@ -11197,7 +11106,7 @@ Transform:
   m_GameObject: {fileID: 2144615436}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -2,36 +2,31 @@ using UnityEngine;
 
 public class AngularDrag : MonoBehaviour
 {
-
-    [SerializeField] private Vector3 DragForceAxesMults = new(1, 1, 0.5f);
-    [SerializeField] public float DragForce = 5;
-
-
-    public Common.QuadDragAnchor SpeedStabilityAnchor = new(50, 1);
-
     private Rigidbody rb;
+    private FlightData fd;
+
+    private FuselageAngularDragCFG config => fd.aircraftParams.fuselageAngularDragParams;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        fd = GetComponent<FlightData>();
     }
 
     private void FixedUpdate()
     {
-        float speedMult = 1 + SpeedStabilityAnchor.GetDrag(rb.velocity.magnitude);
-
         Vector3 localAngVel = transform.InverseTransformDirection(rb.angularVelocity);
-        Vector3 newLocalAngVel = localAngVel;
+        float speedMult = 1 + config.speedStabilityAnchor.GetDrag(rb.velocity.magnitude);
 
-        float deccelerationX = DragForceAxesMults.x * Mathf.Abs(newLocalAngVel.x);
-        newLocalAngVel.x = Mathf.MoveTowards(newLocalAngVel.x, 0, Time.fixedDeltaTime * deccelerationX * speedMult * DragForce);
+        var localDrag = new Vector3(
+            -localAngVel.x * config.axesCoefs.x,
+            -localAngVel.y * config.axesCoefs.y,
+            -localAngVel.z * config.axesCoefs.z
+        ) * speedMult * config.basicDrag;
 
-        float deccelerationY = DragForceAxesMults.y * Mathf.Abs(newLocalAngVel.y);
-        newLocalAngVel.y = Mathf.MoveTowards(newLocalAngVel.y, 0, Time.fixedDeltaTime * deccelerationY * speedMult * DragForce);
-
-        float deccelerationZ = DragForceAxesMults.z * Mathf.Abs(newLocalAngVel.z);
-        newLocalAngVel.z = Mathf.MoveTowards(newLocalAngVel.z, 0, Time.fixedDeltaTime * deccelerationZ * speedMult * DragForce);
-
-        rb.AddRelativeTorque(newLocalAngVel - localAngVel, ForceMode.VelocityChange);
+        rb.AddRelativeTorque(
+            localDrag,
+            ForceMode.Acceleration
+        );
     }
 }

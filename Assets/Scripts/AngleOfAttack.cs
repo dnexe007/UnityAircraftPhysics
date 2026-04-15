@@ -19,7 +19,6 @@ public static class AngleOfAttack
         if (localVelocity.sqrMagnitude < 1)
             return new AOAData(0, 0);
 
-
         float vertical = -Mathf.Atan2(localVelocity.y, localVelocity.z) * Mathf.Rad2Deg;
         float horizontal = -Mathf.Atan2(localVelocity.x, localVelocity.z) * Mathf.Rad2Deg;
 

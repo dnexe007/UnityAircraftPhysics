@@ -4,7 +4,9 @@ using static RollAndPitch;
 
 public class FlightData : MonoBehaviour
 {
+    public AircraftConfig aircraftParams;
     private Rigidbody rb;
+
     public Vector3 LocalVelocity { get; private set; }
     public float Roll { get; private set; }
     public float Pitch { get; private set; }
@@ -15,6 +17,9 @@ public class FlightData : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+        rb.mass = aircraftParams.mass;
+        rb.inertiaTensor = aircraftParams.tensor;
     }
 
     private void FixedUpdate()

@@ -18,7 +18,7 @@ public static class Common
             anchorForce = force;
         }
 
-        public float GetDrag(float speed)
+        public readonly float GetDrag(float speed)
         {
             float speedMult = anchorForce / Mathf.Pow(anchorSpeed, 2);
             return Mathf.Pow(speed, 2) * speedMult;

@@ -2,8 +2,10 @@ using UnityEngine;
 
 public class RudderResistance : MonoBehaviour
 {
+    [SerializeField] private Common.QuadDragAnchor ResistanceAnchor = new(100, 9.81f);
+
     private Rigidbody rb;
-    public float ResistanceMult;
+
     private void Start()
     {
          rb = GetComponentInParent<Rigidbody>();
@@ -15,10 +17,10 @@ public class RudderResistance : MonoBehaviour
             rb.GetPointVelocity(transform.position)
         );
 
-        float force = -localVelocity.x * Mathf.Abs(localVelocity.x) * ResistanceMult;
+        float force = ResistanceAnchor.GetDrag(localVelocity.x) * Mathf.Sign(localVelocity.x);
 
         rb.AddForceAtPosition(
-            rb.transform.right * force,
+            - rb.transform.right * force,
             transform.position, 
             ForceMode.Acceleration
         );

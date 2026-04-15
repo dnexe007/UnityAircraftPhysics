@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class AdditionalSideSlip : MonoBehaviour
 {
-    [SerializeField] private Common.QuadDragAnchor SlipForceAnchor = new(200, 1);
+    [SerializeField] private Common.QuadDragAnchor slipOverSpeedAnchor = new(200, 1);
 
-    [SerializeField] private AnimationCurve SlipMultOverAngle = new(
+    [SerializeField] private AnimationCurve slipMultOverRoll = new(
         new(0, 0),
         new(30, 1)
     );
@@ -23,8 +23,8 @@ public class AdditionalSideSlip : MonoBehaviour
         rb.AddForce(
             transform.right *
             Mathf.Sign(fd.Roll) *
-            SlipForceAnchor.GetDrag(fd.LocalVelocity.z) *
-            SlipMultOverAngle.Evaluate(Mathf.Abs(fd.Roll))
+            slipOverSpeedAnchor.GetDrag(fd.LocalVelocity.z) *
+            slipMultOverRoll.Evaluate(Mathf.Abs(fd.Roll))
             ,
             ForceMode.Acceleration
         );

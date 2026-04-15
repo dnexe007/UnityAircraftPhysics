@@ -3,10 +3,16 @@ using System;
 
 public class ControlSurface : MonoBehaviour
 {
-    public Common.QuadDragAnchor ForceAnchor = new(100, 5);
+    public Common.QuadDragAnchor ResistanceAnchor = new(100, 3);
+    public AnimationCurve ResistanceMultOverAOA = new(
+        new(0, 0),
+        new(90, 1),
+        new(180, 0)
+    );
+    public Vector3 rotationAngles;
 
-    //public float FullPower = 5;
-    //public float FullPowerSpeed = 100;
+    private Vector3 startAngles;
+
     public string PositiveKey;
     public string NegativeKey;
     public float ValueChangeSpeed = 2;
@@ -21,21 +27,26 @@ public class ControlSurface : MonoBehaviour
     private void Start()
     {
         rb = GetComponentInParent<Rigidbody>();
+        startAngles = transform.localEulerAngles;
     }
 
     private void FixedUpdate()
     {
-        float forwardSpeed = transform.InverseTransformDirection(rb.velocity).z;
+        Vector3 localVelocity = transform.InverseTransformDirection(
+            rb.GetPointVelocity(transform.position)
+        );
 
-        Vector3 steerDirection = - transform.up * currentInputValue * Mathf.Sign(forwardSpeed);
+        float basicForce = ResistanceAnchor.GetDrag(localVelocity.y);
+        float speedMult = 1 + ResistanceAnchor.GetDrag(localVelocity.z);
 
-        //float multiplier = Common.CalculateQuadDrag(forwardSpeed, ForceAnchor);
-        float multiplier = ForceAnchor.GetDrag(forwardSpeed);
-
-       // float multiplier = Mathf.InverseLerp(0, FullPowerSpeed, Mathf.Abs(forwardSpeed));
-       // multiplier = Mathf.Clamp01(multiplier);
-
-        rb.AddForceAtPosition(steerDirection * multiplier, transform.position, ForceMode.Acceleration);
+        rb.AddForceAtPosition(
+            -transform.up *
+            Mathf.Sign(localVelocity.y) *
+            basicForce *
+            speedMult,
+            transform.position,
+            ForceMode.Force
+        );
     }
 
     private void Update()
@@ -43,6 +54,8 @@ public class ControlSurface : MonoBehaviour
         float targetValue = (Input.GetKey(PositiveKeycode) ? 1 : 0) - (Input.GetKey(NegativeKeycode) ? 1 : 0) + CenterValue;
         targetValue = Mathf.Clamp(targetValue, -1, 1);
         currentInputValue = Mathf.MoveTowards(currentInputValue, targetValue, Time.deltaTime * ValueChangeSpeed);
+
+        transform.localEulerAngles = startAngles + rotationAngles * currentInputValue;
     }
 
     private void OnDrawGizmos()

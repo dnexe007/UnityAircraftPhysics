@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: F22
   m_EditorClassIdentifier: 
   mass: 30000
-  tensor: {x: 200000, y: 200000, z: 200000}
+  tensor: {x: 300000, y: 200000, z: 200000}
   enginesThrust: 6
   wingParams:
     LiftAnchorFlapsZero:
       anchorSpeed: 60
-      anchorForce: 294300
+      anchorForce: 300000
     LiftAnchorFlapsFull:
       anchorSpeed: 35
-      anchorForce: 294300
+      anchorForce: 300000
     BasicLiftMultOverAOA:
       serializedVersion: 2
       m_Curve:
@@ -36,7 +36,7 @@ MonoBehaviour:
         outWeight: 0
       - serializedVersion: 3
         time: -15
-        value: -0.5
+        value: -1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -87,7 +87,7 @@ MonoBehaviour:
         outWeight: 0
       - serializedVersion: 3
         time: -7
-        value: -1.5
+        value: -3
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -151,7 +151,7 @@ MonoBehaviour:
   pitchParams:
     LiftAnchor:
       anchorSpeed: 200
-      anchorForce: 234000
+      anchorForce: 200000
     LiftMultOverAOA:
       serializedVersion: 2
       m_Curve:
@@ -222,7 +222,7 @@ MonoBehaviour:
     resistanceAnchor:
       anchorSpeed: 200
       anchorForce: 5
-    forcePointOffset: {x: 0, y: 0, z: -2}
+    forcePointOffset: {x: 0, y: 0, z: -1}
   fuselageAngularDragParams:
     basicDrag: 0.5
     axesCoefs: {x: 1, y: 1, z: 1}

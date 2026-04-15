@@ -5,9 +5,8 @@ using UnityEngine;
 [Serializable]
 public class AirSurfaceCFG
 {
-    [SerializeField] protected Common.QuadDragAnchor LiftAnchor = new(200, 3 * 78_000);
-    [SerializeField]
-    protected AnimationCurve LiftMultOverAOA = new(
+    [SerializeField] protected Common.QuadDragAnchor LiftAnchor = new(200, 200000);
+    [SerializeField] protected AnimationCurve LiftMultOverAOA = new(
         new(20, 1),
 
         new(0, 0),
@@ -27,18 +26,18 @@ public class AirSurfaceCFG
 [Serializable]
 public class WingCFG 
 {
-    [SerializeField] private Common.QuadDragAnchor LiftAnchorFlapsZero = new (60, 9.81f * 30000);
-    [SerializeField] private Common.QuadDragAnchor LiftAnchorFlapsFull = new(35, 9.81f * 30000);
+    [SerializeField] private Common.QuadDragAnchor LiftAnchorFlapsZero = new (60, 300000);
+    [SerializeField] private Common.QuadDragAnchor LiftAnchorFlapsFull = new(35, 300000);
     [SerializeField] private AnimationCurve BasicLiftMultOverAOA = new(
             new (-25, -0.1f),
-            new (-15, -0.5f),
+            new (-15, -1),
             new (0, 0),
             new (15, 1),
             new (25, 0.1f)
     );
     [SerializeField] private AnimationCurve HighSPeedLiftMultOverAOA = new(
             new(-25, -0.1f),
-            new(-15 / 2, -0.5f * 3),
+            new(-15 / 2, -1 * 3),
             new(0, 0),
             new(15 / 2, 1 * 3),
             new(25, 0.1f)
@@ -76,7 +75,7 @@ public class FuselageDragCFG
 
     public Common.QuadDragAnchor resistanceAnchor = new(200, 5);
 
-    public Vector3 forcePointOffset = new(0, 0, -15);
+    public Vector3 forcePointOffset = new(0, 0, -1);
 }
 
 

@@ -6152,7 +6152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ef71f4216db96f4e971ecedd93556b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FlapsValue: 1
+  FlapsValue: 0
 --- !u!1 &1167006575
 GameObject:
   m_ObjectHideFlags: 0

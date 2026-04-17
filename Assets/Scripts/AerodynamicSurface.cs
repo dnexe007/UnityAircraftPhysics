@@ -1,14 +1,38 @@
-using System;
 using UnityEngine;
+
+public enum SurfaceType
+{
+    AileronR,
+    AileronL,
+    Pitch,
+    Rudder
+}
 
 public class AerodynamicSurface : AerodynamicSurfaceBase
 {
-    private AirSurfaceCFG surfaceParams => config.pitchParams;
-    [SerializeField] private float additionalRotatingFactor = 0;
+    [SerializeField] private SurfaceType surfaceType;
+
+    public SurfaceType GetSurfaceType() => surfaceType;
+    private AirSurfaceCFG surfaceParams
+    {
+        get
+        {
+            switch (surfaceType)
+            {
+                case SurfaceType.AileronR:
+                    return config.aileronParams;
+                case SurfaceType.AileronL:
+                    return config.aileronParams;
+                case SurfaceType.Pitch:
+                    return config.pitchParams;
+                default:
+                    return config.rudderParams;
+            }
+        }
+    }
 
     protected override void ApplyForce()
     {
-
         SpeedAndAOA data = GetSpeedAndAOA();
 
         Vector3 liftVector = transform.up * surfaceParams.GetLift(data.speed, data.aoa);
@@ -16,8 +40,7 @@ public class AerodynamicSurface : AerodynamicSurfaceBase
         rb.AddForceAtPosition(
             liftVector
             ,
-            transform.position -
-            rb.transform.forward * additionalRotatingFactor
+            transform.position
             ,
             ForceMode.Force
         );

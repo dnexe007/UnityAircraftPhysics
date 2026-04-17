@@ -35,7 +35,7 @@ public class WingCFG
             new (15, 1),
             new (25, 0.1f)
     );
-    [SerializeField] private AnimationCurve HighSPeedLiftMultOverAOA = new(
+    [SerializeField] private AnimationCurve HighSpeedLiftMultOverAOA = new(
             new(-25, -0.1f),
             new(-15 / 2, -1 * 3),
             new(0, 0),
@@ -55,7 +55,7 @@ public class WingCFG
 
 
         float basicAOAMult = BasicLiftMultOverAOA.Evaluate(angleOfAttack);
-        float highSpeedAOAMult = HighSPeedLiftMultOverAOA.Evaluate(angleOfAttack);
+        float highSpeedAOAMult = HighSpeedLiftMultOverAOA.Evaluate(angleOfAttack);
         float blendValue = AOACurvesBlendOverSpeed.Evaluate(speed);
         float totalAOAMult = Mathf.Lerp(basicAOAMult, highSpeedAOAMult, blendValue);
 
@@ -94,8 +94,11 @@ public class AircraftConfig : ScriptableObject
     public float mass = 30000;
     public Vector3 tensor = new(200000, 200000, 200000);
     public float enginesThrust = 6;
+    [Range(1, 10)] public int flapsSteps = 5;
     public WingCFG wingParams;
     public AirSurfaceCFG pitchParams;
+    public AirSurfaceCFG aileronParams;
+    public AirSurfaceCFG rudderParams;
     public FuselageDragCFG fuselageDragParams;
     public FuselageAngularDragCFG fuselageAngularDragParams;
 }

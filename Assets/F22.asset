@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: F22
   m_EditorClassIdentifier: 
   mass: 30000
-  tensor: {x: 300000, y: 200000, z: 200000}
-  enginesThrust: 6
+  tensor: {x: 250000, y: 200000, z: 100000}
+  enginesThrust: 12
   wingParams:
     LiftAnchorFlapsZero:
       anchorSpeed: 60
@@ -73,7 +73,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    HighSPeedLiftMultOverAOA:
+    HighSpeedLiftMultOverAOA:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -85,6 +85,15 @@ MonoBehaviour:
         weightedMode: 0
         inWeight: 0
         outWeight: 0
+      - serializedVersion: 3
+        time: -15
+        value: -3
+        inSlope: -0.02651162
+        outSlope: -0.02651162
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.625
       - serializedVersion: 3
         time: -7
         value: -3
@@ -113,6 +122,15 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
+        time: 15
+        value: 3
+        inSlope: -0.01849429
+        outSlope: -0.01849429
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.5101013
+      - serializedVersion: 3
         time: 25
         value: 0.1
         inSlope: 0
@@ -128,14 +146,14 @@ MonoBehaviour:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 100
+        time: 70
         value: 0
-        inSlope: 0
-        outSlope: 0
+        inSlope: 0.013480983
+        outSlope: 0.013480983
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
-        outWeight: 0
+        outWeight: 0.04848486
       - serializedVersion: 3
         time: 200
         value: 1
@@ -150,8 +168,82 @@ MonoBehaviour:
       m_RotationOrder: 4
   pitchParams:
     LiftAnchor:
+      anchorSpeed: 120
+      anchorForce: 300000
+    LiftMultOverAOA:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: -20
+        value: -1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 20
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  aileronParams:
+    LiftAnchor:
+      anchorSpeed: 135
+      anchorForce: 300000
+    LiftMultOverAOA:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: -20
+        value: -1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 20
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  rudderParams:
+    LiftAnchor:
       anchorSpeed: 200
-      anchorForce: 200000
+      anchorForce: 300000
     LiftMultOverAOA:
       serializedVersion: 2
       m_Curve:
@@ -220,12 +312,12 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     resistanceAnchor:
-      anchorSpeed: 200
-      anchorForce: 5
+      anchorSpeed: 400
+      anchorForce: 12
     forcePointOffset: {x: 0, y: 0, z: -1}
   fuselageAngularDragParams:
-    basicDrag: 0.5
+    basicDrag: 2
     axesCoefs: {x: 1, y: 1, z: 1}
     speedStabilityAnchor:
       anchorSpeed: 200
-      anchorForce: 10
+      anchorForce: 8

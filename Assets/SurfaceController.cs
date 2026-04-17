@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 [RequireComponent(typeof(AerodynamicSurface))]
@@ -10,17 +11,35 @@ public class SurfaceController : MonoBehaviour
     [SerializeField] private float SurfaceRotationSpeed = 30;
     [SerializeField] [Range(-1, 1)] private float trim;
 
-    private KeyCode PositiveKeycode => (KeyCode)Enum.Parse(typeof(KeyCode), PositiveKey);
-    private KeyCode NegativeKeycode => (KeyCode)Enum.Parse(typeof(KeyCode), NegativeKey);
-    private float PlayerInput => (Input.GetKey(PositiveKeycode) ? 1 : 0) - (Input.GetKey(NegativeKeycode) ? 1 : 0);
-    private float FullInput => PlayerInput + trim;
-
+    private AerodynamicSurface surface;
     private Vector3 startAngles;
     private Vector3 currentOffset;
+
+    private float PlayerInput
+    {
+        get
+        {
+            switch (surface.GetSurfaceType())
+            {
+                case SurfaceType.AileronR:
+                    return Controls.singletone.YokeInput.x;
+                case SurfaceType.AileronL:
+                    return -Controls.singletone.YokeInput.x;
+                case SurfaceType.Pitch:
+                    return - Controls.singletone.YokeInput.y;
+                default:
+                    return Controls.singletone.RudderInput;
+            }
+        }
+    }
+    private float FullInput => PlayerInput + trim;
+
+    
 
     private void Start()
     {
         startAngles = transform.localEulerAngles;
+        surface = GetComponent<AerodynamicSurface>();
     }
 
     private void Update()

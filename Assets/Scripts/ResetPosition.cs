@@ -12,7 +12,7 @@ public class ResetPosition : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
             rb.MovePosition(startPosition);
         }

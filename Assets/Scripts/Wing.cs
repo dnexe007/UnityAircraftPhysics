@@ -2,15 +2,27 @@ using UnityEngine;
 
 public class Wing : AerodynamicSurfaceBase
 {
-    [SerializeField][Range(0, 1)] private float FlapsValue;
+    private FlightData fd;
+    protected override void Start()
+    {
+        base.Start();
+        fd = GetComponentInParent<FlightData>();
+        Controls.singletone.OnFlapsChange += ChangeFlaps;
+    }
 
-    private WingCFG wingParams => config.wingParams;
+
+    void ChangeFlaps(int x)
+    {
+        //print($"flaps change: {x}");
+        fd.SetFlapsValue(fd.FlapsValue + x);
+       // print($"flaps: {fd.FlapsValue}");
+    }
 
     protected override void ApplyForce()
     {
         SpeedAndAOA data = GetSpeedAndAOA();
 
-        Vector3 liftVector = transform.up * wingParams.GetLift(data.speed, data.aoa, FlapsValue);
+        Vector3 liftVector = transform.up * config.wingParams.GetLift(data.speed, data.aoa, fd.FlapsValue/(float)config.flapsSteps);
         
         rb.AddForceAtPosition(
             liftVector, 

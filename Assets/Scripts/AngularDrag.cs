@@ -5,7 +5,7 @@ public class AngularDrag : MonoBehaviour
     private Rigidbody rb;
     private FlightData fd;
 
-    private FuselageAngularDragCFG config => fd.aircraftParams.fuselageAngularDragParams;
+    private FuselageAngularDragCFG config => fd.config.fuselageAngularDragParams;
 
     private void Start()
     {

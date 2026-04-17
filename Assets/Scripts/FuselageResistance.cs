@@ -5,7 +5,7 @@ public class FuselageResistance : MonoBehaviour
     private Rigidbody rb;
     private FlightData fd;
 
-    FuselageDragCFG config => fd.aircraftParams.fuselageDragParams;
+    FuselageDragCFG config => fd.config.fuselageDragParams;
     Vector3 ForcePoint => rb.worldCenterOfMass + rb.transform.TransformDirection(config.forcePointOffset);
 
     private void Start()

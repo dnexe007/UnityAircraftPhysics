@@ -24,10 +24,10 @@ public class Engine : MonoBehaviour
     private void Update()
     {
         if (Input.GetKey(KeyCode.LeftShift))
-            fd.SetThrustValue(fd.ThrustValue + ThrustSensitivity * Time.fixedDeltaTime);
+            fd.SetThrustValue(fd.ThrustValue + ThrustSensitivity * Time.deltaTime);
 
         if (Input.GetKey(KeyCode.LeftControl))
-            fd.SetThrustValue(fd.ThrustValue - ThrustSensitivity * Time.fixedDeltaTime);
+            fd.SetThrustValue(fd.ThrustValue - ThrustSensitivity * Time.deltaTime);
     }
 
     private void OnDrawGizmos()

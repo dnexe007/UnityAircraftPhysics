@@ -13,16 +13,16 @@ MonoBehaviour:
   m_Name: F16
   m_EditorClassIdentifier: 
   mass: 10000
-  tensor: {x: 20000, y: 30000, z: 10000}
+  tensor: {x: 50000, y: 30000, z: 10000}
   enginesThrust: 12
   flapsSteps: 5
   wingParams:
     LiftAnchorFlapsZero:
       anchorSpeed: 60
-      anchorForce: 50000
+      anchorForce: 100000
     LiftAnchorFlapsFull:
       anchorSpeed: 35
-      anchorForce: 50000
+      anchorForce: 100000
     BasicLiftMultOverAOA:
       serializedVersion: 2
       m_Curve:
@@ -174,7 +174,7 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 120
+        time: 100
         value: 1
         inSlope: 0
         outSlope: 0
@@ -187,13 +187,13 @@ MonoBehaviour:
       m_RotationOrder: 4
   pitchParams:
     liftAnchor:
-      anchorSpeed: 60
+      anchorSpeed: 35
       anchorForce: 4000
     liftMultOverAOA:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: -20
+        time: -30
         value: -1
         inSlope: 0
         outSlope: 0
@@ -202,16 +202,7 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 20
+        time: 30
         value: 1
         inSlope: 0
         outSlope: 0
@@ -251,7 +242,7 @@ MonoBehaviour:
   aileronParams:
     liftAnchor:
       anchorSpeed: 60
-      anchorForce: 5000
+      anchorForce: 6000
     liftMultOverAOA:
       serializedVersion: 2
       m_Curve:
@@ -411,9 +402,9 @@ MonoBehaviour:
     resistanceAnchor:
       anchorSpeed: 200
       anchorForce: 100000
-    rotatingFactor: -0.5
+    rotatingFactor: -0.1
   fuselageAngularDragParams:
-    axesCoefs: {x: 10000, y: 15000, z: 5000}
+    axesCoefs: {x: 50000, y: 20000, z: 15000}
     speedStabilityAnchor:
       anchorSpeed: 60
       anchorForce: 1

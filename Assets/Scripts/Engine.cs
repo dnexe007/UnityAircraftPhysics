@@ -8,6 +8,9 @@ public class Engine : MonoBehaviour
     private Rigidbody rb;
     private FlightData fd;
 
+    public float autoThrustTargetSpeed = 60;
+
+    bool ATEnabled;
     private void ApplyEngines()
     {
         rb.AddForce(transform.forward * fd.config.enginesThrust * fd.ThrustValue, ForceMode.Acceleration);
@@ -23,6 +26,13 @@ public class Engine : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space)) ATEnabled = !ATEnabled;
+
+        if (ATEnabled) fd.SetThrustValue(
+            new Vector2(fd.LocalVelocity.y, fd.LocalVelocity.z).magnitude > autoThrustTargetSpeed?
+            0: 1
+        );
+
         if (Input.GetKey(KeyCode.LeftShift))
             fd.SetThrustValue(fd.ThrustValue + ThrustSensitivity * Time.deltaTime);
 

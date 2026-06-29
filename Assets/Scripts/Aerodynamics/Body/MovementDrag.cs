@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class FuselageResistance : MonoBehaviour
+public class MovementDrag : MonoBehaviour
 {
     private Rigidbody rb;
     private FlightData fd;
 
-    FuselageDragCFG config => fd.config.fuselageDragParams;
+    MovementDragConfig config => fd.config.fuselageDragParams;
     //Vector3 ForcePoint => rb.worldCenterOfMass + rb.transform.TransformDirection(config.forcePointOffset);
 
     private void Start()

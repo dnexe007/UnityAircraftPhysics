@@ -13,7 +13,7 @@ public class AerodynamicSurface : AerodynamicSurfaceBase
     [SerializeField] private SurfaceType surfaceType;
 
     public SurfaceType GetSurfaceType() => surfaceType;
-    public ControlSurfaceCFG surfaceParams
+    public ControlSurfaceConfig surfaceParams
     {
         get
         {

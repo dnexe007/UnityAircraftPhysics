@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using static Common;
 
 public class Engine : MonoBehaviour
 {

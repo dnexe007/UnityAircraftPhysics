@@ -13,12 +13,12 @@ public class Engine : MonoBehaviour
     bool ATEnabled;
     private void ApplyEngines()
     {
-        rb.AddForce(transform.forward * setup.config.enginesThrust * fd.ThrustValue, ForceMode.Acceleration);
+        rb.AddForceAtPosition(transform.forward * setup.config.enginesThrust * fd.ThrustValue, transform.position, ForceMode.Acceleration);
     }
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponentInParent<Rigidbody>();
         fd = GetComponentInParent<FlightData>();
         setup = fd.GetComponentInParent<AircraftSetup>();
     }
@@ -48,5 +48,6 @@ public class Engine : MonoBehaviour
             Gizmos.DrawLine(transform.position, transform.position + transform.forward * 40);
             Gizmos.DrawLine(transform.position, transform.position + rb.velocity.normalized * 40);
         }
+        Gizmos.DrawWireSphere(transform.position, 0.1f);
     }
 }

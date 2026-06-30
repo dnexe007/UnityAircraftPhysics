@@ -4,12 +4,11 @@ public class AircraftSetup : MonoBehaviour
 {
     public AircraftConfig config;
 
-	private void Awake()
+	private void Start()
 	{
 		Rigidbody rootRb = transform.Find("Body").GetComponent<Rigidbody>();
-
-		print($"{config.BodyMass} {config.BodyTensor}");
-		rootRb.mass = config.BodyMass;
-		rootRb.inertiaTensor = config.BodyTensor;
+		MassAndTensor rootData = config.RootMassAndTensor;
+		rootRb.mass = rootData.mass;
+		rootRb.inertiaTensor = rootData.tensor;
 	}
 }

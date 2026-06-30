@@ -1,29 +1,44 @@
 using System;
 using UnityEngine;
 
+public struct MassAndTensor
+{
+	public float mass;
+	public Vector3 tensor;
+}
 
 
 [CreateAssetMenu(fileName = "NewAircraft", menuName = "ScriptableObjects/AircraftConfig")]
 public class AircraftConfig : ScriptableObject
 {
+	[SerializeField] private int ParentToChildMassMult = 20;
 	[SerializeField] private float totalMass = 10_000;
 	[SerializeField] private Vector3 totalTensor = new(70_000, 80_000, 15_000);
-
 	[SerializeField] private int numOfWheels = 3;
 
+	public float WheelMassMult => 1 / (numOfWheels + numOfWheels * ParentToChildMassMult + Mathf.Pow(ParentToChildMassMult, 2));
 
-	private float CalculateWheelMassMult()
+	public float GearMassMult => WheelMassMult * ParentToChildMassMult;
+
+	public float RootMassMult => WheelMassMult * Mathf.Pow(ParentToChildMassMult, 2);
+
+	public MassAndTensor RootMassAndTensor => new()
 	{
-		float numOfParts = 10 + numOfWheels;
-		
-		return 1 / numOfParts;
-	}
+		mass = RootMassMult * totalMass,
+		tensor = RootMassMult * totalTensor
+	};
 
-	public float WheelMass => totalMass * CalculateWheelMassMult();
-	public Vector3 WheelTensor => totalTensor * CalculateWheelMassMult();
+	public MassAndTensor GearMassAndTensor => new()
+	{
+		mass = GearMassMult * totalMass,
+		tensor = GearMassMult * totalTensor
+	};
 
-	public float BodyMass => WheelMass * 10;
-	public Vector3 BodyTensor => WheelTensor * 10;
+	public MassAndTensor WheelMassAndTensor => new()
+	{
+		mass = WheelMassMult * totalMass,
+		tensor = WheelMassMult * totalTensor
+	};
 
 
 	public float enginesThrust = 12;

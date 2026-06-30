@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbe8552318312344999396acb4afcb66, type: 3}
   m_Name: F16
   m_EditorClassIdentifier: 
-  mass: 10000
+  totalMass: 10000
+  numOfWheels: 3
   tensor: {x: 50000, y: 30000, z: 10000}
   enginesThrust: 12
   flapsSteps: 5
@@ -408,7 +409,3 @@ MonoBehaviour:
     speedStabilityAnchor:
       anchorSpeed: 60
       anchorForce: 1
-  wheelProfiles:
-    profileName: 0
-    spring: 0
-    damp: 0

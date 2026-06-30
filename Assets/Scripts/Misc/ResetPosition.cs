@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class ResetPosition : MonoBehaviour
 {
     private Rigidbody rb;
@@ -14,7 +14,7 @@ public class ResetPosition : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            rb.MovePosition(startPosition);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 }

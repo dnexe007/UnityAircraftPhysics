@@ -28,7 +28,7 @@ public class FlightData : MonoBehaviour
 	private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        setup = GetComponent<AircraftSetup>();
+        setup = GetComponentInParent<AircraftSetup>();
     }
     private void FixedUpdate()
     {

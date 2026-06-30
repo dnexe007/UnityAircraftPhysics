@@ -3,15 +3,15 @@ using UnityEngine;
 public class MovementDrag : MonoBehaviour
 {
     private Rigidbody rb;
-    private FlightData fd;
+    private AircraftSetup setup;
 
-    MovementDragConfig config => fd.config.fuselageDragParams;
+    MovementDragConfig config => setup.config.fuselageDragParams;
     //Vector3 ForcePoint => rb.worldCenterOfMass + rb.transform.TransformDirection(config.forcePointOffset);
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        fd = GetComponent<FlightData>();
+        setup = GetComponentInParent<AircraftSetup>();
     }
 
     private void FixedUpdate()

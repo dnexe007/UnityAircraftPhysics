@@ -6,19 +6,21 @@ public class Engine : MonoBehaviour
 
     private Rigidbody rb;
     private FlightData fd;
+    private AircraftSetup setup;
 
     public float autoThrustTargetSpeed = 60;
 
     bool ATEnabled;
     private void ApplyEngines()
     {
-        rb.AddForce(transform.forward * fd.config.enginesThrust * fd.ThrustValue, ForceMode.Acceleration);
+        rb.AddForce(transform.forward * setup.config.enginesThrust * fd.ThrustValue, ForceMode.Acceleration);
     }
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         fd = GetComponentInParent<FlightData>();
+        setup = fd.GetComponentInParent<AircraftSetup>();
     }
 
     private void FixedUpdate() => ApplyEngines();

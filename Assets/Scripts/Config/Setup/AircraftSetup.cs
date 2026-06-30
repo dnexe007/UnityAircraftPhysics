@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class AircraftSetup : MonoBehaviour
 {
-    [SerializeField] private AircraftConfig config;
+    public AircraftConfig config;
 
 
 	private void Awake()
 	{
-		Rigidbody rootRigidbody = transform.Find("Body").GetComponent<Rigidbody>();
+		Rigidbody rootRb = transform.Find("Body").GetComponent<Rigidbody>();
 
-		ConfigurableJoint[] wheels = GetComponentsInChildren<ConfigurableJoint>();
+		rootRb.mass = config.mass;
+		rootRb.inertiaTensor = config.tensor;
 	}
 }

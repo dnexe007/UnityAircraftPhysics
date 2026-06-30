@@ -1,10 +1,9 @@
 using UnityEngine;
-using static AnglesOfAttack;
 
 public class FlightData : MonoBehaviour
 {
-    public AircraftConfig config;
     private Rigidbody rb;
+    private AircraftSetup setup;
 
     public Vector3 LocalVelocity { get; private set; }
     public float Roll { get; private set; }
@@ -23,17 +22,14 @@ public class FlightData : MonoBehaviour
 
     public void SetFlapsValue(int value)
     {
-        FlapsValue = Mathf.Clamp(value, 0, config.flapsSteps);
+        FlapsValue = Mathf.Clamp(value, 0, setup.config.flapsSteps);
     }
 
-    private void Start()
+	private void Start()
     {
         rb = GetComponent<Rigidbody>();
-
-        rb.mass = config.mass;
-        rb.inertiaTensor = config.tensor;
+        setup = GetComponent<AircraftSetup>();
     }
-
     private void FixedUpdate()
     {
         LocalVelocity = transform.InverseTransformDirection(rb.velocity);

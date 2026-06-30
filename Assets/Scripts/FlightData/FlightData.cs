@@ -1,6 +1,5 @@
 using UnityEngine;
-using static AngleOfAttack;
-using static RollAndPitch;
+using static AnglesOfAttack;
 
 public class FlightData : MonoBehaviour
 {
@@ -15,6 +14,7 @@ public class FlightData : MonoBehaviour
     public float HorizontalAOA { get; private set; }
     public float ThrustValue { get; private set; }
     public int FlapsValue { get; private set; }
+
 
     public void SetThrustValue(float value)
     {
@@ -38,13 +38,13 @@ public class FlightData : MonoBehaviour
     {
         LocalVelocity = transform.InverseTransformDirection(rb.velocity);
 
-        RollAndPitchData rollAndPitch = CalculateRollAndPitch(transform);
-        Roll = rollAndPitch.roll;
-        Pitch = rollAndPitch.pitch;
-        RightHorizontalVector = rollAndPitch.rightHorizontalVector;
+        Attitude attitude = new(transform);
+        Roll = attitude.roll;
+        Pitch = attitude.pitch;
+        RightHorizontalVector = attitude.rightHorizontalVector;
 
-        AOAData anglesOfAttack = CalculateAOA(LocalVelocity);
-        VerticalAOA = anglesOfAttack.vertical;
-        HorizontalAOA = anglesOfAttack.horizontal;
+        AnglesOfAttack aoa = new(LocalVelocity);
+        VerticalAOA = aoa.vertical;
+        HorizontalAOA = aoa.horizontal;
     }
 }

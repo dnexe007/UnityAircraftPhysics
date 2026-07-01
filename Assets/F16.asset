@@ -15,7 +15,7 @@ MonoBehaviour:
   ParentToChildMassMult: 10
   totalMass: 10000
   totalTensor: {x: 70000, y: 80000, z: 15000}
-  numOfWheels: 3
+  numOfWheels: 0
   enginesThrust: 12
   flapsSteps: 5
   wingParams:
@@ -244,7 +244,7 @@ MonoBehaviour:
   aileronParams:
     liftAnchor:
       anchorSpeed: 60
-      anchorForce: 6000
+      anchorForce: 3000
     liftMultOverAOA:
       serializedVersion: 2
       m_Curve:

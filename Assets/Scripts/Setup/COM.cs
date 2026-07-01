@@ -18,7 +18,7 @@ public class COM : MonoBehaviour
 
 	private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position + transform.TransformDirection(COMLocalPosition), 1);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position + transform.TransformDirection(COMLocalPosition), 0.5f);
     }
 }

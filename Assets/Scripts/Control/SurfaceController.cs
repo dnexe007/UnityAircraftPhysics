@@ -1,52 +1,33 @@
-using System;
-using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 [RequireComponent(typeof(AerodynamicSurface))]
 public class SurfaceController : MonoBehaviour
 {
     [SerializeField] private Vector3 rotationVector = new(1, 0, 0);
-    [SerializeField] [Range(-1, 1)] private float trim;
+    [SerializeField] private bool invertInput;
+    [SerializeField] private float rotationAngle = 30;
+    [SerializeField] private float rotationSpeed = 60;
 
-    private AerodynamicSurface surface;
+
     private Vector3 startAngles;
+	float currentAngle;
+	private AerodynamicSurface surface;
 
-    private float PlayerInput
-    {
-        get
-        {
-            switch (surface.GetSurfaceType())
-            {
-                case SurfaceType.AileronR:
-                    return Controls.singletone.YokeInput.x;
-                case SurfaceType.AileronL:
-                    return -Controls.singletone.YokeInput.x;
-                case SurfaceType.Pitch:
-                    return - Controls.singletone.YokeInput.y;
-                default:
-                    return Controls.singletone.RudderInput;
-            }
-        }
-    }
-    private float FullInput => PlayerInput + trim;
 
-    
+	private float PlayerInput => Controls.GetInputByName(surface.surfaceType) * (invertInput? -1: 1);
+
 
     private void Start()
     {
         startAngles = transform.localEulerAngles;
+
         surface = GetComponent<AerodynamicSurface>();
     }
 
-    float currentAngle = 0;
 
     private void Update()
     {
-        float speed = surface.GetSpeedAndAOA().speed;
-        //float rotationAngle = AnglesMultOverSpeed.Evaluate(speed);
-
-        //currentOffset = Vector3.MoveTowards(currentOffset, SurfaceRotationMaxAngles * FullInput * rotationAngle, Time.deltaTime * SurfaceRotationSpeed);
-        currentAngle = surface.surfaceParams.GetRotationAngle(FullInput, speed, currentAngle, Time.deltaTime);
+        currentAngle = Mathf.MoveTowards(currentAngle, rotationAngle * PlayerInput, Time.deltaTime * rotationSpeed);
 
         transform.localEulerAngles = startAngles + rotationVector * currentAngle;
     }

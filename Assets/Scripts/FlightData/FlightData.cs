@@ -22,7 +22,7 @@ public class FlightData : MonoBehaviour
 
     public void SetFlapsValue(int value)
     {
-        FlapsValue = Mathf.Clamp(value, 0, setup.config.flapsSteps);
+        FlapsValue = Mathf.Clamp(value, 0, setup.config.wingParams.flapsSteps);
     }
 
 	private void Start()

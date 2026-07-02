@@ -10,10 +10,9 @@ public class Engine : MonoBehaviour
 
     public float autoThrustTargetSpeed = 60;
 
-    bool ATEnabled;
     private void ApplyEngines()
     {
-        rb.AddForceAtPosition(transform.forward * setup.config.enginesThrust * fd.ThrustValue, transform.position, ForceMode.Acceleration);
+        rb.AddForceAtPosition(transform.forward * setup.config.engineConfig.thrust * fd.ThrustValue, transform.position);
     }
 
     private void Start()
@@ -25,23 +24,17 @@ public class Engine : MonoBehaviour
 
     private void FixedUpdate() => ApplyEngines();
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space)) ATEnabled = !ATEnabled;
+	private void OnEnable()
+	{
+        Controls.singleton.OnThrustChange += ChangeThrust;
+	}
 
-        if (ATEnabled) fd.SetThrustValue(
-            new Vector2(fd.LocalVelocity.y, fd.LocalVelocity.z).magnitude > autoThrustTargetSpeed?
-            0: 1
-        );
+	private void OnDisable()
+	{
+		Controls.singleton.OnThrustChange -= ChangeThrust;
+	}
 
-        if (Input.GetKey(KeyCode.LeftShift))
-            fd.SetThrustValue(fd.ThrustValue + ThrustSensitivity * Time.deltaTime);
-
-        if (Input.GetKey(KeyCode.LeftControl))
-            fd.SetThrustValue(fd.ThrustValue - ThrustSensitivity * Time.deltaTime);
-    }
-
-    private void OnDrawGizmos()
+	private void OnDrawGizmos()
     {
         if (Application.isPlaying)
         {
@@ -49,5 +42,10 @@ public class Engine : MonoBehaviour
             Gizmos.DrawLine(transform.position, transform.position + rb.velocity.normalized * 40);
         }
         Gizmos.DrawWireSphere(transform.position, 0.1f);
+    }
+
+    private void ChangeThrust(int value)
+    {
+        fd.SetThrustValue(fd.ThrustValue + ThrustSensitivity * value * Time.deltaTime);
     }
 }

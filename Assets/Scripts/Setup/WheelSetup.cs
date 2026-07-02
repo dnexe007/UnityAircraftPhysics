@@ -10,13 +10,13 @@ public class WheelSetup : MonoBehaviour
 		AircraftConfig config = GetComponentInParent<AircraftSetup>().config;
 
 		gearRb = transform.Find("Gear").GetComponent<Rigidbody>();
-		MassAndTensor gearData = config.GearMassAndTensor;
+		MassAndTensor gearData = config.massConfig.GearMassAndTensor;
 		gearRb.mass = gearData.mass;
 		gearRb.inertiaTensor = gearData.tensor;
 		gearRb.centerOfMass = Vector3.zero;
 
 		Rigidbody wheelRb = transform.Find("Wheel").GetComponent<Rigidbody>();
-		MassAndTensor wheelData = config.WheelMassAndTensor;
+		MassAndTensor wheelData = config.massConfig.WheelMassAndTensor;
 		wheelRb.mass = wheelData.mass;
 		wheelRb.inertiaTensor = wheelData.tensor;
 		wheelRb.centerOfMass = Vector3.zero;

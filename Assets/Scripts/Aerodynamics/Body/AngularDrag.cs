@@ -5,7 +5,7 @@ public class AngularDrag : MonoBehaviour
     private Rigidbody rb;
     private AircraftSetup setup;
 
-    private AngularDragConfig config => setup.config.fuselageAngularDragParams;
+    private AngularDragConfig config => setup.config.fuselageAngularDragConfig;
 
     private void Start()
     {

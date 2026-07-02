@@ -10,42 +10,36 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbe8552318312344999396acb4afcb66, type: 3}
-  m_Name: F16 1
+  m_Name: Jet
   m_EditorClassIdentifier: 
-  mass: 1000
-  tensor: {x: 5000, y: 3000, z: 1000}
-  enginesThrust: 12
-  flapsSteps: 5
+  massConfig:
+    ParentToChildMassMult: 20
+    totalMass: 10000
+    totalTensor: {x: 70000, y: 80000, z: 15000}
+    numOfWheels: 3
+  engineConfig:
+    thrust: 100000
   wingParams:
     LiftAnchorFlapsZero:
       anchorSpeed: 60
-      anchorForce: 10000
+      anchorForce: 100000
     LiftAnchorFlapsFull:
-      anchorSpeed: 35
-      anchorForce: 10000
+      anchorSpeed: 50
+      anchorForce: 100000
     BasicLiftMultOverAOA:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: -25
         value: -0.1
-        inSlope: 0
-        outSlope: 0
+        inSlope: -0.2484205
+        outSlope: -0.2484205
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
-        outWeight: 0
+        outWeight: 0.11283016
       - serializedVersion: 3
-        time: -16
-        value: -1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: -13
+        time: -15
         value: -1
         inSlope: 0
         outSlope: 0
@@ -56,23 +50,14 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 0
-        outSlope: 0
+        inSlope: 0.16744827
+        outSlope: 0.16744827
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.3468013
         outWeight: 0
       - serializedVersion: 3
-        time: 13
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 16
+        time: 15
         value: 1
         inSlope: 0
         outSlope: 0
@@ -83,85 +68,17 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 25
         value: 0.1
-        inSlope: 0
-        outSlope: 0
+        inSlope: -0.18702771
+        outSlope: -0.18702771
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.26767653
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    HighSpeedLiftMultOverAOA:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: -25
-        value: -0.1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: -8
-        value: -3
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: -6
-        value: -3
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 6
-        value: 3
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 8
-        value: 3
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 25
-        value: 0.1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    AOACurvesBlendOverSpeed:
+    flapsSteps: 5
+    highSpeedFactorOverSpeed:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -174,7 +91,7 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 100
+        time: 150
         value: 1
         inSlope: 0
         outSlope: 0
@@ -185,187 +102,9 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  pitchParams:
-    liftAnchor:
-      anchorSpeed: 35
-      anchorForce: 400
-    liftMultOverAOA:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: -30
-        value: -1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 30
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    surfaceRotationAngle: 30
-    rotationAngleMultOverSpeed:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 400
-        value: 0.1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    surfaceRotationSpeed: 60
-  aileronParams:
-    liftAnchor:
-      anchorSpeed: 60
-      anchorForce: 600
-    liftMultOverAOA:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: -20
-        value: -1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 20
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    surfaceRotationAngle: 30
-    rotationAngleMultOverSpeed:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 400
-        value: 0.1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    surfaceRotationSpeed: 60
-  rudderParams:
-    liftAnchor:
-      anchorSpeed: 60
-      anchorForce: 300
-    liftMultOverAOA:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: -20
-        value: -1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 20
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    surfaceRotationAngle: 30
-    rotationAngleMultOverSpeed:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 400
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    surfaceRotationSpeed: 60
-  fuselageDragParams:
+    highSpeedAOAMult: 2
+    highSpeedForceMult: 3
+  fuselageDragConfig:
     resistanceMultOverFlowAngle:
       serializedVersion: 2
       m_Curve:
@@ -400,11 +139,181 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     resistanceAnchor:
+      anchorSpeed: 400
+      anchorForce: 120000
+    rotatingFactor: -0.5
+  fuselageAngularDragConfig:
+    basicDrag: 20000
+    axesCoefs: {x: 1, y: 1, z: 1}
+    speedStabilityAnchor:
+      anchorSpeed: 200
+      anchorForce: 10
+  surfaceConfigs:
+  - surfaceName: Roll
+    liftAnchor:
       anchorSpeed: 200
       anchorForce: 10000
-    rotatingFactor: -0.1
-  fuselageAngularDragParams:
-    axesCoefs: {x: 5000, y: 2000, z: 1500}
-    speedStabilityAnchor:
-      anchorSpeed: 60
-      anchorForce: 1
+    speedClamp: 200
+    liftMultOverAOA:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: -25
+        value: -0.1
+        inSlope: -0.2484205
+        outSlope: -0.2484205
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.11283016
+      - serializedVersion: 3
+        time: -15
+        value: -1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0.16744827
+        outSlope: 0.16744827
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.3468013
+        outWeight: 0
+      - serializedVersion: 3
+        time: 15
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 25
+        value: 0.1
+        inSlope: -0.18702771
+        outSlope: -0.18702771
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.26767653
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  - surfaceName: Pitch
+    liftAnchor:
+      anchorSpeed: 200
+      anchorForce: 10000
+    speedClamp: 200
+    liftMultOverAOA:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: -25
+        value: -0.1
+        inSlope: -0.2484205
+        outSlope: -0.2484205
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.11283016
+      - serializedVersion: 3
+        time: -15
+        value: -1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0.16744827
+        outSlope: 0.16744827
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.3468013
+        outWeight: 0
+      - serializedVersion: 3
+        time: 15
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 25
+        value: 0.1
+        inSlope: -0.18702771
+        outSlope: -0.18702771
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.26767653
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  - surfaceName: Yaw
+    liftAnchor:
+      anchorSpeed: 200
+      anchorForce: 10000
+    speedClamp: 200
+    liftMultOverAOA:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: -25
+        value: -0.1
+        inSlope: -0.2484205
+        outSlope: -0.2484205
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.11283016
+      - serializedVersion: 3
+        time: -15
+        value: -1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0.16744827
+        outSlope: 0.16744827
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.3468013
+        outWeight: 0
+      - serializedVersion: 3
+        time: 15
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 25
+        value: 0.1
+        inSlope: -0.18702771
+        outSlope: -0.18702771
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.26767653
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4

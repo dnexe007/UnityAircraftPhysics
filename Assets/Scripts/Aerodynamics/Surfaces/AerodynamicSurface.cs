@@ -1,41 +1,24 @@
 using UnityEngine;
 
-public enum SurfaceType
-{
-    AileronR,
-    AileronL,
-    Pitch,
-    Rudder
-}
-
 public class AerodynamicSurface : AerodynamicSurfaceBase
 {
-    [SerializeField] private SurfaceType surfaceType;
+    public string surfaceType;
 
-    public SurfaceType GetSurfaceType() => surfaceType;
-    public ControlSurfaceConfig surfaceParams
-    {
-        get
-        {
-            switch (surfaceType)
-            {
-                case SurfaceType.AileronR:
-                    return config.aileronParams;
-                case SurfaceType.AileronL:
-                    return config.aileronParams;
-                case SurfaceType.Pitch:
-                    return config.pitchParams;
-                default:
-                    return config.rudderParams;
-            }
-        }
-    }
+    private AerodynamicSurfaceConfig surfaceConfig;
+
+	protected override void Start()
+	{
+		base.Start();
+		surfaceConfig = config.GetSurfaceConfigByName(surfaceType);
+	}
+
+    public string GetSurfaceType() => surfaceType;
 
     protected override void ApplyForce()
     {
         SpeedAndAOA data = GetSpeedAndAOA();
 
-        Vector3 liftVector = transform.up * surfaceParams.GetLift(data.speed, data.aoa);
+        Vector3 liftVector = transform.up * surfaceConfig.GetLift(data.speed, data.aoa);
 
         rb.AddForceAtPosition(
             liftVector

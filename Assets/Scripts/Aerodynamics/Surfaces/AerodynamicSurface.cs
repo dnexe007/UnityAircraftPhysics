@@ -28,21 +28,4 @@ public class AerodynamicSurface : AerodynamicSurfaceBase
             ForceMode.Force
         );
     }
-
-	private void OnDrawGizmos()
-	{
-		Gizmos.color = Color.blue;
-
-		Vector3 lf = transform.position + transform.forward / 2 - transform.right / 2;
-		Vector3 lb = transform.position - transform.forward / 2 - transform.right / 2;
-		Vector3 rf = transform.position + transform.forward / 2 + transform.right / 2;
-		Vector3 rb = transform.position - transform.forward / 2 + transform.right / 2;
-
-		Gizmos.DrawLine(lf, lb);
-		Gizmos.DrawLine(lb, rb);
-		Gizmos.DrawLine(rb, rf);
-		Gizmos.DrawLine(rf, lf);
-
-		Gizmos.DrawWireSphere(transform.position, 0.125f);
-	}
 }

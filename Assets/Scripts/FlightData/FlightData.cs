@@ -18,8 +18,11 @@ public class FlightData : MonoBehaviour
 
 	private void OnDestroy()
 	{
-		Controls.singleton.OnFlapsChange -= ChangeFlaps;
-		Controls.singleton.OnThrustChange -= ChangeThrust;
+        if(Controls.singleton != null)
+        {
+			Controls.singleton.OnFlapsChange -= ChangeFlaps;
+			Controls.singleton.OnThrustChange -= ChangeThrust;
+		}
 	}
 
 

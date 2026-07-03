@@ -84,8 +84,8 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 60
         value: 0
-        inSlope: 0
-        outSlope: 0
+        inSlope: 0.025
+        outSlope: 0.025
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
@@ -93,8 +93,8 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 100
         value: 1
-        inSlope: 0
-        outSlope: 0
+        inSlope: 0.025
+        outSlope: 0.025
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
@@ -111,8 +111,8 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 1
-        inSlope: 0
-        outSlope: 0
+        inSlope: 0.1
+        outSlope: 0.1
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
@@ -129,8 +129,8 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 180
         value: 1
-        inSlope: 0
-        outSlope: 0
+        inSlope: -0.1
+        outSlope: -0.1
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
@@ -139,12 +139,12 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     resistanceAnchor:
-      anchorSpeed: 400
-      anchorForce: 120000
+      anchorSpeed: 500
+      anchorForce: 200000
     rotatingFactor: -0.5
   angularDragConfig:
-    basicDrag: 40000
-    axesCoefs: {x: 1, y: 1.5, z: 0.3}
+    basicDrag: 20000
+    axesCoefs: {x: 1, y: 1, z: 1}
     speedStabilityAnchor:
       anchorSpeed: 200
       anchorForce: 10
@@ -153,7 +153,7 @@ MonoBehaviour:
     liftAnchor:
       anchorSpeed: 60
       anchorForce: 20000
-    speedClamp: 1000000
+    speedClamp: 150
     liftMultOverAOA:
       serializedVersion: 2
       m_Curve:
@@ -169,11 +169,11 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 0.16744827
-        outSlope: 0.16744827
+        inSlope: 0.112
+        outSlope: 0.112
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.3468013
+        inWeight: 0
         outWeight: 0
       - serializedVersion: 3
         time: 20
@@ -190,8 +190,8 @@ MonoBehaviour:
   - surfaceName: Roll
     liftAnchor:
       anchorSpeed: 60
-      anchorForce: 5000
-    speedClamp: 1000000
+      anchorForce: 20000
+    speedClamp: 150
     liftMultOverAOA:
       serializedVersion: 2
       m_Curve:
@@ -207,11 +207,11 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 0.16744827
-        outSlope: 0.16744827
+        inSlope: 0.112
+        outSlope: 0.112
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.3468013
+        inWeight: 0
         outWeight: 0
       - serializedVersion: 3
         time: 20
@@ -228,8 +228,8 @@ MonoBehaviour:
   - surfaceName: Yaw
     liftAnchor:
       anchorSpeed: 60
-      anchorForce: 5000
-    speedClamp: 1000000
+      anchorForce: 20000
+    speedClamp: 150
     liftMultOverAOA:
       serializedVersion: 2
       m_Curve:
@@ -245,11 +245,11 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 0.16744827
-        outSlope: 0.16744827
+        inSlope: 0.112
+        outSlope: 0.112
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.3468013
+        inWeight: 0
         outWeight: 0
       - serializedVersion: 3
         time: 20

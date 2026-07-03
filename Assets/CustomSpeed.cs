@@ -5,7 +5,6 @@ using UnityEngine;
 public class CustomSpeed : MonoBehaviour
 {
     private Rigidbody rb;
-
     [SerializeField] private float speed;
 
 	private void Start()

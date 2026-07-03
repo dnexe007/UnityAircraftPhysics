@@ -17,7 +17,7 @@ public class MovementDragConfig
 		new(180f, 1f, -0.1f, -0.1f)
 	);
 
-	[SerializeField] private QuadDragAnchor resistanceAnchor = new(400, 120_000);
+	[SerializeField] private QuadDragAnchor resistanceAnchor = new(500, 200_000);
 	[SerializeField] private float rotatingFactor = -0.5f;
 
 	public DragData GetFuselageDrag(Vector3 velocity, Vector3 forward, Vector3 worldCOM)

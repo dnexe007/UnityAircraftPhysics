@@ -16,8 +16,8 @@ public class WingConfig
 	);
 	[SerializeField] [Range(1, 10)] private int flapsSteps = 5;
 	[SerializeField] private AnimationCurve highSpeedFactorOverSpeed = new(
-		new(60, 0),
-		new(100, 1)
+		new(60f, 0f, 0.025f, 0.025f),
+		new(100f, 1f, 0.025f, 0.025f)
 	);
 	[SerializeField] private float highSpeedAOAMult = 2;
 	[SerializeField] private float highSpeedForceMult = 4;

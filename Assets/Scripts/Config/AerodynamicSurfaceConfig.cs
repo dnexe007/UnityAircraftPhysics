@@ -4,15 +4,39 @@ using UnityEngine;
 [Serializable]
 public class AerodynamicSurfaceConfig
 {
-	[SerializeField] private string surfaceName = "Default";
-	[SerializeField] private QuadDragAnchor liftAnchor = new(150, 50000);
-	[SerializeField] private float speedClamp = 150;
-	[SerializeField]
-	private AnimationCurve liftMultOverAOA = new(
-		new(20, 1),
-		new(0, 0),
-		new(-20, -1)
-	);
+	[SerializeField] private string surfaceName;
+	[SerializeField] private QuadDragAnchor liftAnchor;
+	[SerializeField] private float speedClamp;
+	[SerializeField] private AnimationCurve liftMultOverAOA;
+
+
+	public AerodynamicSurfaceConfig(
+		string surfaceName,
+		QuadDragAnchor liftAnchor,
+		float speedClamp,
+		AnimationCurve liftMultOverAOA
+	)
+	{
+		this.surfaceName = surfaceName;
+		this.liftAnchor = liftAnchor;
+		this.speedClamp = speedClamp;
+		this.liftMultOverAOA = liftMultOverAOA;
+	}
+
+	public static AerodynamicSurfaceConfig PitchSetup()
+	{
+		AerodynamicSurfaceConfig config = new(
+			"Pitch",
+			new(60, 20000),
+			150,
+			new(
+				new(-20f, -1f, 0f, 0f),
+				new(0f, 0f, 0.112f, 0.112f),
+				new(20f, 1f, 0f, 0f)
+			)
+		);
+		return config;
+	}
 
 	public string SurfaceName => surfaceName;
 

@@ -13,8 +13,10 @@ public class AircraftConfig : ScriptableObject
 	public MovementDragConfig movementDragConfig;
 	public AngularDragConfig angularDragConfig;
 
-
-	[SerializeField] private List<AerodynamicSurfaceConfig> surfaceConfigs = new() {new()};
+	[SerializeField] private List<AerodynamicSurfaceConfig> surfaceConfigs = new()
+	{
+		AerodynamicSurfaceConfig.PitchSetup()
+	};
 	public AerodynamicSurfaceConfig GetSurfaceConfigByName(string name)
 	{
 		return surfaceConfigs.FirstOrDefault(x => x.SurfaceName == name);

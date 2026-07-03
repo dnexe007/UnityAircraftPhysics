@@ -11,10 +11,10 @@ public struct MassAndTensor
 [Serializable]
 public class MassConfig
 {
-	[SerializeField] private int ParentToChildMassMult = 20;
-	[SerializeField] private float totalMass = 10_000;
-	[SerializeField] private Vector3 totalTensor = new(70_000, 80_000, 15_000);
-	[SerializeField] private int numOfWheels = 3;
+	[SerializeField] private int ParentToChildMassMult = 10;
+	[SerializeField] private float totalMass = 20_000;
+	[SerializeField] private Vector3 totalTensor = new(350_000, 450_000, 100_000);
+	[SerializeField] private int numOfWheels = 0;
 
 	public float WheelMassMult => 1 / (numOfWheels + numOfWheels * ParentToChildMassMult + Mathf.Pow(ParentToChildMassMult, 2));
 

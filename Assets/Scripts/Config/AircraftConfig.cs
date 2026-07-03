@@ -9,9 +9,9 @@ public class AircraftConfig : ScriptableObject
 {
 	public MassConfig massConfig;
 	public EngineConfig engineConfig;
-	public WingConfig wingParams;
-	public MovementDragConfig fuselageDragConfig;
-	public AngularDragConfig fuselageAngularDragConfig;
+	public WingConfig wingConfig;
+	public MovementDragConfig movementDragConfig;
+	public AngularDragConfig angularDragConfig;
 
 
 	[SerializeField] private List<AerodynamicSurfaceConfig> surfaceConfigs = new() {new()};

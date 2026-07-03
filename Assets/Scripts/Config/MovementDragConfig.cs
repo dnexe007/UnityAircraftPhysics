@@ -12,11 +12,12 @@ public class MovementDragConfig
 
 	[SerializeField]
 	private AnimationCurve resistanceMultOverFlowAngle = new(
-		new(0, 1),
-		new(90, 10),
-		new(180, 1)
+		new(0f, 1f, 0.1f, 0.1f),
+		new(90f, 10f, 0f, 0f),
+		new(180f, 1f, -0.1f, -0.1f)
 	);
-	[SerializeField] private Common.QuadDragAnchor resistanceAnchor = new(400, 120_000);
+
+	[SerializeField] private QuadDragAnchor resistanceAnchor = new(400, 120_000);
 	[SerializeField] private float rotatingFactor = -0.5f;
 
 	public DragData GetFuselageDrag(Vector3 velocity, Vector3 forward, Vector3 worldCOM)

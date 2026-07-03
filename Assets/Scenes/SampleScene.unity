@@ -8761,7 +8761,7 @@ Rigidbody:
   m_ImplicitCom: 0
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
@@ -8811,7 +8811,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc07a68f55fa7c141a77361eae9e967b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 60
+  speed: 50
 --- !u!1 &681623401
 GameObject:
   m_ObjectHideFlags: 0
@@ -16370,7 +16370,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sensorPoint: {fileID: 944541880}
-  appliedForce: 0
 --- !u!43 &1156647682
 Mesh:
   m_ObjectHideFlags: 0
@@ -23418,8 +23417,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10029733e3e6a6243bfba68c7a208335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ThrustSensitivity: 3
-  autoThrustTargetSpeed: 60
 --- !u!1 &1576527364
 GameObject:
   m_ObjectHideFlags: 0
@@ -24037,7 +24034,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sensorPoint: {fileID: 944541880}
-  appliedForce: 0
 --- !u!43 &1654194657
 Mesh:
   m_ObjectHideFlags: 0
@@ -28002,6 +27998,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39d1523b8758aae46a1e87d98dc9085a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  thrustSensitivity: 3
 --- !u!4 &1950850066
 Transform:
   m_ObjectHideFlags: 0

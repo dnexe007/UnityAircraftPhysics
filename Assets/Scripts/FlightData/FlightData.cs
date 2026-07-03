@@ -13,23 +13,34 @@ public class FlightData : MonoBehaviour
     public float HorizontalAOA { get; private set; }
     public float ThrustValue { get; private set; }
     public int FlapsValue { get; private set; }
+    public float FlapsValue01 => (float)FlapsValue / setup.config.wingConfig.FlapsSteps;
 
 
-    public void SetThrustValue(float value)
+	private void OnDestroy()
+	{
+		Controls.singleton.OnFlapsChange -= ChangeFlaps;
+		Controls.singleton.OnThrustChange -= ChangeThrust;
+	}
+
+
+	private void ChangeThrust(float delta)
     {
-        ThrustValue = Mathf.Clamp01(value);
+        ThrustValue = Mathf.Clamp01(ThrustValue + delta);
     }
 
-    public void SetFlapsValue(int value)
+    private void ChangeFlaps(int delta)
     {
-        FlapsValue = Mathf.Clamp(value, 0, setup.config.wingParams.flapsSteps);
+        FlapsValue = Mathf.Clamp(FlapsValue + delta, 0, setup.config.wingConfig.FlapsSteps);
     }
 
 	private void Start()
     {
         rb = GetComponent<Rigidbody>();
         setup = GetComponentInParent<AircraftSetup>();
-    }
+
+		Controls.singleton.OnFlapsChange += ChangeFlaps;
+		Controls.singleton.OnThrustChange += ChangeThrust;
+	}
     private void FixedUpdate()
     {
         LocalVelocity = transform.InverseTransformDirection(rb.velocity);

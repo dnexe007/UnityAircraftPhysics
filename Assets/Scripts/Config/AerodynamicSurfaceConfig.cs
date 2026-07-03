@@ -5,7 +5,7 @@ using UnityEngine;
 public class AerodynamicSurfaceConfig
 {
 	[SerializeField] private string surfaceName = "Default";
-	[SerializeField] private Common.QuadDragAnchor liftAnchor = new(150, 50000);
+	[SerializeField] private QuadDragAnchor liftAnchor = new(150, 50000);
 	[SerializeField] private float speedClamp = 150;
 	[SerializeField]
 	private AnimationCurve liftMultOverAOA = new(

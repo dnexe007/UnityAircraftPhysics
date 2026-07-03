@@ -1,9 +1,10 @@
 using System;
-
+using UnityEngine;
+using static CurveGenerator;
 
 
 [Serializable]
 public class EngineConfig
 {
-    public float thrust = 100000;
+    public float thrust = 220000;
 }

@@ -2,13 +2,9 @@
 
 public class Engine : MonoBehaviour
 {
-    [SerializeField] private float ThrustSensitivity = 3;
-
     private Rigidbody rb;
     private FlightData fd;
     private AircraftSetup setup;
-
-    public float autoThrustTargetSpeed = 60;
 
     private void ApplyEngines()
     {
@@ -24,16 +20,6 @@ public class Engine : MonoBehaviour
 
     private void FixedUpdate() => ApplyEngines();
 
-	private void OnEnable()
-	{
-        Controls.singleton.OnThrustChange += ChangeThrust;
-	}
-
-	private void OnDisable()
-	{
-		Controls.singleton.OnThrustChange -= ChangeThrust;
-	}
-
 	private void OnDrawGizmos()
     {
         if (Application.isPlaying)
@@ -42,10 +28,5 @@ public class Engine : MonoBehaviour
             Gizmos.DrawLine(transform.position, transform.position + rb.velocity.normalized * 40);
         }
         Gizmos.DrawWireSphere(transform.position, 0.1f);
-    }
-
-    private void ChangeThrust(int value)
-    {
-        fd.SetThrustValue(fd.ThrustValue + ThrustSensitivity * value * Time.deltaTime);
     }
 }

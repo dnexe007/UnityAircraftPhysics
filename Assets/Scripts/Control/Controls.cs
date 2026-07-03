@@ -3,13 +3,18 @@ using UnityEngine;
 
 public class Controls : MonoBehaviour
 {
+    [SerializeField] private float thrustSensitivity = 3;
+
+
     public static Controls singleton;
     private float rudderInput;
     private Vector2 YokeInput;
     private bool mouseActive;
 
     public event Action<int> OnFlapsChange;
-    public event Action<int> OnThrustChange;
+    public event Action<float> OnThrustChange;
+
+
 
     private void Awake()
     {
@@ -50,8 +55,8 @@ public class Controls : MonoBehaviour
 
     private void SetThrust()
     {
-        if (Input.GetKey(KeyCode.LeftShift)) OnThrustChange?.Invoke(1);
-        if (Input.GetKey(KeyCode.LeftControl)) OnThrustChange?.Invoke(-1);
+        if (Input.GetKey(KeyCode.LeftShift)) OnThrustChange?.Invoke(thrustSensitivity * Time.deltaTime);
+        if (Input.GetKey(KeyCode.LeftControl)) OnThrustChange?.Invoke(-thrustSensitivity * Time.deltaTime);
     }
 
 

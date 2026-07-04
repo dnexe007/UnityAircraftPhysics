@@ -1,42 +1,43 @@
 using System;
 using UnityEngine;
 
-public struct MassAndTensor
-{
-	public float mass;
-	public Vector3 tensor;
-}
-
+//1 = wheelMass * numOfWheels + wheelMass * numOfWheels * parentToChildCoef + wheelMass * parentToChildCoef^2
+//wheelMassCoef = 1 / (numOfWheels + numOfWheels * parentToChildCoef + parentToChileCoef^2)
+//gearMassCoef = wheelMassCoef * parentToChildCoef
+//bodyMassCoef = gearMassCoef * parentToChildCoef
 
 [Serializable]
 public class MassConfig
 {
-	[SerializeField] private int ParentToChildMassMult = 10;
+	[Header("Mass settings")]
 	[SerializeField] private float totalMass = 20_000;
-	[SerializeField] private Vector3 totalTensor = new(350_000, 450_000, 100_000);
+	
+
+	[Header("Tensor settings")]
+	[SerializeField] private float pitchTensor = 250_000;
+	[SerializeField] private float yawTensorCoef = 1.2f;
+	[SerializeField] private float rollTensorCoef = 0.2f;
+
+
+	[Header("Joint settings")]
+	[SerializeField] private int parentToChildMassMult = 10;
 	[SerializeField] private int numOfWheels = 0;
 
-	public float WheelMassMult => 1 / (numOfWheels + numOfWheels * ParentToChildMassMult + Mathf.Pow(ParentToChildMassMult, 2));
 
-	public float GearMassMult => WheelMassMult * ParentToChildMassMult;
+	private Vector3 TotalTensor =>  new Vector3(1, yawTensorCoef, rollTensorCoef) * pitchTensor;
 
-	public float RootMassMult => WheelMassMult * Mathf.Pow(ParentToChildMassMult, 2);
 
-	public MassAndTensor RootMassAndTensor => new()
-	{
-		mass = RootMassMult * totalMass,
-		tensor = RootMassMult * totalTensor
-	};
+	private float WheelMassCoef => 1 / (numOfWheels + numOfWheels * parentToChildMassMult + Mathf.Pow(parentToChildMassMult, 2));
+	private float GearMassCoef => WheelMassCoef * parentToChildMassMult;
+	private float BodyMassCoef => GearMassCoef * parentToChildMassMult;
 
-	public MassAndTensor GearMassAndTensor => new()
-	{
-		mass = GearMassMult * totalMass,
-		tensor = GearMassMult * totalTensor
-	};
 
-	public MassAndTensor WheelMassAndTensor => new()
-	{
-		mass = WheelMassMult * totalMass,
-		tensor = WheelMassMult * totalTensor
-	};
+	public float WheelMass => totalMass * WheelMassCoef;
+	public float GearMass => totalMass * GearMassCoef;
+	public float BodyMass => totalMass * BodyMassCoef;
+
+
+	public Vector3 WheelTensor => TotalTensor * WheelMassCoef;
+	public Vector3 GearTensor => TotalTensor * GearMassCoef;
+	public Vector3 BodyTensor => TotalTensor * BodyMassCoef;
 }

@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor.Networking.PlayerConnection;
 using UnityEngine;
 
 public class AircraftSetup : MonoBehaviour
@@ -14,9 +15,8 @@ public class AircraftSetup : MonoBehaviour
 	private void Start()
 	{
 		Rigidbody rootRb = transform.Find("Body").GetComponent<Rigidbody>();
-		MassAndTensor rootData = config.massConfig.RootMassAndTensor;
-		rootRb.mass = rootData.mass;
-		rootRb.inertiaTensor = rootData.tensor;
+		rootRb.mass = config.massConfig.BodyMass;
+		rootRb.inertiaTensor = config.massConfig.BodyTensor;
 
 		StartCoroutine(CalculateMass());
 	}

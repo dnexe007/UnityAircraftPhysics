@@ -21,6 +21,11 @@ public class AircraftConfig : ScriptableObject
 	{
 		return surfaceConfigs.FirstOrDefault(x => x.SurfaceName == name);
 	}
+
+	private void OnValidate()
+	{
+		massConfig.UpdateData();
+	}
 }
 
 

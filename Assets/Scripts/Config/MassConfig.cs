@@ -11,7 +11,7 @@ public class MassConfig
 {
 	[Header("Mass settings")]
 	[SerializeField] private float totalMass = 20_000;
-	
+
 
 	[Header("Tensor settings")]
 	[SerializeField] private float pitchTensor = 250_000;
@@ -21,23 +21,45 @@ public class MassConfig
 
 	[Header("Joint settings")]
 	[SerializeField] private int parentToChildMassMult = 10;
-	[SerializeField] private int numOfWheels = 0;
+	[SerializeField] private int numOfWheels = 3;
 
 
-	private Vector3 TotalTensor =>  new Vector3(1, yawTensorCoef, rollTensorCoef) * pitchTensor;
+	[field: SerializeField, HideInInspector] public float WheelMass { get; private set; }
+	[field: SerializeField, HideInInspector] public float GearMass { get; private set; }
+	[field: SerializeField, HideInInspector] public float BodyMass { get; private set; }
 
 
-	private float WheelMassCoef => 1 / (numOfWheels + numOfWheels * parentToChildMassMult + Mathf.Pow(parentToChildMassMult, 2));
-	private float GearMassCoef => WheelMassCoef * parentToChildMassMult;
-	private float BodyMassCoef => GearMassCoef * parentToChildMassMult;
+	[field: SerializeField, HideInInspector] public Vector3 WheelTensor { get; private set; }
+	[field: SerializeField, HideInInspector] public Vector3 GearTensor { get; private set; }
+	[field: SerializeField, HideInInspector] public Vector3 BodyTensor { get; private set; }
 
 
-	public float WheelMass => totalMass * WheelMassCoef;
-	public float GearMass => totalMass * GearMassCoef;
-	public float BodyMass => totalMass * BodyMassCoef;
+	public void UpdateData()
+	{
+		float wheelMassCoef = 1f / (numOfWheels + numOfWheels * parentToChildMassMult + Mathf.Pow(parentToChildMassMult, 2));
+		float gearMassCoef = wheelMassCoef * parentToChildMassMult;
+		float bodyMassCoef = gearMassCoef * parentToChildMassMult;
 
+		WheelMass = totalMass * wheelMassCoef;
+		BodyMass = totalMass * bodyMassCoef;
+		GearMass = totalMass * gearMassCoef;
 
-	public Vector3 WheelTensor => TotalTensor * WheelMassCoef;
-	public Vector3 GearTensor => TotalTensor * GearMassCoef;
-	public Vector3 BodyTensor => TotalTensor * BodyMassCoef;
+		Vector3 totalTensor = new Vector3(1, yawTensorCoef, rollTensorCoef) * pitchTensor;
+
+		WheelTensor = totalTensor * wheelMassCoef;
+		GearTensor = totalTensor * gearMassCoef;
+		BodyTensor = totalTensor * bodyMassCoef;
+
+		Debug.Log(
+			"Mass config data updated.\n\n" +
+			$"Total Mass: {totalMass}\n" +
+			$"Total Tensor: {totalTensor}\n\n" +
+			$"Wheel Mass: {numOfWheels} * {WheelMass}\n" +
+			$"Gear Mass: {numOfWheels} * {GearMass}\n" +
+			$"Body Mass: {BodyMass}\n\n" +
+			$"Wheel Tensor: {numOfWheels} * {WheelTensor}\n" +
+			$"Gear Tensor: {numOfWheels} * {GearTensor}\n" +
+			$"Body Tensor: {BodyTensor}\n"
+		);
+	}
 }

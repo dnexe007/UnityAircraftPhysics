@@ -13,10 +13,18 @@ MonoBehaviour:
   m_Name: Jet
   m_EditorClassIdentifier: 
   massConfig:
-    ParentToChildMassMult: 10
     totalMass: 20000
-    totalTensor: {x: 350000, y: 450000, z: 100000}
+    pitchTensor: 250000
+    yawTensorCoef: 1.2
+    rollTensorCoef: 0.2
+    parentToChildMassMult: 10
     numOfWheels: 0
+    <WheelMass>k__BackingField: 200
+    <GearMass>k__BackingField: 1999.9999
+    <BodyMass>k__BackingField: 19999.998
+    <WheelTensor>k__BackingField: {x: 2500, y: 3000, z: 500}
+    <GearTensor>k__BackingField: {x: 24999.998, y: 29999.998, z: 4999.9995}
+    <BodyTensor>k__BackingField: {x: 249999.98, y: 299999.97, z: 49999.996}
   engineConfig:
     thrust: 220000
   wingConfig:
@@ -151,9 +159,9 @@ MonoBehaviour:
   surfaceConfigs:
   - surfaceName: Pitch
     liftAnchor:
-      anchorSpeed: 10
+      anchorSpeed: 60
       anchorForce: 20000
-    speedClamp: 10
+    speedClamp: 150
     liftMultOverAOA:
       serializedVersion: 2
       m_Curve:

@@ -7,18 +7,9 @@ public class Wing : AerodynamicSurfaceBase
     {
         base.Start();
         fd = GetComponentInParent<FlightData>();
-        
     }
-
-    protected override void ApplyForce()
+    protected override float CalculateLift()
     {
-        SpeedAndAOA data = GetSpeedAndAOA();
-
-        Vector3 liftVector = transform.up * config.wingConfig.GetLift(data.speed, data.aoa, fd.FlapsValue01);
-        rb.AddForceAtPosition(
-            liftVector, 
-            transform.position, 
-            ForceMode.Force
-        );
+        return config.WingConfig.GetLift(VelocityMagnitude, VerticalAOA, fd.FlapsValue01);
     }
 }

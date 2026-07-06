@@ -6,20 +6,20 @@ public class AerodynamicSurfaceConfig
 {
 	[SerializeField] private string surfaceName;
 	[SerializeField] private QuadDragAnchor liftAnchor;
-	[SerializeField] private float speedClamp;
+	[SerializeField] private float forceClamp;
 	[SerializeField] private AnimationCurve liftMultOverAOA;
 
 
 	public AerodynamicSurfaceConfig(
 		string surfaceName,
 		QuadDragAnchor liftAnchor,
-		float speedClamp,
+		float forceClamp,
 		AnimationCurve liftMultOverAOA
 	)
 	{
 		this.surfaceName = surfaceName;
 		this.liftAnchor = liftAnchor;
-		this.speedClamp = speedClamp;
+		this.forceClamp = forceClamp;
 		this.liftMultOverAOA = liftMultOverAOA;
 	}
 
@@ -42,8 +42,7 @@ public class AerodynamicSurfaceConfig
 
 	public float GetLift(float speed, float angleOfAttack)
 	{
-		speed = Mathf.Clamp(speed, -speedClamp, speedClamp);
-		float basicLift = liftAnchor.GetDrag(speed);
+		float basicLift = Mathf.Clamp(liftAnchor.GetDrag(speed), -forceClamp, forceClamp);
 		float mult = liftMultOverAOA.Evaluate(angleOfAttack);
 		return basicLift * mult;
 	}

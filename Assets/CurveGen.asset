@@ -16,6 +16,15 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
+      time: -30
+      value: -0.1
+      inSlope: -0.15703534
+      outSlope: -0.15703534
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.22618255
+    - serializedVersion: 3
       time: -20
       value: -1
       inSlope: 0
@@ -27,12 +36,12 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0.112053394
-      outSlope: 0.112053394
+      inSlope: 0.103764355
+      outSlope: 0.103764355
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.3468013
-      outWeight: 0.092929356
+      outWeight: 0.103522435
     - serializedVersion: 3
       time: 20
       value: 1
@@ -42,8 +51,17 @@ MonoBehaviour:
       weightedMode: 0
       inWeight: 0
       outWeight: 0
+    - serializedVersion: 3
+      time: 30
+      value: 0.1
+      inSlope: -0.18702771
+      outSlope: -0.18702771
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.26767653
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  result: "new(\n\tnew(-20f, -1f, 0f, 0f),\n\tnew(0f, 0f, 0.112f, 0.112f),\n\tnew(20f,
-    1f, 0f, 0f)\n);"
+  result: "new(\n\tnew(-30f, -0.1f, -0.157f, -0.157f),\n\tnew(-20f, -1f, 0f, 0f),\n\tnew(0f,
+    0f, 0.104f, 0.104f),\n\tnew(20f, 1f, 0f, 0f),\n\tnew(30f, 0.1f, -0.187f, -0.187f)\n);"

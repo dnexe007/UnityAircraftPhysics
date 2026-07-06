@@ -4,19 +4,22 @@ using UnityEngine;
 [Serializable]
 public class AngularDragConfig
 {
-	[SerializeField] private float basicDrag = 20000;
-	[SerializeField] private Vector3 axesCoefs = new(1, 1, 1);
-	[SerializeField] private QuadDragAnchor speedStabilityAnchor = new(200, 10);
-
-	public Vector3 GetAngularDrag(Vector3 localAngularVelocity, float speed)
+	[SerializeField] private float basicDragForce;
+	[SerializeField] private Vector3 axesCoefs;
+	[SerializeField] private QuadDragAnchor speedFactorAnchor = new(750, 10);
+	public Vector3 GetAngularDrag(Vector3 localAngularVelocity, float linearVelocityMagnitude)
 	{
-		float speedMult = 1 + speedStabilityAnchor.GetDrag(speed);
+		float speedFactor = 1 + speedFactorAnchor.GetDrag(linearVelocityMagnitude);
 
-
-		return basicDrag * speedMult * new Vector3(
-			-localAngularVelocity.x * axesCoefs.x,
-			-localAngularVelocity.y * axesCoefs.y,
-			-localAngularVelocity.z * axesCoefs.z
+		return basicDragForce * speedFactor * new Vector3(
+			GetAxisDrag(localAngularVelocity.x, axesCoefs.x),
+			GetAxisDrag(localAngularVelocity.y, axesCoefs.y),
+			GetAxisDrag(localAngularVelocity.z, axesCoefs.z)
 		);
+	}
+
+	private float GetAxisDrag(float angularVel, float axisCoef)
+	{
+		return -Mathf.Abs(angularVel) * angularVel * axisCoef;
 	}
 }

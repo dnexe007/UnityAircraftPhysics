@@ -8,7 +8,7 @@ public class Engine : MonoBehaviour
 
     private void ApplyEngines()
     {
-        rb.AddForceAtPosition(transform.forward * setup.config.engineConfig.thrust * fd.ThrustValue, transform.position);
+        rb.AddForceAtPosition(transform.forward * setup.config.EngineConfig.thrust * fd.ThrustValue, transform.position);
     }
 
     private void Start()

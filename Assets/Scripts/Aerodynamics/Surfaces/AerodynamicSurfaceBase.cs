@@ -1,43 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public abstract class AerodynamicSurfaceBase : MonoBehaviour
 {
-    [SerializeField] private Transform sensorPoint;
+	[SerializeField] [Range(0.1f, 1)] private float AOALerpSpeed;
+	[SerializeField] private float AOADelta;
 
-    protected Rigidbody rb;
+    private Rigidbody rb;
     protected AircraftConfig config;
 
-    public struct SpeedAndAOA
+    protected float VelocityMagnitude { get; private set; }
+    protected float VerticalAOA { get; private set; }
+	protected abstract float CalculateLift();
+
+    private void UpdateData()
     {
-        public float speed;
-        public float aoa;
+		Vector3 localVelocity = transform.InverseTransformDirection(
+			rb.GetPointVelocity(transform.position)
+		);
 
-        public SpeedAndAOA(float speed, float aoa)
-        {
-            this.speed = speed;
-            this.aoa = aoa;
-        }
-    }
+        VelocityMagnitude = new Vector2(
+			localVelocity.z,
+			localVelocity.y
+		).magnitude;
+		
+		float targetVerticalAOA = AnglesOfAttack.GetVerticalAOA(localVelocity);
 
-    public SpeedAndAOA GetSpeedAndAOA()
-    {
-        if (sensorPoint == null) sensorPoint = transform;
-        Vector3 localVelocity = transform.InverseTransformDirection(
-            rb.GetPointVelocity(sensorPoint.position)
-        );
+		VerticalAOA = Mathf.Lerp(
+			VerticalAOA,
+			targetVerticalAOA,
+			AOALerpSpeed
+		);
 
-        float speed = new Vector2(localVelocity.z, localVelocity.y).magnitude;
-        float aoa = -Mathf.Atan2(localVelocity.y, localVelocity.z) * Mathf.Rad2Deg;
+		AOADelta = MathF.Round(VerticalAOA - targetVerticalAOA, 3);
+	}
 
-        return new(speed, aoa);
-    }
-
-    protected abstract void ApplyForce();
-
-
-    protected virtual void Start()
+	protected virtual void Start()
     {
         rb = GetComponentInParent<Rigidbody>();
         config = rb.GetComponentInParent<AircraftSetup>().config;
@@ -45,7 +45,13 @@ public abstract class AerodynamicSurfaceBase : MonoBehaviour
 
     private void FixedUpdate()
     {
-        ApplyForce();
+        UpdateData();
+
+		rb.AddForceAtPosition(
+			transform.up * CalculateLift(),
+			transform.position,
+			ForceMode.Force
+		);
     }
 
 	private void OnDrawGizmos()

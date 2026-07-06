@@ -1,22 +1,21 @@
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-
-
 
 [CreateAssetMenu(fileName = "NewAircraft", menuName = "ScriptableObjects/AircraftConfig")]
 public class AircraftConfig : ScriptableObject
 {
-	public MassConfig massConfig;
-	public EngineConfig engineConfig;
-	public WingConfig wingConfig;
-	public MovementDragConfig movementDragConfig;
-	public AngularDragConfig angularDragConfig;
+	[field: SerializeField] public MassConfig MassConfig { get; private set; } = new();
+	[field: SerializeField] public EngineConfig EngineConfig { get; private set; } = new();
+	[field: SerializeField] public WingConfig WingConfig { get; private set; } = new();
+	[field: SerializeField] public MovementDragConfig MovementDragConfig { get; private set; } = new();
+	[field: SerializeField] public AngularDragConfig AngularDragConfig { get; private set; } = new();
 
 	[SerializeField] private List<AerodynamicSurfaceConfig> surfaceConfigs = new()
 	{
 		AerodynamicSurfaceConfig.PitchSetup()
 	};
+
 	public AerodynamicSurfaceConfig GetSurfaceConfigByName(string name)
 	{
 		return surfaceConfigs.FirstOrDefault(x => x.SurfaceName == name);
@@ -24,7 +23,7 @@ public class AircraftConfig : ScriptableObject
 
 	private void OnValidate()
 	{
-		massConfig.UpdateData();
+		MassConfig.UpdateData();
 	}
 }
 

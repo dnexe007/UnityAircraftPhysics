@@ -1,18 +1,16 @@
 using UnityEngine;
 
-public struct AnglesOfAttack
+public static class AnglesOfAttack
 {
-    public float vertical;
-    public float horizontal;
-
-    public AnglesOfAttack(Vector3 localVelocity)
+    public static float GetVerticalAOA(Vector3 localVelocity)
     {
-        if (localVelocity.sqrMagnitude < 1) vertical = horizontal = 0;
+        if(localVelocity.sqrMagnitude < 1) return 0;
+		return -Mathf.Atan2(localVelocity.y, localVelocity.z) * Mathf.Rad2Deg;
+	}
 
-        else
-        {
-			vertical = -Mathf.Atan2(localVelocity.y, localVelocity.z) * Mathf.Rad2Deg;
-			horizontal = -Mathf.Atan2(localVelocity.x, localVelocity.z) * Mathf.Rad2Deg;
-		}
-    }
+	public static float GetHorizontalAOA(Vector3 localVelocity)
+    {
+		if (localVelocity.sqrMagnitude < 1) return 0;
+		return -Mathf.Atan2(localVelocity.x, localVelocity.z) * Mathf.Rad2Deg;
+	}
 }

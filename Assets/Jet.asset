@@ -12,22 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbe8552318312344999396acb4afcb66, type: 3}
   m_Name: Jet
   m_EditorClassIdentifier: 
-  massConfig:
+  <MassConfig>k__BackingField:
     totalMass: 20000
-    pitchTensor: 250000
-    yawTensorCoef: 1.2
-    rollTensorCoef: 0.2
+    pitchTensor: 300000
+    yawTensor: 350000
+    rollTensor: 40000
     parentToChildMassMult: 10
     numOfWheels: 0
     <WheelMass>k__BackingField: 200
     <GearMass>k__BackingField: 1999.9999
     <BodyMass>k__BackingField: 19999.998
-    <WheelTensor>k__BackingField: {x: 2500, y: 3000, z: 500}
-    <GearTensor>k__BackingField: {x: 24999.998, y: 29999.998, z: 4999.9995}
-    <BodyTensor>k__BackingField: {x: 249999.98, y: 299999.97, z: 49999.996}
-  engineConfig:
-    thrust: 220000
-  wingConfig:
+    <WheelTensor>k__BackingField: {x: 3000, y: 3500, z: 400}
+    <GearTensor>k__BackingField: {x: 29999.998, y: 34999.996, z: 3999.9998}
+    <BodyTensor>k__BackingField: {x: 299999.97, y: 349999.97, z: 39999.996}
+  <EngineConfig>k__BackingField:
+    thrust: 250000
+  <WingConfig>k__BackingField:
     liftAnchorFlapsZero:
       anchorSpeed: 60
       anchorForce: 100000
@@ -40,12 +40,12 @@ MonoBehaviour:
       - serializedVersion: 3
         time: -25
         value: -0.1
-        inSlope: -0.24
-        outSlope: -0.24
+        inSlope: -0.2484205
+        outSlope: -0.2484205
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
-        outWeight: 0
+        outWeight: 0.11283016
       - serializedVersion: 3
         time: -15
         value: -1
@@ -58,11 +58,11 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 0.15
-        outSlope: 0.15
+        inSlope: 0.16744827
+        outSlope: 0.16744827
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.3468013
         outWeight: 0
       - serializedVersion: 3
         time: 15
@@ -76,43 +76,17 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 25
         value: 0.1
-        inSlope: -0.24
-        outSlope: -0.24
+        inSlope: -0.18702771
+        outSlope: -0.18702771
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.26767653
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     flapsSteps: 5
-    highSpeedFactorOverSpeed:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 60
-        value: 0
-        inSlope: 0.025
-        outSlope: 0.025
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 100
-        value: 1
-        inSlope: 0.025
-        outSlope: 0.025
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    highSpeedAOAMult: 2
-    highSpeedForceMult: 4
-  movementDragConfig:
+  <MovementDragConfig>k__BackingField:
     resistanceMultOverFlowAngle:
       serializedVersion: 2
       m_Curve:
@@ -147,21 +121,97 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     resistanceAnchor:
-      anchorSpeed: 500
+      anchorSpeed: 550
       anchorForce: 200000
-    rotatingFactor: -0.5
-  angularDragConfig:
-    basicDrag: 20000
-    axesCoefs: {x: 1, y: 1, z: 1}
-    speedStabilityAnchor:
-      anchorSpeed: 200
-      anchorForce: 10
+    rotatingFactor: 0
+  <AngularDragConfig>k__BackingField:
+    basicDragForce: 1
+    axesCoefs: {x: 250000, y: 400000, z: 40000}
+    speedFactorAnchor:
+      anchorSpeed: 750
+      anchorForce: 12
   surfaceConfigs:
   - surfaceName: Pitch
     liftAnchor:
       anchorSpeed: 60
-      anchorForce: 20000
-    speedClamp: 150
+      anchorForce: 10000
+    forceClamp: 1e+19
+    liftMultOverAOA:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: -20
+        value: -1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0.112
+        outSlope: 0.112
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 20
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  - surfaceName: Yaw
+    liftAnchor:
+      anchorSpeed: 60
+      anchorForce: 7500
+    forceClamp: 1e+19
+    liftMultOverAOA:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: -20
+        value: -1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0.112
+        outSlope: 0.112
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 20
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  - surfaceName: Roll
+    liftAnchor:
+      anchorSpeed: 60
+      anchorForce: 5000
+    forceClamp: 1e+19
     liftMultOverAOA:
       serializedVersion: 2
       m_Curve:

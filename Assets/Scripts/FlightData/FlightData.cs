@@ -13,7 +13,7 @@ public class FlightData : MonoBehaviour
     public float HorizontalAOA { get; private set; }
     public float ThrustValue { get; private set; }
     public int FlapsValue { get; private set; }
-    public float FlapsValue01 => (float)FlapsValue / setup.config.wingConfig.FlapsSteps;
+    public float FlapsValue01 => (float)FlapsValue / setup.config.WingConfig.FlapsSteps;
 
 
 	private void OnDestroy()
@@ -33,7 +33,7 @@ public class FlightData : MonoBehaviour
 
     private void ChangeFlaps(int delta)
     {
-        FlapsValue = Mathf.Clamp(FlapsValue + delta, 0, setup.config.wingConfig.FlapsSteps);
+        FlapsValue = Mathf.Clamp(FlapsValue + delta, 0, setup.config.WingConfig.FlapsSteps);
     }
 
 	private void Start()
@@ -53,8 +53,7 @@ public class FlightData : MonoBehaviour
         Pitch = attitude.pitch;
         RightHorizontalVector = attitude.rightHorizontalVector;
 
-        AnglesOfAttack aoa = new(LocalVelocity);
-        VerticalAOA = aoa.vertical;
-        HorizontalAOA = aoa.horizontal;
+        VerticalAOA = AnglesOfAttack.GetVerticalAOA(LocalVelocity);
+        HorizontalAOA = AnglesOfAttack.GetHorizontalAOA(LocalVelocity);
     }
 }

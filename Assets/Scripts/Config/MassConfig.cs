@@ -14,9 +14,9 @@ public class MassConfig
 
 
 	[Header("Tensor settings")]
-	[SerializeField] private float pitchTensor = 250_000;
-	[SerializeField] private float yawTensorCoef = 1.2f;
-	[SerializeField] private float rollTensorCoef = 0.2f;
+	[SerializeField] private float pitchTensor = 150_000;
+	[SerializeField] private float yawTensor = 200_000;
+	[SerializeField] private float rollTensor = 30_000;
 
 
 	[Header("Joint settings")]
@@ -44,22 +44,10 @@ public class MassConfig
 		BodyMass = totalMass * bodyMassCoef;
 		GearMass = totalMass * gearMassCoef;
 
-		Vector3 totalTensor = new Vector3(1, yawTensorCoef, rollTensorCoef) * pitchTensor;
+		Vector3 totalTensor = new Vector3(pitchTensor, yawTensor, rollTensor);
 
 		WheelTensor = totalTensor * wheelMassCoef;
 		GearTensor = totalTensor * gearMassCoef;
 		BodyTensor = totalTensor * bodyMassCoef;
-
-		Debug.Log(
-			"Mass config data updated.\n\n" +
-			$"Total Mass: {totalMass}\n" +
-			$"Total Tensor: {totalTensor}\n\n" +
-			$"Wheel Mass: {numOfWheels} * {WheelMass}\n" +
-			$"Gear Mass: {numOfWheels} * {GearMass}\n" +
-			$"Body Mass: {BodyMass}\n\n" +
-			$"Wheel Tensor: {numOfWheels} * {WheelTensor}\n" +
-			$"Gear Tensor: {numOfWheels} * {GearTensor}\n" +
-			$"Body Tensor: {BodyTensor}\n"
-		);
 	}
 }

@@ -5,7 +5,7 @@ public class MovementDrag : MonoBehaviour
     private Rigidbody rb;
     private AircraftSetup setup;
 
-    MovementDragConfig config => setup.config.movementDragConfig;
+    MovementDragConfig config => setup.config.MovementDragConfig;
     //Vector3 ForcePoint => rb.worldCenterOfMass + rb.transform.TransformDirection(config.forcePointOffset);
 
     private void Start()

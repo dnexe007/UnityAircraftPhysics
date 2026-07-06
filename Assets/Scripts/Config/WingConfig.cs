@@ -15,26 +15,18 @@ public class WingConfig
 		new(25, 0.1f, -0.24f, -0.24f)
 	);
 	[SerializeField] [Range(1, 10)] private int flapsSteps = 5;
-	[SerializeField] private AnimationCurve highSpeedFactorOverSpeed = new(
-		new(60f, 0f, 0.025f, 0.025f),
-		new(100f, 1f, 0.025f, 0.025f)
-	);
-	[SerializeField] private float highSpeedAOAMult = 2;
-	[SerializeField] private float highSpeedForceMult = 4;
 
 	public int FlapsSteps => flapsSteps;
 
 	public float GetLift(float speed, float angleOfAttack, float flapsValue)
 	{
-		float highSpeedFactor = highSpeedFactorOverSpeed.Evaluate(speed);
 
 		float basicForce = Mathf.Lerp(
 			liftAnchorFlapsZero.GetDrag(speed),
 			liftAnchorFlapsFull.GetDrag(speed),
 			flapsValue
-		) * Mathf.Lerp(1, highSpeedForceMult, highSpeedFactor);
+		);
 
-		angleOfAttack *= Mathf.Lerp(1, highSpeedAOAMult, highSpeedFactor);
 		float angleOfAttackMult = liftMultOverAOA.Evaluate(angleOfAttack);
 
 		return basicForce * angleOfAttackMult;

@@ -33,7 +33,7 @@ public class Sliders : MonoBehaviour
         thrustSlider.anchoredPosition = new Vector2(0, fd.ThrustValue * 200);
 
 
-        flapsText.text = $"FLAPS\n{fd.FlapsValue}/{setup.config.wingConfig.FlapsSteps}";
-        flapsSlider.anchoredPosition = new Vector2(0, fd.FlapsValue / (float)setup.config.wingConfig.FlapsSteps * 100);
+        flapsText.text = $"FLAPS\n{fd.FlapsValue}/{setup.config.WingConfig.FlapsSteps}";
+        flapsSlider.anchoredPosition = new Vector2(0, fd.FlapsValue / (float)setup.config.WingConfig.FlapsSteps * 100);
     }
 }

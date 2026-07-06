@@ -28,7 +28,9 @@ public class Controls : MonoBehaviour
 
     private void SetInputs()
     {
-        if (Input.GetMouseButtonDown(1))
+		rudderInput = (Input.GetKey(KeyCode.E) ? 1 : 0) - (Input.GetKey(KeyCode.Q) ? 1 : 0);
+
+		if (Input.GetMouseButtonDown(1))
             mouseActive = !mouseActive;
 
         if (!mouseActive)
@@ -44,7 +46,7 @@ public class Controls : MonoBehaviour
         currentInput *= 2;
         YokeInput = currentInput;
 
-        rudderInput = (Input.GetKey(KeyCode.E) ? 1 : 0) - (Input.GetKey(KeyCode.Q) ? 1 : 0);
+        
 	}
 
     private void SetFlaps()

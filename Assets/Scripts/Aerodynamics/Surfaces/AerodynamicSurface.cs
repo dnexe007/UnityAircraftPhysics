@@ -14,18 +14,8 @@ public class AerodynamicSurface : AerodynamicSurfaceBase
 
     public string GetSurfaceType() => surfaceType;
 
-    protected override void ApplyForce()
+    protected override float CalculateLift()
     {
-        SpeedAndAOA data = GetSpeedAndAOA();
-
-        Vector3 liftVector = transform.up * surfaceConfig.GetLift(data.speed, data.aoa);
-
-        rb.AddForceAtPosition(
-            liftVector
-            ,
-            transform.position
-            ,
-            ForceMode.Force
-        );
+        return surfaceConfig.GetLift(VelocityMagnitude, VerticalAOA);
     }
 }

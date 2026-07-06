@@ -6,7 +6,7 @@ public class AngularDragConfig
 {
 	[SerializeField] private float basicDragForce;
 	[SerializeField] private Vector3 axesCoefs;
-	[SerializeField] private QuadDragAnchor speedFactorAnchor = new(750, 10);
+	[SerializeField] private QuadDragAnchor speedFactorAnchor = new(100, 10);
 	public Vector3 GetAngularDrag(Vector3 localAngularVelocity, float linearVelocityMagnitude)
 	{
 		float speedFactor = 1 + speedFactorAnchor.GetDrag(linearVelocityMagnitude);

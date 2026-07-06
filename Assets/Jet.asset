@@ -87,7 +87,7 @@ MonoBehaviour:
       m_RotationOrder: 4
     flapsSteps: 5
   <MovementDragConfig>k__BackingField:
-    resistanceMultOverFlowAngle:
+    dragMultOverAOA:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -120,10 +120,43 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    resistanceAnchor:
-      anchorSpeed: 550
+    rotatingFactorMultOverAOA:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 90
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 180
+        value: -1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    dragAnchor:
+      anchorSpeed: 500
       anchorForce: 200000
-    rotatingFactor: 0
+    rotatingFactor: -5
   <AngularDragConfig>k__BackingField:
     basicDragForce: 1
     axesCoefs: {x: 250000, y: 400000, z: 40000}

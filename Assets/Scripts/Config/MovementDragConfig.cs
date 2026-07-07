@@ -12,24 +12,18 @@ public class MovementDragConfig
 		new(180f, 1f, -0.1f, -0.1f)
 	);
 
-	[SerializeField] private float rotatingFactor = -0.5f;
-
-	[SerializeField] private AnimationCurve rotatingFactorMultOverAOA = new(
-		new(0, 1),
-		new(90, 0),
-		new(180, -1)
-	);
+	[SerializeField] private float rotatingFactor = -3;
 
 	public Vector3 GetDragVector(Vector3 velocity, float angleOfAttack)
 	{
 		float basicDrag = dragSpeedAnchor.GetDrag(velocity.magnitude);
 		float angleMult = dragMultOverAOA.Evaluate(angleOfAttack);
-		return -velocity.normalized * basicDrag * angleMult;
+		return angleMult * basicDrag * -velocity.normalized;
 	}
 
 	public float GetRotatingFactor(float angleOfAttack)
 	{
-		float angleMult = rotatingFactorMultOverAOA.Evaluate(angleOfAttack);
+		float angleMult = Mathf.Lerp(1, -1, Mathf.InverseLerp(0, 180, angleOfAttack));
 		return rotatingFactor * angleMult;
 	}
 }

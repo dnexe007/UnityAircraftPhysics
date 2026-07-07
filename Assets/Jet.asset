@@ -40,12 +40,12 @@ MonoBehaviour:
       - serializedVersion: 3
         time: -25
         value: -0.1
-        inSlope: -0.2484205
-        outSlope: -0.2484205
+        inSlope: -0.24
+        outSlope: -0.24
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
-        outWeight: 0.11283016
+        outWeight: 0
       - serializedVersion: 3
         time: -15
         value: -1
@@ -58,11 +58,11 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 0.16744827
-        outSlope: 0.16744827
+        inSlope: 0.15
+        outSlope: 0.15
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.3468013
+        inWeight: 0
         outWeight: 0
       - serializedVersion: 3
         time: 15
@@ -76,17 +76,20 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 25
         value: 0.1
-        inSlope: -0.18702771
-        outSlope: -0.18702771
+        inSlope: -0.24
+        outSlope: -0.24
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.26767653
+        inWeight: 0
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     flapsSteps: 5
   <MovementDragConfig>k__BackingField:
+    dragSpeedAnchor:
+      anchorSpeed: 500
+      anchorForce: 200000
     dragMultOverAOA:
       serializedVersion: 2
       m_Curve:
@@ -120,55 +123,17 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    rotatingFactorMultOverAOA:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 90
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 180
-        value: -1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    dragAnchor:
-      anchorSpeed: 500
-      anchorForce: 200000
-    rotatingFactor: -5
+    rotatingFactor: -3
   <AngularDragConfig>k__BackingField:
-    basicDragForce: 1
-    axesCoefs: {x: 250000, y: 400000, z: 40000}
-    speedFactorAnchor:
-      anchorSpeed: 750
-      anchorForce: 12
+    basicDragForce: 10000
+    axesCoefs: {x: 1, y: 1.5, z: 0.05}
+    anchorSpeed: 100
+    anchorSpeedForceMult: 40
   surfaceConfigs:
   - surfaceName: Pitch
     liftAnchor:
       anchorSpeed: 60
       anchorForce: 10000
-    forceClamp: 1e+19
     liftMultOverAOA:
       serializedVersion: 2
       m_Curve:
@@ -198,6 +163,32 @@ MonoBehaviour:
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    maxRotationAngle: 30
+    rotationSpeed: 7
+    angleMultOverSpeed:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 100
+        value: 1
+        inSlope: -0.006157576
+        outSlope: -0.006157576
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.037373737
+      - serializedVersion: 3
+        time: 220
+        value: 0.5
+        inSlope: -0.0013232711
+        outSlope: -0.0013232711
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.13232331
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -206,7 +197,6 @@ MonoBehaviour:
     liftAnchor:
       anchorSpeed: 60
       anchorForce: 7500
-    forceClamp: 1e+19
     liftMultOverAOA:
       serializedVersion: 2
       m_Curve:
@@ -240,11 +230,36 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+    maxRotationAngle: 30
+    rotationSpeed: 7
+    angleMultOverSpeed:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: -0.006157576
+        outSlope: -0.006157576
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.037373737
+      - serializedVersion: 3
+        time: 220
+        value: 0.5
+        inSlope: -0.0013232711
+        outSlope: -0.0013232711
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.13232331
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
   - surfaceName: Roll
     liftAnchor:
       anchorSpeed: 60
       anchorForce: 5000
-    forceClamp: 1e+19
     liftMultOverAOA:
       serializedVersion: 2
       m_Curve:
@@ -274,6 +289,32 @@ MonoBehaviour:
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    maxRotationAngle: 30
+    rotationSpeed: 7
+    angleMultOverSpeed:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: -0.006157576
+        outSlope: -0.006157576
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.037373737
+      - serializedVersion: 3
+        time: 220
+        value: 0.5
+        inSlope: -0.0013232711
+        outSlope: -0.0013232711
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.13232331
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2

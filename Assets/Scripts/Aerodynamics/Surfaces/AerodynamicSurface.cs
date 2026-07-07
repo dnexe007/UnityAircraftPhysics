@@ -2,9 +2,12 @@ using UnityEngine;
 
 public class AerodynamicSurface : AerodynamicSurfaceBase
 {
-    public string surfaceType;
+    [SerializeField] private string surfaceType;
 
     private AerodynamicSurfaceConfig surfaceConfig;
+    public float MaxRotationAngle => surfaceConfig.GetMaxRotationAngle(VelocityMagnitude);
+
+    public float RotationSpeed => surfaceConfig.RotationSpeed;
 
 	protected override void Start()
 	{
@@ -12,7 +15,7 @@ public class AerodynamicSurface : AerodynamicSurfaceBase
 		surfaceConfig = config.GetSurfaceConfigByName(surfaceType);
 	}
 
-    public string GetSurfaceType() => surfaceType;
+    public string SurfaceType => surfaceType;
 
     protected override float CalculateLift()
     {

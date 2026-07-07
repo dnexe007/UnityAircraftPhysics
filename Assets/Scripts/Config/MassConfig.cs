@@ -14,14 +14,14 @@ public class MassConfig
 
 
 	[Header("Tensor settings")]
-	[SerializeField] private float pitchTensor = 150_000;
-	[SerializeField] private float yawTensor = 200_000;
-	[SerializeField] private float rollTensor = 30_000;
+	[SerializeField] private float pitchTensor = 300_000;
+	[SerializeField] private float yawTensor = 350_000;
+	[SerializeField] private float rollTensor = 40_000;
 
 
 	[Header("Joint settings")]
 	[SerializeField] private int parentToChildMassMult = 10;
-	[SerializeField] private int numOfWheels = 3;
+	[SerializeField] private int numOfWheels = 0;
 
 
 	[field: SerializeField, HideInInspector] public float WheelMass { get; private set; }

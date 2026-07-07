@@ -44,6 +44,10 @@ public class Controls : MonoBehaviour
         currentInput.x /= Screen.width;
         currentInput -= new Vector2(0.5f, 0.5f);
         currentInput *= 2;
+
+        currentInput.x = Mathf.Clamp(currentInput.x, -1, 1);
+        currentInput.y = Mathf.Clamp(currentInput.y, -1, 1);
+
         YokeInput = currentInput;
 
         

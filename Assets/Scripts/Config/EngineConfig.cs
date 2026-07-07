@@ -6,5 +6,5 @@ using static CurveGenerator;
 [Serializable]
 public class EngineConfig
 {
-    public float thrust = 220000;
+    public float thrust = 250000;
 }

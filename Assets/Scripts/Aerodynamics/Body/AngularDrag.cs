@@ -14,6 +14,7 @@ public class AngularDrag : MonoBehaviour
     private void FixedUpdate()
     {
         Vector3 localAngVel = transform.InverseTransformDirection(rb.angularVelocity);
+        print(setup.config.AngularDragConfig.GetAngularDrag(localAngVel, rb.velocity.magnitude).magnitude);
         rb.AddRelativeTorque(
             setup.config.AngularDragConfig.GetAngularDrag(localAngVel, rb.velocity.magnitude),
             ForceMode.Force

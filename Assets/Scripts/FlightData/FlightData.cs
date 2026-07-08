@@ -48,10 +48,10 @@ public class FlightData : MonoBehaviour
     {
         LocalVelocity = transform.InverseTransformDirection(rb.velocity);
 
-        Attitude attitude = new(transform);
-        Roll = attitude.roll;
-        Pitch = attitude.pitch;
-        RightHorizontalVector = attitude.rightHorizontalVector;
+        RightHorizontalVector = Attitude.CalculateRightHorizontalVector(transform);
+        Roll = Attitude.CalculateRoll(transform, RightHorizontalVector);
+        Pitch = Attitude.CalculatePitch(transform);
+
 
         VerticalAOA = AnglesOfAttack.GetVerticalAOA(LocalVelocity);
         HorizontalAOA = AnglesOfAttack.GetHorizontalAOA(LocalVelocity);

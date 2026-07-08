@@ -25,6 +25,12 @@ public class AircraftConfig : ScriptableObject
 	{
 		MassConfig.UpdateData();
 	}
+
+	[ContextMenu("Add default surface config")]
+	private void AddSurfaceConfig()
+	{
+		surfaceConfigs.Add(AerodynamicSurfaceConfig.PitchSetup());
+	}
 }
 
 

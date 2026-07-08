@@ -4,7 +4,7 @@ using UnityEngine;
 [Serializable]
 public class MovementDragConfig
 {
-	[SerializeField] private QuadDragAnchor dragSpeedAnchor = new(500, 200_000);
+	[SerializeField] private DragAnchor dragSpeedAnchor = new(500, 200_000);
 
 	[SerializeField] private AnimationCurve dragMultOverAOA = new(
 		new(0f, 1f, 0.1f, 0.1f),
@@ -16,7 +16,7 @@ public class MovementDragConfig
 
 	public Vector3 GetDragVector(Vector3 velocity, float angleOfAttack)
 	{
-		float basicDrag = dragSpeedAnchor.GetDrag(velocity.magnitude);
+		float basicDrag = dragSpeedAnchor.GetQuadraticDrag(velocity.magnitude);
 		float angleMult = dragMultOverAOA.Evaluate(angleOfAttack);
 		return angleMult * basicDrag * -velocity.normalized;
 	}

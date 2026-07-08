@@ -4,8 +4,8 @@ using UnityEngine;
 [Serializable]
 public class WingConfig
 {
-	[SerializeField] private QuadDragAnchor liftAnchorFlapsZero = new(60, 100_000);
-	[SerializeField] private QuadDragAnchor liftAnchorFlapsFull = new(50, 100_000);
+	[SerializeField] private DragAnchor liftAnchorFlapsZero = new(60, 100_000);
+	[SerializeField] private DragAnchor liftAnchorFlapsFull = new(50, 100_000);
 	[SerializeField]
 	private AnimationCurve liftMultOverAOA = new(
 		new(-25, -0.1f, -0.24f, -0.24f),
@@ -22,8 +22,8 @@ public class WingConfig
 	{
 
 		float basicForce = Mathf.Lerp(
-			liftAnchorFlapsZero.GetDrag(speed),
-			liftAnchorFlapsFull.GetDrag(speed),
+			liftAnchorFlapsZero.GetQuadraticDrag(speed),
+			liftAnchorFlapsFull.GetQuadraticDrag(speed),
 			flapsValue
 		);
 

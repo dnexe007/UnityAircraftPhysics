@@ -127,8 +127,9 @@ MonoBehaviour:
   <AngularDragConfig>k__BackingField:
     basicDragForce: 10000
     axesCoefs: {x: 1, y: 1.5, z: 0.05}
-    anchorSpeed: 100
-    anchorSpeedForceMult: 40
+    linearSpeedMultAnchor:
+      anchorSpeed: 100
+      anchorForce: 40
   surfaceConfigs:
   - surfaceName: Pitch
     liftAnchor:
@@ -182,8 +183,8 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0.037373737
       - serializedVersion: 3
-        time: 220
-        value: 0.5
+        time: 220.24243
+        value: 0.69418335
         inSlope: -0.0013232711
         outSlope: -0.0013232711
         tangentMode: 0

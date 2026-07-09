@@ -21,7 +21,7 @@ public class AerodynamicSurfaceConfig
 			new(20f, 1f, 0f, 0f)
 		),
 		maxRotationAngle = 30,
-		rotationSpeed = 7,
+		rotationSpeed = 60,
 		angleMultOverSpeed = new(
 			new(0, 1),
 			new(750, 0.1f)

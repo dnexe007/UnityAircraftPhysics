@@ -44,7 +44,7 @@ public class SurfaceController : MonoBehaviour
 
     private void Update()
     {
-        currentAngle = Mathf.Lerp(
+        currentAngle = Mathf.MoveTowards(
             currentAngle,
             surface.MaxRotationAngle * GetInput(),
             Time.deltaTime * surface.RotationSpeed

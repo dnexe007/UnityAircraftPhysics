@@ -169,7 +169,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     maxRotationAngle: 30
-    rotationSpeed: 7
+    rotationSpeed: 60
     angleMultOverSpeed:
       serializedVersion: 2
       m_Curve:
@@ -232,7 +232,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     maxRotationAngle: 30
-    rotationSpeed: 7
+    rotationSpeed: 60
     angleMultOverSpeed:
       serializedVersion: 2
       m_Curve:
@@ -295,7 +295,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     maxRotationAngle: 30
-    rotationSpeed: 7
+    rotationSpeed: 60
     angleMultOverSpeed:
       serializedVersion: 2
       m_Curve:

@@ -3,13 +3,13 @@ using UnityEngine;
 public class MovementDrag : MonoBehaviour
 {
     private Rigidbody rb;
-    private AircraftSetup setup;
-    MovementDragConfig config => setup.config.MovementDragConfig;
+    private Aircraft setup;
+    MovementDragConfig config => setup.Config.MovementDragConfig;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        setup = GetComponentInParent<AircraftSetup>();
+        setup = GetComponentInParent<Aircraft>();
     }
 
     private void FixedUpdate()

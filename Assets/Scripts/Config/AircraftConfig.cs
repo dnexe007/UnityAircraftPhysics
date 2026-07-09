@@ -13,7 +13,7 @@ public class AircraftConfig : ScriptableObject
 
 	[SerializeField] private List<AerodynamicSurfaceConfig> surfaceConfigs = new()
 	{
-		AerodynamicSurfaceConfig.PitchSetup()
+		AerodynamicSurfaceConfig.DefaultSetup
 	};
 
 	public AerodynamicSurfaceConfig GetSurfaceConfigByName(string name)
@@ -29,7 +29,7 @@ public class AircraftConfig : ScriptableObject
 	[ContextMenu("Add default surface config")]
 	private void AddSurfaceConfig()
 	{
-		surfaceConfigs.Add(AerodynamicSurfaceConfig.PitchSetup());
+		surfaceConfigs.Add(AerodynamicSurfaceConfig.DefaultSetup);
 	}
 }
 

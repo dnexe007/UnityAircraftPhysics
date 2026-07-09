@@ -11,9 +11,9 @@ public class AerodynamicSurfaceConfig
 	[SerializeField] private float rotationSpeed;
 	[SerializeField] private AnimationCurve angleMultOverSpeed;
 
-	public static AerodynamicSurfaceConfig PitchSetup() => new()
+	public static AerodynamicSurfaceConfig DefaultSetup => new()
 	{
-		surfaceName = "Pitch",
+		surfaceName = "Default",
 		liftAnchor = new(60, 10000),
 		liftMultOverAOA = new(
 			new(-20f, -1f, 0f, 0f),

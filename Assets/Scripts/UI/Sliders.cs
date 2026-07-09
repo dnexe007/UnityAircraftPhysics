@@ -5,9 +5,7 @@ using UnityEngine;
 
 public class Sliders : MonoBehaviour
 {
-    [SerializeField] private FlightData fd;
-    private AircraftSetup setup;
-
+    private UIManager root;
 
     private RectTransform thrustSlider;
     private RectTransform flapsSlider;
@@ -24,16 +22,17 @@ public class Sliders : MonoBehaviour
         flapsSlider = transform.Find("Flaps/Image").GetComponent<RectTransform>();
         flapsText = flapsSlider.GetComponentInChildren<TMP_Text>();
 
-        setup = fd.GetComponentInParent<AircraftSetup>();
+        root = GetComponentInParent<UIManager>();
     }
+
 
     private void Update()
     {
-        thrustText.text = $"THRUST\n{(Mathf.Round(fd.ThrustValue * 100))}%";
-        thrustSlider.anchoredPosition = new Vector2(0, fd.ThrustValue * 200);
+        thrustText.text = $"THRUST\n{(Mathf.Round(root.Aircraft.ThrustValue * 100))}%";
+        thrustSlider.anchoredPosition = new Vector2(0, root.Aircraft.ThrustValue * 200);
 
 
-        flapsText.text = $"FLAPS\n{fd.FlapsValue}/{setup.config.WingConfig.FlapsSteps}";
-        flapsSlider.anchoredPosition = new Vector2(0, fd.FlapsValue / (float)setup.config.WingConfig.FlapsSteps * 100);
+        flapsText.text = $"FLAPS\n{root.Aircraft.FlapsValue}/{root.Aircraft.Config.WingConfig.FlapsSteps}";
+        flapsSlider.anchoredPosition = new Vector2(0, root.Aircraft.FlapsValue01 * 100);
     }
 }

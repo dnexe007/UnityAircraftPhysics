@@ -3,15 +3,34 @@ using UnityEngine;
 [RequireComponent(typeof(AerodynamicSurface))]
 public class SurfaceController : MonoBehaviour
 {
-    [SerializeField] private Vector3 rotationVector = new(1, 0, 0);
-    [SerializeField] private bool invertInput;
+	private enum InputType { Roll, Pitch, Yaw, None}
 
-    private Vector3 startAngles;
-	float currentAngle;
+
+	[SerializeField] private Vector3 rotationVector = new(1, 0, 0);
+	[SerializeField] private InputType inputType = InputType.None;
+	[SerializeField] private bool invertInput;
+
+
+	private Vector3 startAngles;
+	private float currentAngle;
+
+
 	private AerodynamicSurface surface;
+    private Aircraft root;
 
+    
+	private float GetInput()
+    {
+        float input = inputType switch
+        {
+            InputType.Roll => root.RollInput,
+            InputType.Pitch => root.PitchInput,
+            InputType.Yaw => root.YawInput,
+            _ => 0,
+        };
 
-	private float PlayerInput => Controls.GetInputByName(surface.SurfaceType) * (invertInput? -1: 1);
+        return input * (invertInput ? -1 : 1);
+    }
 
 
     private void Start()
@@ -19,6 +38,7 @@ public class SurfaceController : MonoBehaviour
         startAngles = transform.localEulerAngles;
 
         surface = GetComponent<AerodynamicSurface>();
+        root = GetComponentInParent<Aircraft>();
     }
 
 
@@ -26,7 +46,7 @@ public class SurfaceController : MonoBehaviour
     {
         currentAngle = Mathf.Lerp(
             currentAngle,
-            surface.MaxRotationAngle * PlayerInput,
+            surface.MaxRotationAngle * GetInput(),
             Time.deltaTime * surface.RotationSpeed
         );
 

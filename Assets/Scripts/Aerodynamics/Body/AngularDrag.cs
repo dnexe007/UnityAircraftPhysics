@@ -3,20 +3,19 @@ using UnityEngine;
 public class AngularDrag : MonoBehaviour
 {
     private Rigidbody rb;
-    private AircraftSetup setup;
+    private Aircraft setup;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        setup = GetComponentInParent<AircraftSetup>();
+        setup = GetComponentInParent<Aircraft>();
     }
 
     private void FixedUpdate()
     {
         Vector3 localAngVel = transform.InverseTransformDirection(rb.angularVelocity);
-        print(setup.config.AngularDragConfig.GetAngularDrag(localAngVel, rb.velocity.magnitude).magnitude);
         rb.AddRelativeTorque(
-            setup.config.AngularDragConfig.GetAngularDrag(localAngVel, rb.velocity.magnitude),
+            setup.Config.AngularDragConfig.GetAngularDrag(localAngVel, rb.velocity.magnitude),
             ForceMode.Force
         );
     }

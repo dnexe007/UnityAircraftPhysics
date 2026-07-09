@@ -7,7 +7,7 @@ public class WheelSetup : MonoBehaviour
 	Rigidbody gearRb;
 	private void Start()
 	{
-		AircraftConfig config = GetComponentInParent<AircraftSetup>().config;
+		AircraftConfig config = GetComponentInParent<Aircraft>().Config;
 
 		gearRb = transform.Find("Gear").GetComponent<Rigidbody>();
 		gearRb.mass = config.MassConfig.GearMass;

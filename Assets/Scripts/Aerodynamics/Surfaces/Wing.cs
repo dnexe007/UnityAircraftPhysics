@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class Wing : AerodynamicSurfaceBase
 {
-    private FlightData fd;
+    private Aircraft root;
     protected override void Start()
     {
         base.Start();
-        fd = GetComponentInParent<FlightData>();
+        root = GetComponentInParent<Aircraft>();
     }
     protected override float CalculateLift()
     {
-        return config.WingConfig.GetLift(VelocityMagnitude, VerticalAOA, fd.FlapsValue01);
+        return config.WingConfig.GetLift(VelocityMagnitude, VerticalAOA, root.FlapsValue01);
     }
 }

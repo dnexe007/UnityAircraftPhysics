@@ -40,7 +40,7 @@ public abstract class AerodynamicSurfaceBase : MonoBehaviour
 	protected virtual void Start()
     {
         rb = GetComponentInParent<Rigidbody>();
-        config = rb.GetComponentInParent<AircraftSetup>().config;
+        config = rb.GetComponentInParent<Aircraft>().Config;
     }
 
     private void FixedUpdate()

@@ -3,7 +3,6 @@ using TMPro;
 
 public class AttitudeIndicator : MonoBehaviour
 {
-    [SerializeField] private FlightData flightData;
     [SerializeField] private float MaxPitchRange = -487;
     [Range(-1, 1)][SerializeField] private float currentValue;
     [SerializeField] private float PitchSpeed = 5;
@@ -11,6 +10,8 @@ public class AttitudeIndicator : MonoBehaviour
 
     private float currentPitchRange;
     private float currentRollAngle;
+
+    private UIManager root;
 
     private RectTransform pitchTransform;
     private RectTransform rollTransform;
@@ -24,6 +25,8 @@ public class AttitudeIndicator : MonoBehaviour
         AOAText = transform.Find("AOAText").GetComponentInChildren<TMP_Text>();
         rollTransform = transform.Find("Roll").GetComponent<RectTransform>();
         pitchTransform = rollTransform.Find("Pitch").GetComponent<RectTransform>();
+
+        root = GetComponentInParent<UIManager>();
     }
 
     private void LateUpdate()
@@ -35,10 +38,10 @@ public class AttitudeIndicator : MonoBehaviour
 
     private void SetDotAndAOA()
     {
-        AOAText.text = $"AOA: {Mathf.Round(flightData.VerticalAOA)}";
+        AOAText.text = $"AOA: {Mathf.Round(root.Aircraft.VerticalAOA)}";
         Vector2 dotTargetPosition = new Vector2(
-            flightData.HorizontalAOA / 90,
-            flightData.VerticalAOA / 90
+            root.Aircraft.HorizontalAOA / 90,
+            root.Aircraft.VerticalAOA / 90
         ) * MaxPitchRange;
 
         dot.anchoredPosition = Vector2.Lerp(
@@ -49,7 +52,7 @@ public class AttitudeIndicator : MonoBehaviour
     }
     private void SetPitch()
     {
-        float targetPitchRange = flightData.Pitch / 90 * MaxPitchRange;
+        float targetPitchRange = root.Aircraft.Pitch / 90 * MaxPitchRange;
 
         currentPitchRange = Mathf.Lerp(
             currentPitchRange,
@@ -63,7 +66,7 @@ public class AttitudeIndicator : MonoBehaviour
 
     private void SetRoll()
     {
-        currentRollAngle = Mathf.LerpAngle(currentRollAngle, flightData.Roll, RollSpeed * Time.deltaTime);
+        currentRollAngle = Mathf.LerpAngle(currentRollAngle, root.Aircraft.Roll, RollSpeed * Time.deltaTime);
 
         if (currentRollAngle > 180) currentRollAngle -= 360;
         if (currentRollAngle < -180) currentRollAngle += 360;

@@ -12,13 +12,16 @@ public class Aircraft : MonoBehaviour
 	public Vector3 RightHorizontalVector { get; private set; }
 	public float VerticalAOA { get; private set; }
 	public float HorizontalAOA { get; private set; }
+
+	public float Overload { get; private set; }
 	public void SetFlightData(
 		Vector3 localVelocity,
 		Vector3 rightHorizontalVector,
 		float roll,
 		float pitch,
 		float verticalAOA,
-		float horizontalAOA
+		float horizontalAOA,
+		float overload
 	)
 	{
 		LocalVelocity = localVelocity;
@@ -27,6 +30,7 @@ public class Aircraft : MonoBehaviour
 		Pitch = pitch;
 		VerticalAOA = verticalAOA;
 		HorizontalAOA = horizontalAOA;
+		Overload = overload;
 	}
 
 

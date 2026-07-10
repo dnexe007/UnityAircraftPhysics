@@ -5,11 +5,13 @@ public class FlightIndicators : MonoBehaviour
 {
 	private Rigidbody rb;
 	private Aircraft root;
+	private OverloadCalculator overloadCalculator;
 
 	private void Start()
 	{
 		rb = GetComponent<Rigidbody>();
 		root = GetComponentInParent<Aircraft>();
+		overloadCalculator = new(rb);
 	}
 
 
@@ -28,13 +30,16 @@ public class FlightIndicators : MonoBehaviour
 		float horizontalAOA = AnglesOfAttack.GetHorizontalAOA(localVelocity);
 
 
+		float overload = overloadCalculator.CalculateOverload();
+
 		root.SetFlightData(
 			localVelocity,
 			rightHorizontalVector,
 			roll,
 			pitch,
 			verticalAOA,
-			horizontalAOA
+			horizontalAOA,
+			overload
 		);
 	}
 }

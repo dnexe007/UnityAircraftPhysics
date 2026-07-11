@@ -5,7 +5,6 @@ public class Wing : AerodynamicSurfaceBase
     private WingConfig config;
     private Aircraft root;
 
-
     protected override void Start()
     {
         base.Start();

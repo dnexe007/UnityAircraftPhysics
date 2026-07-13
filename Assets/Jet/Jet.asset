@@ -86,6 +86,8 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     flapsSteps: 5
+    flapsRotationAngle: 30
+    flapsRotationSpeed: 15
   <MovementDragConfig>k__BackingField:
     dragSpeedAnchor:
       anchorSpeed: 500

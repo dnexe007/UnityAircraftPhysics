@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 [Serializable]
 public class WingConfig
@@ -15,8 +16,11 @@ public class WingConfig
 		new(25, 0.1f, -0.24f, -0.24f)
 	);
 	[SerializeField] [Range(1, 10)] private int flapsSteps = 5;
+	[SerializeField] private float flapsRotationAngle = 30;
+	[SerializeField] private float flapsRotationSpeed = 15;
 
 	public int FlapsSteps => flapsSteps;
+	public float FlapsRotationAngle => flapsRotationAngle;
 
 	public float GetLift(float speed, float angleOfAttack, float flapsValue)
 	{
@@ -30,5 +34,11 @@ public class WingConfig
 		float angleOfAttackMult = liftMultOverAOA.Evaluate(angleOfAttack);
 
 		return basicForce * angleOfAttackMult;
+	}
+
+
+	public float UpdateFlaps(float currentFlapsValue01, float tartgetFlapsValue01, float deltaTime)
+	{
+		return Mathf.MoveTowards(currentFlapsValue01, tartgetFlapsValue01, flapsRotationSpeed / FlapsRotationAngle * deltaTime);
 	}
 }

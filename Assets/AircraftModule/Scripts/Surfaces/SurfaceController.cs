@@ -7,14 +7,12 @@ public class SurfaceController : MonoBehaviour
 
 
 	[SerializeField] private Vector3 rotationVector = new(1, 0, 0);
-    [SerializeField] private Vector3 modelRotationVector = new(1, 0, 0);
-    [SerializeField] private Transform model;
+    [SerializeField] private SurfaceAnimator surfaceAnimator;
 	[SerializeField] private InputType inputType = InputType.None;
 	[SerializeField] private bool invertInput;
 
 
 	private Vector3 startAngles;
-    private Vector3 modelStartAngles;
 	public float CurrentAngle { get; private set; }
 
 
@@ -40,7 +38,6 @@ public class SurfaceController : MonoBehaviour
     {
         startAngles = transform.localEulerAngles;
 
-        if(model != null) modelStartAngles = model.localEulerAngles;
 
         surface = GetComponent<AerodynamicSurface>();
         root = GetComponentInParent<Aircraft>();
@@ -56,12 +53,6 @@ public class SurfaceController : MonoBehaviour
         );
 
         transform.localEulerAngles = startAngles + rotationVector * CurrentAngle;
-
-
-
-        if(model != null)
-        {
-            model.localEulerAngles = modelStartAngles + modelRotationVector * CurrentAngle;
-        }
+        if (surfaceAnimator != null) surfaceAnimator.SetAngle(CurrentAngle);
     }
 }

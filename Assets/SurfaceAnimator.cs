@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class SurfaceAnimator : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private Vector3 rotationVector;
+    [Range(-90, 90)] public float currentAngle;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	private Vector3 startAngles;
+
+	private void Start()
+	{
+		startAngles = transform.localEulerAngles;
+	}
+
+	private void Update()
+	{
+		transform.localEulerAngles = startAngles + rotationVector * currentAngle;
+	}
 }

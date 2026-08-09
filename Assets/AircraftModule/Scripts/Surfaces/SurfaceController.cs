@@ -7,7 +7,6 @@ public class SurfaceController : MonoBehaviour
 
 
 	[SerializeField] private Vector3 rotationVector = new(1, 0, 0);
-    [SerializeField] private SurfaceAnimator surfaceAnimator;
 	[SerializeField] private InputType inputType = InputType.None;
 	[SerializeField] private bool invertInput;
 
@@ -53,6 +52,5 @@ public class SurfaceController : MonoBehaviour
         );
 
         transform.localEulerAngles = startAngles + rotationVector * CurrentAngle;
-        if (surfaceAnimator != null) surfaceAnimator.SetAngle(CurrentAngle);
     }
 }

@@ -5,6 +5,8 @@ using UnityEngine;
 public class SurfaceAnimator : MonoBehaviour
 {
     [SerializeField] private Vector3 rotationVector;
+	[SerializeField] private SurfaceController surfaceController;
+
 	private Vector3 startAngles;
 
 	private void Start()
@@ -12,9 +14,9 @@ public class SurfaceAnimator : MonoBehaviour
 		startAngles = transform.localEulerAngles;
 	}
 
-	public void SetAngle(float angle)
+	public void Update()
 	{
-		transform.localEulerAngles = startAngles + rotationVector * angle;
+		transform.localEulerAngles = startAngles + rotationVector * surfaceController.CurrentAngle;
 	}
 }
 

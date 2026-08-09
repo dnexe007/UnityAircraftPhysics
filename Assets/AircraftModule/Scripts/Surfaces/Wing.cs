@@ -2,14 +2,10 @@ using UnityEngine;
 
 public class Wing : AerodynamicSurfaceBase
 {
-    [SerializeField] private FlapAnimator flapAnimator;
-
-
     private WingConfig config;
     private Aircraft root;
 
-    public float currentFlapsValue01;
-   // private Vector3 flapsModelStartAngles;
+    public float CurrentFlapDeployment01 { get; private set; }
 
 
     protected override void Start()
@@ -17,26 +13,26 @@ public class Wing : AerodynamicSurfaceBase
         base.Start();
         root = GetComponentInParent<Aircraft>();
 		config = root.Config.WingConfig;
-        currentFlapsValue01 = root.FlapsValue01;
-
-        //if (flapAnimator != null) flapsModelStartAngles = flapAnimator.localEulerAngles;
+        CurrentFlapDeployment01 = root.FlapsValue01;
     }
 
 
 	private void Update()
 	{
-        currentFlapsValue01 = config.UpdateFlaps(currentFlapsValue01, root.FlapsValue01, Time.deltaTime);
-
-        if(flapAnimator != null) flapAnimator.SetDeployment(currentFlapsValue01);
-
-        //if(flapAnimator != null)
-        //{
-        //    flapAnimator.localEulerAngles = flapsModelStartAngles + flapsModelRotationVector * currentFlapsValue01 * config.FlapsRotationAngle;
-        //}
+        CurrentFlapDeployment01 = config.UpdateFlaps(
+            CurrentFlapDeployment01,
+            root.FlapsValue01,
+            Time.deltaTime
+        );
 	}
+
 
 	protected override float CalculateLift()
     {
-        return config.GetLift(VelocityMagnitude, VerticalAOA, currentFlapsValue01);
+        return config.GetLift(
+            VelocityMagnitude,
+            VerticalAOA,
+            CurrentFlapDeployment01
+        );
     }
 }

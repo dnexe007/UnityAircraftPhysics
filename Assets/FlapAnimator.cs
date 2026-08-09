@@ -4,6 +4,7 @@ public class FlapAnimator : MonoBehaviour
 {
 	[SerializeField] private Vector3 rotationVector;
 	[SerializeField] private Vector3 flap2MovementVector;
+	[SerializeField] private Wing wing;
 
 
 	private Transform flap2;
@@ -19,9 +20,9 @@ public class FlapAnimator : MonoBehaviour
 		flap2StartPos = flap2.localPosition;
 	}
 
-	public void SetDeployment(float deployment)
+	private void Update()
 	{
-		deployment = Mathf.Clamp01(deployment);
+		float deployment = Mathf.Clamp01(wing.CurrentFlapDeployment01);
 		transform.localEulerAngles = startAngles + rotationVector * deployment;
 		flap2.localPosition = flap2StartPos + flap2MovementVector * deployment;
 	}

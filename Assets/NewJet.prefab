@@ -754,6 +754,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationVector: {x: 1, y: 0, z: 0}
+  surfaceController: {fileID: 0}
 --- !u!1 &98151601705864188
 GameObject:
   m_ObjectHideFlags: 0
@@ -1100,6 +1101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationVector: {x: -30, y: 0, z: 0}
   flap2MovementVector: {x: 0, y: 0, z: -0.4}
+  wing: {fileID: 0}
 --- !u!1 &139350277921159366
 GameObject:
   m_ObjectHideFlags: 0
@@ -4165,6 +4167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationVector: {x: 0, y: -1, z: 0}
+  surfaceController: {fileID: 0}
 --- !u!1 &839062528866647772
 GameObject:
   m_ObjectHideFlags: 0
@@ -6741,6 +6744,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationVector: {x: 1, y: 0, z: 0}
+  surfaceController: {fileID: 0}
 --- !u!1 &1613629326650490842
 GameObject:
   m_ObjectHideFlags: 0
@@ -7256,6 +7260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationVector: {x: 1, y: 0, z: 0}
+  surfaceController: {fileID: 0}
 --- !u!1 &1874651788343666871
 GameObject:
   m_ObjectHideFlags: 0
@@ -9947,6 +9952,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationVector: {x: -30, y: 0, z: 0}
   flap2MovementVector: {x: 0, y: 0, z: -0.4}
+  wing: {fileID: 0}
 --- !u!1 &2404059056789109161
 GameObject:
   m_ObjectHideFlags: 0
@@ -11281,6 +11287,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationVector: {x: 1, y: 0, z: 0}
+  surfaceController: {fileID: 0}
 --- !u!1 &3271382370103082884
 GameObject:
   m_ObjectHideFlags: 0
@@ -16475,7 +16482,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2875854316764377739
 Transform:
   m_ObjectHideFlags: 0
@@ -23974,6 +23981,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationVector: {x: 0, y: 1, z: 0}
+  surfaceController: {fileID: 0}
 --- !u!1 &6707234158576139248
 GameObject:
   m_ObjectHideFlags: 0

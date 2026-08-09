@@ -10,7 +10,7 @@ public class FlightIndicators : MonoBehaviour
 	private void Start()
 	{
 		rb = GetComponent<Rigidbody>();
-		root = GetComponentInParent<Aircraft>();
+		root = GetComponent<Aircraft>();
 		overloadCalculator = new(rb);
 	}
 

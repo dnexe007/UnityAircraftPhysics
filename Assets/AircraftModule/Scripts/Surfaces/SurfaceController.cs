@@ -1,25 +1,18 @@
+using System;
 using UnityEngine;
 
-[RequireComponent(typeof(AerodynamicSurface))]
-public class SurfaceController : MonoBehaviour
+[Serializable]
+public class SurfaceController
 {
 	private enum InputType { Roll, Pitch, Yaw, None}
 
 
-	[SerializeField] private Vector3 rotationVector = new(1, 0, 0);
 	[SerializeField] private InputType inputType = InputType.None;
 	[SerializeField] private bool invertInput;
 
-
-	private Vector3 startAngles;
-	public float CurrentAngle { get; private set; }
-
-
-	private AerodynamicSurface surface;
-    private Aircraft root;
-
+    public float CurrentRotationAngle { get; private set; }
     
-	private float GetInput()
+	private float GetInput(Aircraft root)
     {
         float input = inputType switch
         {
@@ -32,25 +25,12 @@ public class SurfaceController : MonoBehaviour
         return input * (invertInput ? -1 : 1);
     }
 
-
-    private void Start()
+    public void UpdateAngle(float maxRotationAngle, float rotationSpeed, Aircraft root)
     {
-        startAngles = transform.localEulerAngles;
-
-
-        surface = GetComponent<AerodynamicSurface>();
-        root = GetComponentInParent<Aircraft>();
-    }
-
-
-    private void Update()
-    {
-        CurrentAngle = Mathf.MoveTowards(
-            CurrentAngle,
-            surface.MaxRotationAngle * GetInput(),
-            Time.deltaTime * surface.RotationSpeed
+        CurrentRotationAngle = Mathf.MoveTowards(
+            CurrentRotationAngle,
+            maxRotationAngle * GetInput(root),
+            Time.deltaTime * rotationSpeed
         );
-
-        transform.localEulerAngles = startAngles + rotationVector * CurrentAngle;
     }
 }

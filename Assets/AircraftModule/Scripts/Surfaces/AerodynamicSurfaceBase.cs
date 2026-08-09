@@ -8,11 +8,12 @@ public abstract class AerodynamicSurfaceBase : MonoBehaviour
 	[SerializeField] [Range(0.1f, 1)] private float AOALerpSpeed;
 	[SerializeField] private float AOADelta;
 
-    private Rigidbody rb;
+    protected Rigidbody rb;
 
     protected float VelocityMagnitude { get; private set; }
     protected float VerticalAOA { get; private set; }
-	protected abstract float CalculateLift();
+	protected virtual float CalculateLift() => 0;
+	protected virtual void ApplyLift() { }
 
     private void UpdateData()
     {
@@ -47,6 +48,8 @@ public abstract class AerodynamicSurfaceBase : MonoBehaviour
 			transform.position,
 			ForceMode.Force
 		);
+
+		ApplyLift();
     }
 
 	private void OnDrawGizmos()

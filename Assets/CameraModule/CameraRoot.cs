@@ -6,8 +6,7 @@ public class CameraRoot : MonoBehaviour
     [SerializeField] private float RotationSpeed = 3;
     [SerializeField] private PlayerControls player;
 
-    private Transform aircraftTransform;
-    private Aircraft aircraftRoot;
+    private Aircraft aircraft;
 
     private Quaternion currentRt;
 
@@ -15,18 +14,17 @@ public class CameraRoot : MonoBehaviour
     {
         currentRt = player.Aircraft.transform.rotation;
 
-        aircraftRoot = player.Aircraft;
-        aircraftTransform = aircraftRoot.transform.Find("Body");
+        aircraft = player.Aircraft;
     }
     private void Update()
     {
-        transform.position = aircraftTransform.position;
+        transform.position = aircraft.transform.position;
 
-        Vector3 noRollUp = Vector3.Cross(aircraftTransform.forward, aircraftRoot.RightHorizontalVector);
-        Vector3 rollUp = aircraftTransform.up;
+        Vector3 noRollUp = Vector3.Cross(aircraft.transform.forward, aircraft.RightHorizontalVector);
+        Vector3 rollUp = aircraft.transform.up;
 
         Quaternion targetRt = Quaternion.LookRotation(
-            aircraftTransform.forward, 
+            aircraft.transform.forward, 
             FollowRoll? rollUp: noRollUp
         );
 

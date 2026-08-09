@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SurfaceAnimator : MonoBehaviour
 {
     [SerializeField] private Vector3 rotationVector;
-	[SerializeField] private SurfaceController surfaceController;
+	[SerializeField] private AerodynamicSurface surface;
 
 	private Vector3 startAngles;
 
@@ -16,7 +14,11 @@ public class SurfaceAnimator : MonoBehaviour
 
 	public void Update()
 	{
-		transform.localEulerAngles = startAngles + rotationVector * surfaceController.CurrentAngle;
+		if (surface == null) return;
+		transform.localEulerAngles = (
+			startAngles +
+			rotationVector * surface.CurrentRotationAngle
+		);
 	}
 }
 

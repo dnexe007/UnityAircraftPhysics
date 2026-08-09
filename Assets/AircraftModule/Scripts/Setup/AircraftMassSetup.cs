@@ -8,7 +8,7 @@ public class AircraftMassSetup : MonoBehaviour
 	void Start()
 	{
 		Rigidbody rb = GetComponent<Rigidbody>();
-		Aircraft root = GetComponentInParent<Aircraft>();
+		Aircraft root = GetComponent<Aircraft>();
 
 		rb.mass = root.Config.MassConfig.BodyMass;
 		rb.inertiaTensor = root.Config.MassConfig.BodyTensor;

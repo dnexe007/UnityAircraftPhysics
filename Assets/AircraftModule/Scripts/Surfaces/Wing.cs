@@ -4,7 +4,7 @@ public class Wing : AerodynamicSurfaceBase
 {
     private WingConfig config;
     private Aircraft root;
-
+    [SerializeField] private MultipointWing pointsGenerator;
     public float CurrentFlapDeployment01 { get; private set; }
 
 
@@ -26,6 +26,15 @@ public class Wing : AerodynamicSurfaceBase
         );
 	}
 
+	//protected override void ApplyLift()
+	//{
+	//	foreach(WingPoint point in pointsGenerator.GetPoints(transform))
+ //       {
+ //           point.UpdateMovementData(rb);
+ //           float lift = config.GetLift(point.VelocityMagnitude, point.VerticalAOA, CurrentFlapDeployment01);
+ //           rb.AddForceAtPosition(lift * point.normal * point.forceMult / pointsGenerator.NumOfPoints, point.position, ForceMode.Force);
+ //       }
+	//}
 
 	protected override float CalculateLift()
     {
@@ -35,4 +44,9 @@ public class Wing : AerodynamicSurfaceBase
             CurrentFlapDeployment01
         );
     }
+
+	//private void OnDrawGizmos()
+	//{
+ //       pointsGenerator.DrawGizmos(transform, 0);
+	//}
 }

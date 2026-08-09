@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable] public class MultipointWing
+[Serializable] public class PointsGenerator
 {
-	[SerializeField] private float endX;
-	[SerializeField] private float endZ;
+	[SerializeField] private float WingSpan;
+	[SerializeField] private float WingSweep;
 	[SerializeField] [Range(2, 20)] private int numOfPoints = 2;
 	[SerializeField] [Range(1, 20)] private float edgePointsDeltaCoef = 3;
 	[SerializeField] [Range(0.05f, 10)] private float gizmoLinesScale;
@@ -13,10 +13,11 @@ using UnityEngine;
 	public IEnumerable<WingPoint> GetPoints(Transform transform, float rotationAngle, Rigidbody rb = null)
 	{
 		Vector3 startPos = transform.position;
-		Vector3 endPos = transform.TransformPoint(new(endX, 0, endZ));
+		Vector3 endPos = transform.TransformPoint(new(WingSpan, 0, Mathf.Abs(WingSpan) * WingSweep));
 
-		float endPointForceMult = 1 / (1 + edgePointsDeltaCoef);
-		float startPointForceMult = endPointForceMult * edgePointsDeltaCoef;
+		// endPointForceMult + endPointForceMult * edgePointsDeltaCoef == 2
+		float endPositionForceMult = 2 / (1 + edgePointsDeltaCoef);
+		float startPositionForceMult = endPositionForceMult * edgePointsDeltaCoef;
 
 		Vector3 wingForward = Vector3.Slerp(
 			transform.forward,
@@ -37,8 +38,8 @@ using UnityEngine;
 			);
 
 			float positionForceMult = Mathf.Lerp(
-				startPointForceMult,
-				endPointForceMult,
+				startPositionForceMult,
+				endPositionForceMult,
 				pointPositionValue
 			);
 
@@ -65,5 +66,24 @@ using UnityEngine;
 			Gizmos.DrawLine(p.Position, p.Position + gizmoLinesScale * 0.25f * p.TotalForceMult * p.Right);
 			Gizmos.DrawWireSphere(p.Position, 0.125f);
 		}
+	}
+
+	public void TestForceMult(Transform transform)
+	{
+		Debug.Log($"numOfPoints {numOfPoints}");
+
+		int count = 0;
+
+		float mult = 0;
+
+		foreach(WingPoint p in GetPoints(transform, 0))
+		{
+			mult += p.TotalForceMult;
+			count++;
+		}
+
+		Debug.Log($"count {count}");
+
+		Debug.Log($"mult {mult}");
 	}
 }

@@ -13,7 +13,6 @@ public struct WingPoint
 
 	public readonly Vector3 Right => Vector3.Cross(Normal, Forward).normalized;
 
-
 	public WingPoint(
 		Vector3 position,
 		Vector3 forward,
@@ -24,8 +23,8 @@ public struct WingPoint
 	)
 	{
 		Position = position;
-		Forward = forward;
-		Normal = normal;
+		Forward = forward.normalized;
+		Normal = normal.normalized;
 		PositionForceMult = positionForceMult;
 		TotalForceMult = positionForceMult / numOfPoints;
 		VelocityMagnitude = VerticalAOA = 0;
@@ -33,13 +32,12 @@ public struct WingPoint
 		if (rb != null)
 		{
 			Vector3 pointVelocity = rb.GetPointVelocity(Position);
-			Vector3 forwardVelocity = Vector3.Project(pointVelocity, Forward);
-			Vector3 verticalVelocity = Vector3.Project(pointVelocity, Normal);
+			float localVelocityZ = Vector3.Dot(pointVelocity, Forward);
+			float localVelocityY = Vector3.Dot(pointVelocity, Normal);
+			Vector3 localVelocity = new(0, localVelocityY, localVelocityZ);
 
-			Vector3 projectedVelocity = forwardVelocity + verticalVelocity;
-
-			VerticalAOA = Vector3.SignedAngle(Forward, projectedVelocity, Right);
-			VelocityMagnitude = (forwardVelocity + verticalVelocity).magnitude;
+			VerticalAOA = AnglesOfAttack.GetVerticalAOA(localVelocity);
+			VelocityMagnitude = localVelocity.magnitude;
 		}
 	}
 }

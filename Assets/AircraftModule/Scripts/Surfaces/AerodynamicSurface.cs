@@ -3,41 +3,33 @@ using UnityEngine;
 public class AerodynamicSurface : AerodynamicSurfaceBase
 {
     [SerializeField] private string profileName = "Default";
-	[SerializeField] private MultipointWing pointsGenerator;
 	[SerializeField] private SurfaceController surfaceController;
 
 	private AerodynamicSurfaceConfig config;
 
-	public float CurrentRotationAngle => surfaceController.CurrentRotationAngle;
-    public float MaxRotationAngle => config.GetMaxRotationAngle(VelocityMagnitude);
-    public float RotationSpeed => config.RotationSpeed;
+	public float GetMaxRotationAngle()
+	{
+		Vector3 localVelocity = rb.GetLocalVelocity(transform.position);
 
+		localVelocity.x = 0;
 
-	private Aircraft root;
+		return config.GetMaxRotationAngle(localVelocity.magnitude);
+	}
+
 	protected override void Start()
 	{
 		base.Start();
-		root = GetComponentInParent<Aircraft>();
 		config = root.Config.GetSurfaceConfigByName(profileName);
 	}
 
+	protected override float GetLift(float velocityMagnitude, float verticalAOA)
+	{
+		return config.GetLift(velocityMagnitude, verticalAOA);
+	}
 
 	private void Update()
 	{
-		surfaceController.UpdateAngle(MaxRotationAngle, RotationSpeed, root);
-	}
-
-	protected override void ApplyLift()
-	{
-		foreach (WingPoint point in pointsGenerator.GetPoints(transform, CurrentRotationAngle, rb))
-		{
-			float lift = config.GetLift(point.VelocityMagnitude, point.VerticalAOA);
-			rb.AddForceAtPosition(lift * point.Normal * point.TotalForceMult, point.Position, ForceMode.Force);
-		}
-	}
-
-	private void OnDrawGizmos()
-	{
-		pointsGenerator.DrawGizmos(transform, CurrentRotationAngle);
+		surfaceController.UpdateAngle(GetMaxRotationAngle(), config.RotationSpeed, root);
+		CurrentRotationAngle = surfaceController.CurrentRotationAngle;
 	}
 }

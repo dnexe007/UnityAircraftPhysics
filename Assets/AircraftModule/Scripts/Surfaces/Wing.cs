@@ -2,9 +2,8 @@ using UnityEngine;
 
 public class Wing : AerodynamicSurfaceBase
 {
-    private WingConfig config;
-    private Aircraft root;
-    [SerializeField] private MultipointWing pointsGenerator;
+	private WingConfig config;
+
     public float CurrentFlapDeployment01 { get; private set; }
 
 
@@ -26,27 +25,12 @@ public class Wing : AerodynamicSurfaceBase
         );
 	}
 
-	//protected override void ApplyLift()
-	//{
-	//	foreach(WingPoint point in pointsGenerator.GetPoints(transform))
- //       {
- //           point.UpdateMovementData(rb);
- //           float lift = config.GetLift(point.VelocityMagnitude, point.VerticalAOA, CurrentFlapDeployment01);
- //           rb.AddForceAtPosition(lift * point.normal * point.forceMult / pointsGenerator.NumOfPoints, point.position, ForceMode.Force);
- //       }
-	//}
-
-	protected override float CalculateLift()
-    {
-        return config.GetLift(
-            VelocityMagnitude,
-            VerticalAOA,
-            CurrentFlapDeployment01
-        );
-    }
-
-	//private void OnDrawGizmos()
-	//{
- //       pointsGenerator.DrawGizmos(transform, 0);
-	//}
+	protected override float GetLift(float velocityMagnitude, float verticalAOA)
+	{
+		return config.GetLift(
+			velocityMagnitude,
+			verticalAOA,
+			CurrentFlapDeployment01
+		);
+	}
 }

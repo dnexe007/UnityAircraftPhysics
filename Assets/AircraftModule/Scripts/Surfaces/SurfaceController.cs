@@ -25,7 +25,11 @@ public class SurfaceController
         return input * (invertInput ? -1 : 1);
     }
 
-    public void UpdateAngle(float maxRotationAngle, float rotationSpeed, Aircraft root)
+    public void UpdateAngle(
+        float maxRotationAngle,
+        float rotationSpeed,
+        Aircraft root
+    )
     {
         CurrentRotationAngle = Mathf.MoveTowards(
             CurrentRotationAngle,

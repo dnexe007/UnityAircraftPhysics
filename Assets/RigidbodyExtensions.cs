@@ -4,14 +4,14 @@ using UnityEngine;
 
 public static class RigidbodyExtensions
 {
-    public static Vector3 GetLocalVelocity(this Rigidbody rb)
+    public static Vector3 GetLocalVelocity(this Rigidbody rb, Transform transform)
     {
-        return rb.transform.InverseTransformDirection(rb.velocity);
+        return transform.InverseTransformDirection(rb.velocity);
     }
 
-	public static Vector3 GetLocalVelocity(this Rigidbody rb, Vector3 position)
+	public static Vector3 GetLocalVelocity(this Rigidbody rb, Transform transform, Vector3 position)
 	{
-		return rb.transform.InverseTransformDirection(
+		return transform.InverseTransformDirection(
 			rb.GetPointVelocity(position)
 		);
 	}

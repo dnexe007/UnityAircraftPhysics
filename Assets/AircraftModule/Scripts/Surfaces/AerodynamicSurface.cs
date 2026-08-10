@@ -9,7 +9,7 @@ public class AerodynamicSurface : AerodynamicSurfaceBase
 
 	public float GetMaxRotationAngle()
 	{
-		Vector3 localVelocity = rb.GetLocalVelocity(transform.position);
+		Vector3 localVelocity = rb.GetLocalVelocity(transform, transform.position);
 
 		localVelocity.x = 0;
 

@@ -3,7 +3,7 @@ using UnityEngine;
 public class SurfaceAnimator : MonoBehaviour
 {
     [SerializeField] private Vector3 rotationVector;
-	[SerializeField] private AerodynamicSurface surface;
+	[SerializeField] private AerodynamicSurfaceBase surface;
 
 	private Vector3 startAngles;
 
@@ -17,7 +17,7 @@ public class SurfaceAnimator : MonoBehaviour
 		if (surface == null) return;
 		transform.localEulerAngles = (
 			startAngles +
-			rotationVector * surface.CurrentRotationAngle
+			rotationVector * surface.RotationAngle
 		);
 	}
 }

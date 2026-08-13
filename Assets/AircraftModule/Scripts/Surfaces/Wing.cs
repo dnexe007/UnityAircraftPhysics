@@ -4,23 +4,22 @@ public class Wing : AerodynamicSurfaceBase
 {
 	private WingConfig config;
 
-    public float CurrentFlapDeployment01 { get; private set; }
+    public float FlapDeployment01 { get; private set; }
 
 
-    protected override void Start()
+	protected override void Start()
     {
         base.Start();
-        root = GetComponentInParent<Aircraft>();
-		config = root.Config.WingConfig;
-        CurrentFlapDeployment01 = root.FlapsValue01;
+		config = Root.Config.WingConfig;
+        FlapDeployment01 = Root.FlapsValue01;
     }
 
 
 	private void Update()
 	{
-        CurrentFlapDeployment01 = config.UpdateFlaps(
-            CurrentFlapDeployment01,
-            root.FlapsValue01,
+        FlapDeployment01 = config.UpdateFlaps(
+            FlapDeployment01,
+            Root.FlapsValue01,
             Time.deltaTime
         );
 	}
@@ -30,7 +29,7 @@ public class Wing : AerodynamicSurfaceBase
 		return config.GetLift(
 			velocityMagnitude,
 			verticalAOA,
-			CurrentFlapDeployment01
+			FlapDeployment01
 		);
 	}
 }

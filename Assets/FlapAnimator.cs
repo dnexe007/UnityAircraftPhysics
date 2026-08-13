@@ -22,7 +22,7 @@ public class FlapAnimator : MonoBehaviour
 
 	private void Update()
 	{
-		float deployment = Mathf.Clamp01(wing.CurrentFlapDeployment01);
+		float deployment = Mathf.Clamp01(wing.FlapDeployment01);
 		transform.localEulerAngles = startAngles + rotationVector * deployment;
 		flap2.localPosition = flap2StartPos + flap2MovementVector * deployment;
 	}

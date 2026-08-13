@@ -12,25 +12,11 @@ public class AircraftConfig : ScriptableObject
 	[field: SerializeField] public AngularDragConfig AngularDragConfig { get; private set; } = new();
 	[field: SerializeField] public YawHelperConfig YawHelperConfig { get; private set; } = new();
 
-	[SerializeField] private List<AerodynamicSurfaceConfig> surfaceConfigs = new()
-	{
-		AerodynamicSurfaceConfig.DefaultSetup
-	};
+	[SerializeField] private List<AerodynamicSurfaceConfig> surfaceConfigs = new();
 
 	public AerodynamicSurfaceConfig GetSurfaceConfigByName(string name)
 	{
 		return surfaceConfigs.FirstOrDefault(x => x.SurfaceName == name);
-	}
-
-	private void OnValidate()
-	{
-		MassConfig.UpdateData();
-	}
-
-	[ContextMenu("Add default surface config")]
-	private void AddSurfaceConfig()
-	{
-		surfaceConfigs.Add(AerodynamicSurfaceConfig.DefaultSetup);
 	}
 }
 

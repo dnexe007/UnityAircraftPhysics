@@ -3454,7 +3454,10 @@ MonoBehaviour:
   rotatingZone:
     startIndex: 0
     endIndex: 100
+  CurrentMainAOAList: []
   liftError: 0
+  currentMainAOA: 0
+  currentRotatingAOA: 0
   profileName: Default
 --- !u!43 &193085368
 Mesh:
@@ -8956,7 +8959,10 @@ MonoBehaviour:
   rotatingZone:
     startIndex: 0
     endIndex: 100
+  CurrentMainAOAList: []
   liftError: 0
+  currentMainAOA: 0
+  currentRotatingAOA: 0
   profileName: Default
 --- !u!114 &535118671
 MonoBehaviour:
@@ -12932,7 +12938,10 @@ MonoBehaviour:
   rotatingZone:
     startIndex: 4
     endIndex: 6
+  CurrentMainAOAList: []
   liftError: 0
+  currentMainAOA: 0
+  currentRotatingAOA: 0
 --- !u!4 &771659060
 Transform:
   m_ObjectHideFlags: 0
@@ -17726,7 +17735,10 @@ MonoBehaviour:
   rotatingZone:
     startIndex: 0
     endIndex: 100
+  CurrentMainAOAList: []
   liftError: 0
+  currentMainAOA: 0
+  currentRotatingAOA: 0
   profileName: Default
 --- !u!114 &998827676
 MonoBehaviour:
@@ -22604,7 +22616,10 @@ MonoBehaviour:
   rotatingZone:
     startIndex: 4
     endIndex: 6
+  CurrentMainAOAList: []
   liftError: 0
+  currentMainAOA: 0
+  currentRotatingAOA: 0
 --- !u!4 &1454007649
 Transform:
   m_ObjectHideFlags: 0
@@ -25202,6 +25217,37 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1599122145
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1599122146}
+  m_Layer: 0
+  m_Name: Colliders
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1599122146
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1599122145}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 565882592440628521}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1621006084
 Mesh:
   m_ObjectHideFlags: 0
@@ -32341,6 +32387,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1479465489965087664, guid: 494476028b65c674daee38333ffa92e2,
         type: 3}
+      propertyPath: surface
+      value: 
+      objectReference: {fileID: 2122167472}
+    - target: {fileID: 1479465489965087664, guid: 494476028b65c674daee38333ffa92e2,
+        type: 3}
+      propertyPath: rotationVector.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479465489965087664, guid: 494476028b65c674daee38333ffa92e2,
+        type: 3}
       propertyPath: surfaceController
       value: 
       objectReference: {fileID: 0}
@@ -33744,6 +33800,16 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1862712806}
+    - target: {fileID: 8491616045160028231, guid: 494476028b65c674daee38333ffa92e2,
+        type: 3}
+      propertyPath: surface
+      value: 
+      objectReference: {fileID: 187028981}
+    - target: {fileID: 8491616045160028231, guid: 494476028b65c674daee38333ffa92e2,
+        type: 3}
+      propertyPath: rotationVector.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8491616045160028231, guid: 494476028b65c674daee38333ffa92e2,
         type: 3}
       propertyPath: surfaceController
@@ -35722,7 +35788,10 @@ MonoBehaviour:
   rotatingZone:
     startIndex: 0
     endIndex: 100
+  CurrentMainAOAList: []
   liftError: 0
+  currentMainAOA: 0
+  currentRotatingAOA: 0
   profileName: Default
 --- !u!1 &2123342568
 GameObject:
@@ -36882,6 +36951,7 @@ Transform:
   - {fileID: 2102791680}
   - {fileID: 883773373}
   - {fileID: 2061130101}
+  - {fileID: 1599122146}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &565882592440628522
@@ -36920,7 +36990,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc07a68f55fa7c141a77361eae9e967b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 220
+  speed: 60
 --- !u!114 &565882592440628525
 MonoBehaviour:
   m_ObjectHideFlags: 0

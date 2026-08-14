@@ -8,6 +8,7 @@ public class WingConfig
 	[SerializeField] private DragAnchor liftAnchorFlapsZero = new(60, 100_000);
 	[SerializeField] private DragAnchor liftAnchorFlapsFull = new(50, 100_000);
 	[SerializeField] private AnimationCurve liftMultOverAOA;
+	[SerializeField] private float peakAttackAngle;
 	[SerializeField] [Range(1, 10)] private int flapsSteps = 5;
 	[SerializeField] private float flapsRotationAngle = 30;
 	[SerializeField] private float flapsRotationSpeed = 15;
@@ -18,17 +19,33 @@ public class WingConfig
 	public int FlapsSteps => flapsSteps;
 	public float FlapsRotationAngle => flapsRotationAngle;
 
-	public float GetLift(float speed, float angleOfAttack, float flapsValue)
+
+
+	public float GetLift(float velocityMagnitude, float mainAOA, float rotatingAOA, float flapsValue)
 	{
+		float mainAOAClampedAbs = (
+			Mathf.Max(Mathf.Abs(mainAOA), peakAttackAngle)
+		);
+
+		float rotatingAOAClampedAbs = (
+			Mathf.Min(Mathf.Abs(rotatingAOA), peakAttackAngle)
+		);
+
+		float mainAOAMult = liftMultOverAOA.Evaluate(
+			mainAOAClampedAbs
+		);
+
+		float rotatingAOAMult = liftMultOverAOA.Evaluate(
+			rotatingAOAClampedAbs
+		) * Mathf.Sign(rotatingAOA);
+
 		float basicForce = Mathf.Lerp(
-			liftAnchorFlapsZero.GetQuadraticDrag(speed),
-			liftAnchorFlapsFull.GetQuadraticDrag(speed),
+			liftAnchorFlapsZero.GetQuadraticDrag(velocityMagnitude),
+			liftAnchorFlapsFull.GetQuadraticDrag(velocityMagnitude),
 			flapsValue
 		);
 
-		float angleOfAttackMult = Mathf.Sign(angleOfAttack) * liftMultOverAOA.Evaluate(Mathf.Abs(angleOfAttack));
-
-		return basicForce * angleOfAttackMult;
+		return basicForce * mainAOAMult * rotatingAOAMult;
 	}
 
 

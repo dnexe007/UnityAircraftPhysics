@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VisualWing : MonoBehaviour
+public class WingGenerator : MonoBehaviour
 {
 	[SerializeField] [Min(0)] private float edgeZ = 1;
 	[SerializeField] [Min(0)] private float edgeX = 1;

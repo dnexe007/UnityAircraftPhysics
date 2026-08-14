@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using UnityEngine.UIElements;
 
 public abstract class AerodynamicSurfaceBase : MonoBehaviour
 {
@@ -16,8 +17,8 @@ public abstract class AerodynamicSurfaceBase : MonoBehaviour
 
 
 
-	private VisualWing pointsGenerator;
-	private float[] CurrentAOAList = new float[0];
+	private WingGenerator pointsGenerator;
+	[SerializeField] private float[] CurrentMainAOAList = new float[0];
 	public float liftError;
 
 	protected Rigidbody Rb { get; private set; }
@@ -30,7 +31,7 @@ public abstract class AerodynamicSurfaceBase : MonoBehaviour
 	{
 		Rb = GetComponentInParent<Rigidbody>();
 		Root = Rb.GetComponent<Aircraft>();
-		pointsGenerator = GetComponent<VisualWing>();
+		pointsGenerator = GetComponent<WingGenerator>();
 	}
 
 	private void FixedUpdate()
@@ -42,17 +43,19 @@ public abstract class AerodynamicSurfaceBase : MonoBehaviour
 
 	private void UpdateLiftList()
 	{
-		if(CurrentAOAList.Length != pointsGenerator.NumOfPoints)
-			CurrentAOAList = new float[pointsGenerator.NumOfPoints];
+		if(CurrentMainAOAList.Length != pointsGenerator.NumOfPoints)
+			CurrentMainAOAList = new float[pointsGenerator.NumOfPoints];
 	}
+
+	public float currentMainAOA, currentRotatingAOA;
 	private void ApplyLift()
 	{
-		Vector3 rotatedForward = Vector3.Slerp(transform.forward,
-			transform.up * (RotationAngle > 0 ? -1 : 1),
+		Vector3 rotatedUp = Vector3.Slerp(
+			transform.up,
+			transform.forward * (RotationAngle > 0 ? -1 : 1),
 			Mathf.Abs(RotationAngle) / 90
 		);
 
-		Vector3 rotatedUp = Vector3.Cross(rotatedForward, transform.right);
 
 		int pointIndex = 0;
 		foreach (WingPoint point in pointsGenerator.GetPoints())
@@ -63,39 +66,38 @@ public abstract class AerodynamicSurfaceBase : MonoBehaviour
 				pointIndex <= rotatingZone.endIndex
 			);
 
-			Vector3 pointVelocity = Rb.GetPointVelocity(point.position);
-
-			Vector3 up = isRotatingPoint ? rotatedUp : transform.up;
-			Vector3 forward = isRotatingPoint ? rotatedForward : transform.forward;
-
-			Vector3 localVelocity = new(
-				0,
-				Vector3.Dot(pointVelocity, up),
-				Vector3.Dot(pointVelocity, forward)
+			Vector3 pointLocalVelocity = transform.InverseTransformDirection(
+				Rb.GetPointVelocity(point.position)
 			);
+			pointLocalVelocity.x = 0;
 
+			float targetMainAOA = AnglesOfAttack.GetVerticalAOA(pointLocalVelocity);
 
-			float targetAOA = AnglesOfAttack.GetVerticalAOA(localVelocity);
-
-			float currentAOA = Mathf.Lerp(
-				CurrentAOAList[pointIndex],
-				targetAOA,
+			currentMainAOA = Mathf.Lerp(
+				CurrentMainAOAList[pointIndex],
+				targetMainAOA,
 				AOALerpSpeed
 			);
 
+			currentRotatingAOA = currentMainAOA - (isRotatingPoint ? RotationAngle : 0);
+			if (currentRotatingAOA > 180) currentRotatingAOA -= 360;
+			if (currentRotatingAOA < -180) currentRotatingAOA += 360;
+
+
 			float pointLift = GetLift(
-				localVelocity.magnitude,
-				currentAOA
+				pointLocalVelocity.magnitude,
+				currentMainAOA,
+				currentRotatingAOA
 			) * point.forceMult;
 
 
 			Rb.AddForceAtPosition(
-				pointLift * up,
+				pointLift * (isRotatingPoint? rotatedUp: transform.up),
 				point.position,
 				ForceMode.Force
 			);
 
-			CurrentAOAList[pointIndex] = currentAOA;
+			CurrentMainAOAList[pointIndex] = currentMainAOA;
 
 			pointIndex++;
 		}
@@ -106,5 +108,5 @@ public abstract class AerodynamicSurfaceBase : MonoBehaviour
 		RotationAngle = Mathf.Clamp(angle, -90, 90);
 	}
 
-	protected abstract float GetLift(float velocityMagnitude, float verticalAOA);
+	protected abstract float GetLift(float velocityMagnitude, float mainAOA, float rotatingAOA);
 }

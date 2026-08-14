@@ -24,11 +24,12 @@ public class Wing : AerodynamicSurfaceBase
         );
 	}
 
-	protected override float GetLift(float velocityMagnitude, float verticalAOA)
+	protected override float GetLift(float velocityMagnitude, float mainAOA, float rotatingAOA)
 	{
 		return config.GetLift(
 			velocityMagnitude,
-			verticalAOA,
+			mainAOA,
+			rotatingAOA,
 			FlapDeployment01
 		);
 	}

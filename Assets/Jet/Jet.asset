@@ -68,6 +68,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+    peakAttackAngle: 15
     flapsSteps: 5
     flapsRotationAngle: 30
     flapsRotationSpeed: 15
@@ -192,3 +193,4 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+    peakAttackAngle: 20

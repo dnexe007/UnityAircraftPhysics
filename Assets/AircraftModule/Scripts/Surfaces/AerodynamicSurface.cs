@@ -13,8 +13,8 @@ public class AerodynamicSurface : AerodynamicSurfaceBase
 		config = Root.Config.GetSurfaceConfigByName(profileName);
 	}
 
-	protected override float GetLift(float velocityMagnitude, float verticalAOA)
+	protected override float GetLift(float velocityMagnitude, float mainAOA, float rotatingAOA)
 	{
-		return config.GetLift(velocityMagnitude, verticalAOA);
+		return config.GetLift(velocityMagnitude, mainAOA, rotatingAOA);
 	}
 }

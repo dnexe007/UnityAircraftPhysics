@@ -5,6 +5,9 @@ public class YawHelperV2 : MonoBehaviour
 	private Rigidbody rb;
 	private YawHelperConfig config;
 
+
+	public float forcePointYOffset;
+
 	private void Start()
 	{
 		rb = GetComponentInParent<Rigidbody>();
@@ -13,8 +16,10 @@ public class YawHelperV2 : MonoBehaviour
 
 	private void FixedUpdate()
 	{
+		Vector3 forcePosition = transform.position + transform.up * forcePointYOffset;
+
 		Vector3 localVelocity = transform.InverseTransformDirection(
-			rb.GetPointVelocity(transform.position)
+			rb.GetPointVelocity(forcePosition)
 		);
 
 		float movementSpeed = new Vector2(localVelocity.z, localVelocity.y).magnitude;
@@ -25,7 +30,7 @@ public class YawHelperV2 : MonoBehaviour
 
 		rb.AddForceAtPosition(
 			config.CalculateForce(transform.up, rightHorizontalVector, movementSpeed, horizontalAOA),
-			transform.position,
+			forcePosition,
 			ForceMode.Force
 		);
 	}

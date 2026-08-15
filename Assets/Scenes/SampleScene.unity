@@ -3434,9 +3434,10 @@ MonoBehaviour:
   edgeX: 3
   baseWidth: 3.375
   edgeWidth: 0.75
-  forcePointPosition: 0.5
+  forcePointPosition: 0.25
   reverseDirection: 0
   numOfPoints: 4
+  angleInfluence: 0
   totalMult: 1
 --- !u!114 &187028981
 MonoBehaviour:
@@ -3451,13 +3452,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AOALerpSpeed: 0.5
-  rotatingZone:
-    startIndex: 0
-    endIndex: 100
-  CurrentMainAOAList: []
-  liftError: 0
-  currentMainAOA: 0
-  currentRotatingAOA: 0
+  rotatingPoints:
+  - index: 0
+    rotationInfluence: 1
+  - index: 1
+    rotationInfluence: 1
+  - index: 2
+    rotationInfluence: 1
+  - index: 3
+    rotationInfluence: 1
+  horizontalAOAOffset: 0
   profileName: Default
 --- !u!43 &193085368
 Mesh:
@@ -8956,13 +8960,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AOALerpSpeed: 0.5
-  rotatingZone:
-    startIndex: 0
-    endIndex: 100
-  CurrentMainAOAList: []
-  liftError: 0
-  currentMainAOA: 0
-  currentRotatingAOA: 0
+  rotatingPoints:
+  - index: 0
+    rotationInfluence: 1
+  - index: 1
+    rotationInfluence: 1
+  - index: 2
+    rotationInfluence: 1
+  - index: 3
+    rotationInfluence: 1
+  horizontalAOAOffset: 0
   profileName: Default
 --- !u!114 &535118671
 MonoBehaviour:
@@ -8980,9 +8987,10 @@ MonoBehaviour:
   edgeX: 2.375
   baseWidth: 3
   edgeWidth: 0.75
-  forcePointPosition: 0.5
+  forcePointPosition: 0.25
   reverseDirection: 1
   numOfPoints: 4
+  angleInfluence: 0
   totalMult: 1
 --- !u!114 &535118672
 MonoBehaviour:
@@ -12935,13 +12943,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AOALerpSpeed: 0.5
-  rotatingZone:
-    startIndex: 4
-    endIndex: 6
-  CurrentMainAOAList: []
-  liftError: 0
-  currentMainAOA: 0
-  currentRotatingAOA: 0
+  rotatingPoints:
+  - index: 4
+    rotationInfluence: 0.5
+  - index: 5
+    rotationInfluence: 0.5
+  - index: 6
+    rotationInfluence: 0.5
+  horizontalAOAOffset: 15
 --- !u!4 &771659060
 Transform:
   m_ObjectHideFlags: 0
@@ -12976,6 +12985,7 @@ MonoBehaviour:
   forcePointPosition: 0.25
   reverseDirection: 0
   numOfPoints: 7
+  angleInfluence: 1
   totalMult: 1
 --- !u!114 &771659062
 MonoBehaviour:
@@ -12992,7 +13002,7 @@ MonoBehaviour:
   inputType: 0
   invertInput: 0
   config:
-    maxRotationAngle: 15
+    maxRotationAngle: 30
     rotationSpeed: 60
     angleMultOverSpeed:
       serializedVersion: 2
@@ -17732,13 +17742,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AOALerpSpeed: 0.5
-  rotatingZone:
-    startIndex: 0
-    endIndex: 100
-  CurrentMainAOAList: []
-  liftError: 0
-  currentMainAOA: 0
-  currentRotatingAOA: 0
+  rotatingPoints:
+  - index: 0
+    rotationInfluence: 1
+  - index: 1
+    rotationInfluence: 1
+  - index: 2
+    rotationInfluence: 1
+  - index: 3
+    rotationInfluence: 1
+  horizontalAOAOffset: 0
   profileName: Default
 --- !u!114 &998827676
 MonoBehaviour:
@@ -17756,9 +17769,10 @@ MonoBehaviour:
   edgeX: 2.375
   baseWidth: 3
   edgeWidth: 0.75
-  forcePointPosition: 0.5
+  forcePointPosition: 0.25
   reverseDirection: 0
   numOfPoints: 4
+  angleInfluence: 0
   totalMult: 1
 --- !u!114 &998827677
 MonoBehaviour:
@@ -22613,13 +22627,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AOALerpSpeed: 0.5
-  rotatingZone:
-    startIndex: 4
-    endIndex: 6
-  CurrentMainAOAList: []
-  liftError: 0
-  currentMainAOA: 0
-  currentRotatingAOA: 0
+  rotatingPoints:
+  - index: 4
+    rotationInfluence: 0.5
+  - index: 5
+    rotationInfluence: 0.5
+  - index: 6
+    rotationInfluence: 0.5
+  horizontalAOAOffset: 15
 --- !u!4 &1454007649
 Transform:
   m_ObjectHideFlags: 0
@@ -22654,6 +22669,7 @@ MonoBehaviour:
   forcePointPosition: 0.25
   reverseDirection: 1
   numOfPoints: 7
+  angleInfluence: 1
   totalMult: 1
 --- !u!114 &1454007651
 MonoBehaviour:
@@ -22670,7 +22686,7 @@ MonoBehaviour:
   inputType: 0
   invertInput: 1
   config:
-    maxRotationAngle: 15
+    maxRotationAngle: 30
     rotationSpeed: 60
     angleMultOverSpeed:
       serializedVersion: 2
@@ -35768,9 +35784,10 @@ MonoBehaviour:
   edgeX: 3
   baseWidth: 3.375
   edgeWidth: 0.75
-  forcePointPosition: 0.5
+  forcePointPosition: 0.25
   reverseDirection: 0
   numOfPoints: 4
+  angleInfluence: 0
   totalMult: 1
 --- !u!114 &2122167472
 MonoBehaviour:
@@ -35785,13 +35802,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AOALerpSpeed: 0.5
-  rotatingZone:
-    startIndex: 0
-    endIndex: 100
-  CurrentMainAOAList: []
-  liftError: 0
-  currentMainAOA: 0
-  currentRotatingAOA: 0
+  rotatingPoints:
+  - index: 0
+    rotationInfluence: 1
+  - index: 1
+    rotationInfluence: 1
+  - index: 2
+    rotationInfluence: 1
+  - index: 3
+    rotationInfluence: 1
+  horizontalAOAOffset: 0
   profileName: Default
 --- !u!1 &2123342568
 GameObject:

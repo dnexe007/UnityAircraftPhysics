@@ -17,7 +17,21 @@ public class WingGenerator : MonoBehaviour
 
 	[SerializeField][Range(2, 20)] private int numOfPoints = 4;
 
+	[SerializeField][Range(0, 1)] private float angleInfluence;
+
 	public int NumOfPoints => numOfPoints;
+	public bool ReverseDirection => reverseDirection;
+
+	public Vector3 GetForward()
+	{
+		Vector3 edgeVector = (EdgeFront - BaseFront) * (reverseDirection ? -1 : 1);
+
+		return Vector3.Slerp(
+			transform.forward,
+			Vector3.Cross(edgeVector, transform.up).normalized,
+			angleInfluence
+		);
+	}
 
 	private Vector3 BaseFront => transform.position; 
 	private Vector3 BaseBack => transform.TransformPoint(
@@ -73,5 +87,7 @@ public class WingGenerator : MonoBehaviour
 				0.125f
 			);
 		}
+
+		Gizmos.DrawLine(EdgeFront, EdgeFront + GetForward());
 	}
 }

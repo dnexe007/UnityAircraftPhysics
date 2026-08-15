@@ -1,53 +1,42 @@
-using UnityEngine;
 using System;
+using System.Drawing;
+using System.Linq;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 public abstract class AerodynamicSurfaceBase : MonoBehaviour
 {
-	[Serializable] private struct SurfaceZone
+	[Serializable] private struct RotatingPoint
 	{
-		[Min(0)] public int startIndex;
-		[Min(0)] public int endIndex;
+		[Min(0)] public int index;
+		[Range(0, 1)] public float rotationInfluence;
 	}
-
 	[SerializeField][Range(0, 1)] private float AOALerpSpeed;
-
-
-	[SerializeField] private SurfaceZone rotatingZone;
+	[SerializeField] private RotatingPoint[] rotatingPoints;
+	[SerializeField][Range(-90, 90)] private float horizontalAOAOffset;
 
 
 
 	private WingGenerator pointsGenerator;
-	[SerializeField] private float[] CurrentMainAOAList = new float[0];
-	public float liftError;
+	private float[] mainVerticalAOAList = new float[0];
 
+	public float RotationAngle { get; private set; }
 	protected Rigidbody Rb { get; private set; }
 	protected Aircraft Root { get; private set; }
-	public float RotationAngle { get; private set; }
 
-	
 
 	protected virtual void Start()
 	{
 		Rb = GetComponentInParent<Rigidbody>();
 		Root = Rb.GetComponent<Aircraft>();
 		pointsGenerator = GetComponent<WingGenerator>();
-	}
-
-	private void FixedUpdate()
-	{
-		UpdateLiftList();
-		ApplyLift();
+		mainVerticalAOAList = new float[pointsGenerator.NumOfPoints];
 	}
 
 
-	private void UpdateLiftList()
-	{
-		if(CurrentMainAOAList.Length != pointsGenerator.NumOfPoints)
-			CurrentMainAOAList = new float[pointsGenerator.NumOfPoints];
-	}
+	private void FixedUpdate() => ApplyLift();
 
-	public float currentMainAOA, currentRotatingAOA;
+
 	private void ApplyLift()
 	{
 		Vector3 rotatedUp = Vector3.Slerp(
@@ -56,57 +45,100 @@ public abstract class AerodynamicSurfaceBase : MonoBehaviour
 			Mathf.Abs(RotationAngle) / 90
 		);
 
-
 		int pointIndex = 0;
 		foreach (WingPoint point in pointsGenerator.GetPoints())
 		{
-			bool isRotatingPoint = (
-				rotatingZone.startIndex <= pointIndex
-				&&
-				pointIndex <= rotatingZone.endIndex
-			);
+			float rotationInfluence = GetRotationInfluence(pointIndex);
 
-			Vector3 pointLocalVelocity = transform.InverseTransformDirection(
-				Rb.GetPointVelocity(point.position)
-			);
-			pointLocalVelocity.x = 0;
-
-			float targetMainAOA = AnglesOfAttack.GetVerticalAOA(pointLocalVelocity);
-
-			currentMainAOA = Mathf.Lerp(
-				CurrentMainAOAList[pointIndex],
-				targetMainAOA,
-				AOALerpSpeed
-			);
-
-			currentRotatingAOA = currentMainAOA - (isRotatingPoint ? RotationAngle : 0);
-			if (currentRotatingAOA > 180) currentRotatingAOA -= 360;
-			if (currentRotatingAOA < -180) currentRotatingAOA += 360;
-
-
-			float pointLift = GetLift(
-				pointLocalVelocity.magnitude,
-				currentMainAOA,
-				currentRotatingAOA
-			) * point.forceMult;
-
-
-			Rb.AddForceAtPosition(
-				pointLift * (isRotatingPoint? rotatedUp: transform.up),
+			SurfaceMovementData movementData = GetMovementData(
 				point.position,
-				ForceMode.Force
+				pointIndex,
+				rotationInfluence
 			);
 
-			CurrentMainAOAList[pointIndex] = currentMainAOA;
+			float pointLift = GetLift(movementData) * point.forceMult;
+			Vector3 pointUp = Vector3.Slerp(transform.up, rotatedUp, rotationInfluence);
+
+			Rb.AddForceAtPosition(pointLift * pointUp, point.position);
 
 			pointIndex++;
 		}
 	}
+
+
+	private SurfaceMovementData GetMovementData(Vector3 pointPosition, int pointIndex, float rotationInfluence)
+	{
+		Vector3 pointLocalVelocity = transform.InverseTransformDirection(
+				Rb.GetPointVelocity(pointPosition)
+		);
+
+		float mainVerticalAOA = GetMainVerticalAOA(pointLocalVelocity, pointIndex);
+		float rotatingVerticalAOA = GetRotatingVerticalAOA(mainVerticalAOA, rotationInfluence);
+		float horizontalAOA = GetHorizontalAOA(pointLocalVelocity);
+
+		return new()
+		{
+			velocityMagnitude = pointLocalVelocity.magnitude,
+			mainVerticalAOA = mainVerticalAOA,
+			rotatingVerticalAOA = rotatingVerticalAOA,
+			horizontalAOA = horizontalAOA
+		};
+	}
+
+
+	private float GetRotationInfluence(int pointIndex)
+	{
+		return rotatingPoints.FirstOrDefault(p => p.index == pointIndex).rotationInfluence;
+	}
+	
+
+	private float GetMainVerticalAOA(Vector3 pointLocalVelocity, int pointIndex)
+	{
+		float targetAOA = AnglesOfAttack.GetVerticalAOA(pointLocalVelocity);
+		mainVerticalAOAList[pointIndex] = Mathf.Lerp(
+			mainVerticalAOAList[pointIndex],
+			targetAOA,
+			AOALerpSpeed
+		);
+		return mainVerticalAOAList[pointIndex];
+	}
+
+
+	private float GetRotatingVerticalAOA(float mainVerticalAOA, float rotationInfluence)
+	{
+		float rotatingVerticalAOA = (
+			mainVerticalAOA -
+			RotationAngle * rotationInfluence
+		);
+			
+		return FixAOA(rotatingVerticalAOA);
+	}
+
+
+	private float GetHorizontalAOA(Vector3 pointLocalVelocity)
+	{
+		float horizontalAOA = Mathf.Abs(
+				AnglesOfAttack.GetHorizontalAOA(pointLocalVelocity) *
+				(pointsGenerator.ReverseDirection ? -1 : 1) +
+				horizontalAOAOffset
+			);
+		return FixAOA(horizontalAOA);
+	}
+
+
+	private static float FixAOA(float angle)
+	{
+		if (angle > 180) angle -= 360;
+		if (angle < -180) angle += 360;
+		return angle;
+	}
+
 
 	public void SetRotationAngle(float angle)
 	{
 		RotationAngle = Mathf.Clamp(angle, -90, 90);
 	}
 
-	protected abstract float GetLift(float velocityMagnitude, float mainAOA, float rotatingAOA);
+
+	protected abstract float GetLift(SurfaceMovementData movementData);
 }

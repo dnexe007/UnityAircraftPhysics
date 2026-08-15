@@ -3,7 +3,6 @@ using UnityEngine;
 public class Wing : AerodynamicSurfaceBase
 {
 	private WingConfig config;
-
     public float FlapDeployment01 { get; private set; }
 
 
@@ -24,12 +23,11 @@ public class Wing : AerodynamicSurfaceBase
         );
 	}
 
-	protected override float GetLift(float velocityMagnitude, float mainAOA, float rotatingAOA)
+
+	protected override float GetLift(SurfaceMovementData movementData)
 	{
 		return config.GetLift(
-			velocityMagnitude,
-			mainAOA,
-			rotatingAOA,
+			movementData,
 			FlapDeployment01
 		);
 	}

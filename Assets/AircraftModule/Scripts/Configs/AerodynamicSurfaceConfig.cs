@@ -1,34 +1,19 @@
 using System;
 using UnityEngine;
 
-[Serializable]
-public class AerodynamicSurfaceConfig
+[Serializable] public class AerodynamicSurfaceConfig
 {
-	[field: SerializeField] public string SurfaceName { get; private set; }
+	[SerializeField] private string surfaceName;
 	[SerializeField] private DragAnchor liftAnchor;
-	[SerializeField] private AnimationCurve liftMultOverAOA;
-	[SerializeField] private float peakAttackAngle;
+	[SerializeField] private SurfaceAOAConfig AOAConfig;
 
-	public float GetLift(float velocityMagnitude, float mainAOA, float rotatingAOA)
+	public string SurfaceName => surfaceName;
+
+	public float GetLift(SurfaceMovementData movementData)
 	{
-		float mainAOAClampedAbs = (
-			Mathf.Max(Mathf.Abs(mainAOA), peakAttackAngle)
-		);
+		float basicLift = liftAnchor.GetQuadraticDrag(movementData.velocityMagnitude);
+		float AOAMult = AOAConfig.GetAOAMult(movementData);
 
-		float rotatingAOAClampedAbs = (
-			Mathf.Min(Mathf.Abs(rotatingAOA), peakAttackAngle)
-		);
-
-		float mainAOAMult = liftMultOverAOA.Evaluate(
-			mainAOAClampedAbs
-		);
-
-		float rotatingAOAMult = liftMultOverAOA.Evaluate(
-			rotatingAOAClampedAbs
-		) * Mathf.Sign(rotatingAOA);
-
-		float basicForce = liftAnchor.GetQuadraticDrag(velocityMagnitude);
-
-		return basicForce * mainAOAMult * rotatingAOAMult;
+		return basicLift * AOAMult;
 	}
 }

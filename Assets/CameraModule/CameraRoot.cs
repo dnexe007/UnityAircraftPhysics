@@ -13,7 +13,7 @@ public class CameraRoot : MonoBehaviour
     private void Start()
     {
         currentRt = player.Aircraft.transform.rotation;
-
+        transform.rotation = currentRt;
         aircraft = player.Aircraft;
     }
     private void Update()

@@ -15,23 +15,18 @@ public class WingGenerator : MonoBehaviour
 
 	[SerializeField] private bool reverseDirection;
 
-	[SerializeField][Range(2, 20)] private int numOfPoints = 4;
+	[SerializeField] [Range(2, 20)] private int numOfPoints = 4;
 
-	[SerializeField][Range(0, 1)] private float angleInfluence;
+	[SerializeField] [Range(0, 1)] private float angleInfluence;
+
+	[SerializeField] [Range(0, 89)] private float horizontalAOAOffset;
 
 	public int NumOfPoints => numOfPoints;
-	public bool ReverseDirection => reverseDirection;
 
-	public Vector3 GetForward()
-	{
-		Vector3 edgeVector = (EdgeFront - BaseFront) * (reverseDirection ? -1 : 1);
 
-		return Vector3.Slerp(
-			transform.forward,
-			Vector3.Cross(edgeVector, transform.up).normalized,
-			angleInfluence
-		);
-	}
+	public float HorizontalAOAOffset => horizontalAOAOffset * (reverseDirection ? -1 : 1);
+
+
 
 	private Vector3 BaseFront => transform.position; 
 	private Vector3 BaseBack => transform.TransformPoint(
@@ -44,13 +39,10 @@ public class WingGenerator : MonoBehaviour
 		new(edgeX * (reverseDirection ? -1 : 1), 0, -edgeZ - edgeWidth)
 	);
 
-	public float totalMult;
 
 	public IEnumerable<WingPoint> GetPoints()
 	{
 		float widthSum = (baseWidth + edgeWidth) / 2 * NumOfPoints;
-		float _totalMult = 0;
-
 
 		for (int i = 0; i < NumOfPoints; i++)
 		{
@@ -64,11 +56,9 @@ public class WingGenerator : MonoBehaviour
 			float localWidth = Vector3.Distance(front, back);
 
 			float forceMult = localWidth / widthSum;
-			_totalMult += forceMult;
 
 			yield return new(position, forceMult);
 		}
-		totalMult = _totalMult;
 	}
 
 	private void OnDrawGizmos()
@@ -88,6 +78,15 @@ public class WingGenerator : MonoBehaviour
 			);
 		}
 
-		Gizmos.DrawLine(EdgeFront, EdgeFront + GetForward());
+
+		Gizmos.DrawLine(
+			EdgeFront,
+			EdgeFront +
+			Vector3.Slerp(
+				transform.forward,
+				transform.right * (reverseDirection? -1: 1),
+				horizontalAOAOffset / 90
+			)
+		);
 	}
 }

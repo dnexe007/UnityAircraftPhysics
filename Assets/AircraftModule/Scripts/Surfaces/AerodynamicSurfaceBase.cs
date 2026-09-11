@@ -13,8 +13,6 @@ public abstract class AerodynamicSurfaceBase : MonoBehaviour
 	}
 	[SerializeField][Range(0, 1)] private float AOALerpSpeed;
 	[SerializeField] private RotatingPoint[] rotatingPoints;
-	[SerializeField][Range(-90, 90)] private float horizontalAOAOffset;
-
 
 
 	private WingGenerator pointsGenerator;
@@ -115,13 +113,14 @@ public abstract class AerodynamicSurfaceBase : MonoBehaviour
 	}
 
 
+	public float horizontalAOA;
+
 	private float GetHorizontalAOA(Vector3 pointLocalVelocity)
 	{
-		float horizontalAOA = Mathf.Abs(
-				AnglesOfAttack.GetHorizontalAOA(pointLocalVelocity) *
-				(pointsGenerator.ReverseDirection ? -1 : 1) +
-				horizontalAOAOffset
-			);
+		horizontalAOA = Mathf.Abs(
+			AnglesOfAttack.GetHorizontalAOA(pointLocalVelocity) +
+			pointsGenerator.HorizontalAOAOffset
+		);
 		return FixAOA(horizontalAOA);
 	}
 

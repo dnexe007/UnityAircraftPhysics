@@ -43,14 +43,14 @@ MonoBehaviour:
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
-          time: 30
-          value: 0.4
-          inSlope: -0.007097144
-          outSlope: -0.007097144
+          time: 29.636377
+          value: 0.39369875
+          inSlope: -0.007865155
+          outSlope: -0.007865155
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.71111095
-          outWeight: 0.19289055
+          outWeight: 0.1084695
         - serializedVersion: 3
           time: 150
           value: 0.1
@@ -88,44 +88,26 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 1
-          inSlope: -0.004216676
-          outSlope: -0.004216676
-          tangentMode: 0
+          inSlope: -0.006666668
+          outSlope: -0.006666668
+          tangentMode: 34
           weightedMode: 0
           inWeight: 0
-          outWeight: 0.9090909
+          outWeight: 0.33333334
         - serializedVersion: 3
           time: 15
-          value: 0.8
-          inSlope: -0.034347888
-          outSlope: -0.034347888
+          value: 0.9
+          inSlope: -0.015086485
+          outSlope: -0.015086485
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.28484848
+          inWeight: 0.34597605
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 20.181818
-          value: 0.2872222
-          inSlope: -0.0057800557
-          outSlope: -0.0057800557
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.4753247
-        - serializedVersion: 3
-          time: 90
-          value: 0
-          inSlope: 0.0011229294
-          outSlope: 0.0011229294
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0.22857143
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 180
-          value: 1
-          inSlope: 0.011111111
-          outSlope: 0.011111111
+          time: 30
+          value: 0.54435426
+          inSlope: -0.023709714
+          outSlope: -0.023709714
           tangentMode: 34
           weightedMode: 0
           inWeight: 0.33333334
@@ -182,7 +164,7 @@ MonoBehaviour:
     rotatingFactor: -3
   <AngularDragConfig>k__BackingField:
     basicDragForce: 10000
-    axesCoefs: {x: 1, y: 1.5, z: 0.05}
+    axesCoefs: {x: 1, y: 1.5, z: 0.1}
     linearSpeedMultAnchor:
       anchorSpeed: 100
       anchorForce: 40
@@ -287,44 +269,26 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 1
-          inSlope: -0.004216676
-          outSlope: -0.004216676
-          tangentMode: 0
+          inSlope: -0.006666668
+          outSlope: -0.006666668
+          tangentMode: 34
           weightedMode: 0
           inWeight: 0
-          outWeight: 0.9090909
+          outWeight: 0.33333334
         - serializedVersion: 3
           time: 15
-          value: 0.8
-          inSlope: -0.034347888
-          outSlope: -0.034347888
+          value: 0.9
+          inSlope: -0.015086485
+          outSlope: -0.015086485
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.28484848
+          inWeight: 0.34597605
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 20.181818
-          value: 0.2872222
-          inSlope: -0.0057800557
-          outSlope: -0.0057800557
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.4753247
-        - serializedVersion: 3
-          time: 90
-          value: 0
-          inSlope: 0.0011229294
-          outSlope: 0.0011229294
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0.22857143
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 180
-          value: 1
-          inSlope: 0.011111111
-          outSlope: 0.011111111
+          time: 25
+          value: 0.4
+          inSlope: -0.049999997
+          outSlope: -0.049999997
           tangentMode: 34
           weightedMode: 0
           inWeight: 0.33333334

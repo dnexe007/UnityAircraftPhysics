@@ -7,49 +7,49 @@ using UnityEngine;
 	[SerializeField] private float peakVerticalAOA;
 	[SerializeField] private AnimationCurve liftMultOverHorizontalAOA;
 
-	private float GetVerticalAOAMult(float mainVerticalAOA, float rotatingVerticalAOA)
+
+	private float GetBasicMult(float rotatingVerticalAOA)
 	{
-		float mainAOAClampedAbs = (
-			Mathf.Max(Mathf.Abs(mainVerticalAOA), peakVerticalAOA)
-		);
 		float rotatingAOAClampedAbs = (
 			Mathf.Min(Mathf.Abs(rotatingVerticalAOA), peakVerticalAOA)
 		);
-		float mainVerticalAOAMult = liftMultOverVerticalAOA.Evaluate(
-			mainAOAClampedAbs
-		);
-		float rotatingVerticalAOAMult = liftMultOverVerticalAOA.Evaluate(
+
+		return liftMultOverVerticalAOA.Evaluate(
 			rotatingAOAClampedAbs
 		) * Mathf.Sign(rotatingVerticalAOA);
-
-		return mainVerticalAOAMult * rotatingVerticalAOAMult;
 	}
 
-	private float GetHorizontalAOAMult(float horizontalAOA)
+	private float GetBreakdownMult(float mainVerticalAOA, float horizontalAOA)
 	{
-		return liftMultOverHorizontalAOA.Evaluate(
+		float mainVerticalAOAClampedAbs = (
+			Mathf.Max(Mathf.Abs(mainVerticalAOA), peakVerticalAOA)
+		);
+
+		float verticalBreakdown = liftMultOverVerticalAOA.Evaluate(
+			mainVerticalAOAClampedAbs
+		);
+
+		float horizontalBreakdown = liftMultOverHorizontalAOA.Evaluate(
 			Mathf.Abs(horizontalAOA)
 		);
+
+		return Mathf.Min(verticalBreakdown, horizontalBreakdown);
 	}
 
 	public float GetAOAMult(
 		float mainVerticalAOA,
 		float rotatingVerticalAOA,
 		float horizontalAOA
-	)
-	{
-		return (
-			GetVerticalAOAMult(mainVerticalAOA, rotatingVerticalAOA) *
-			GetHorizontalAOAMult(horizontalAOA)
-		);
-	}
+	) => (
+		GetBasicMult(rotatingVerticalAOA) *
+		GetBreakdownMult(mainVerticalAOA, horizontalAOA)
+	);
 
-	public float GetAOAMult(SurfaceMovementData movementData)
-	{
-		return GetAOAMult(
-			movementData.mainVerticalAOA,
-			movementData.rotatingVerticalAOA,
-			movementData.horizontalAOA
-		);
-	}
+	public float GetAOAMult(
+		SurfaceMovementData movementData
+	) => GetAOAMult(
+		movementData.mainVerticalAOA,
+		movementData.rotatingVerticalAOA,
+		movementData.horizontalAOA
+	);
 }

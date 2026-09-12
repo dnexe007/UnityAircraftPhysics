@@ -1,11 +1,14 @@
 using System;
 using UnityEngine;
 
-[Serializable] public class SurfaceControllerConfig
+[Serializable] public class SurfaceRotationConfig
 {
+	[SerializeField] private string name;
 	[SerializeField] private float maxRotationAngle;
 	[SerializeField] private float rotationSpeed;
 	[SerializeField] private AnimationCurve angleMultOverSpeed;
+
+	public string Name => name;
 
 	public float UpdateRotationAngle(
 		float currentAngle,

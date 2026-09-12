@@ -17,8 +17,6 @@ public class WingGenerator : MonoBehaviour
 
 	[SerializeField] [Range(2, 20)] private int numOfPoints = 4;
 
-	[SerializeField] [Range(0, 1)] private float angleInfluence;
-
 	[SerializeField] [Range(0, 89)] private float horizontalAOAOffset;
 
 	public int NumOfPoints => numOfPoints;

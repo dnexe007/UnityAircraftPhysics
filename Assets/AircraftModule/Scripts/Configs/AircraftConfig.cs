@@ -12,11 +12,18 @@ public class AircraftConfig : ScriptableObject
 	[field: SerializeField] public AngularDragConfig AngularDragConfig { get; private set; } = new();
 	[field: SerializeField] public YawHelperConfig YawHelperConfig { get; private set; } = new();
 
+	[SerializeField] private List<SurfaceRotationConfig> surfaceRotationConfigs = new();
+
 	[SerializeField] private List<AerodynamicSurfaceConfig> surfaceConfigs = new();
 
 	public AerodynamicSurfaceConfig GetSurfaceConfigByName(string name)
 	{
 		return surfaceConfigs.FirstOrDefault(x => x.SurfaceName == name);
+	}
+
+	public SurfaceRotationConfig GetSurfaceRotationConfigByName(string name)
+	{
+		return surfaceRotationConfigs.FirstOrDefault(x => x.Name  == name);
 	}
 }
 

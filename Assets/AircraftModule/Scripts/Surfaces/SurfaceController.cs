@@ -8,17 +8,19 @@ public class SurfaceController: MonoBehaviour
 
 	[SerializeField] private InputType inputType = InputType.None;
 	[SerializeField] private bool invertInput;
-	[SerializeField] private SurfaceControllerConfig config;
+	[SerializeField] private string rotationConfigName;
 
     private AerodynamicSurfaceBase surface;
     private Aircraft root;
 	private Rigidbody rb;
+	private SurfaceRotationConfig rotationConfig;
 
 	private void Start()
 	{
 		surface = GetComponent<AerodynamicSurfaceBase>();
         root = GetComponentInParent<Aircraft>();
 		rb = GetComponentInParent<Rigidbody>();
+		rotationConfig = root.Config.GetSurfaceRotationConfigByName(rotationConfigName);
 	}
 
 	private float GetInput()
@@ -36,6 +38,8 @@ public class SurfaceController: MonoBehaviour
 
 	private void Update()
     {
+		if (rotationConfig == null) return;
+
 		Vector3 localVelocity = transform.InverseTransformDirection(
 			rb.GetPointVelocity(transform.position)
 		);
@@ -43,7 +47,7 @@ public class SurfaceController: MonoBehaviour
 
 
 		float input = GetInput();
-		float newAngle = config.UpdateRotationAngle(
+		float newAngle = rotationConfig.UpdateRotationAngle(
 			surface.RotationAngle,
 			localVelocity.magnitude,
 			input,

@@ -3886,33 +3886,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputType: 2
   invertInput: 1
-  config:
-    maxRotationAngle: 15
-    rotationSpeed: 60
-    angleMultOverSpeed:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
+  rotationConfigName: Default
 --- !u!114 &187028980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3932,7 +3906,6 @@ MonoBehaviour:
   forcePointPosition: 0.25
   reverseDirection: 0
   numOfPoints: 4
-  angleInfluence: 0
   horizontalAOAOffset: 15
 --- !u!114 &187028981
 MonoBehaviour:
@@ -9650,7 +9623,6 @@ MonoBehaviour:
   forcePointPosition: 0.25
   reverseDirection: 1
   numOfPoints: 4
-  angleInfluence: 0
   horizontalAOAOffset: 15
 --- !u!114 &535118672
 MonoBehaviour:
@@ -9666,33 +9638,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputType: 1
   invertInput: 1
-  config:
-    maxRotationAngle: 25
-    rotationSpeed: 60
-    angleMultOverSpeed:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
+  rotationConfigName: Default
 --- !u!43 &549965090
 Mesh:
   m_ObjectHideFlags: 0
@@ -13315,7 +13261,6 @@ MonoBehaviour:
   forcePointPosition: 0.25
   reverseDirection: 0
   numOfPoints: 7
-  angleInfluence: 1
   horizontalAOAOffset: 15
 --- !u!114 &771659062
 MonoBehaviour:
@@ -13331,33 +13276,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputType: 0
   invertInput: 0
-  config:
-    maxRotationAngle: 30
-    rotationSpeed: 60
-    angleMultOverSpeed:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
+  rotationConfigName: Default
 --- !u!43 &783719314
 Mesh:
   m_ObjectHideFlags: 0
@@ -17607,7 +17526,6 @@ MonoBehaviour:
   forcePointPosition: 0.25
   reverseDirection: 0
   numOfPoints: 4
-  angleInfluence: 0
   horizontalAOAOffset: 15
 --- !u!114 &998827677
 MonoBehaviour:
@@ -17623,33 +17541,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputType: 1
   invertInput: 1
-  config:
-    maxRotationAngle: 25
-    rotationSpeed: 60
-    angleMultOverSpeed:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
+  rotationConfigName: Default
 --- !u!1 &999199167
 GameObject:
   m_ObjectHideFlags: 0
@@ -23824,7 +23716,6 @@ MonoBehaviour:
   forcePointPosition: 0.25
   reverseDirection: 1
   numOfPoints: 7
-  angleInfluence: 1
   horizontalAOAOffset: 15
 --- !u!114 &1454007651
 MonoBehaviour:
@@ -23840,33 +23731,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputType: 0
   invertInput: 1
-  config:
-    maxRotationAngle: 30
-    rotationSpeed: 60
-    angleMultOverSpeed:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
+  rotationConfigName: Default
 --- !u!1 &1456352120
 GameObject:
   m_ObjectHideFlags: 0
@@ -37302,33 +37167,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputType: 2
   invertInput: 1
-  config:
-    maxRotationAngle: 15
-    rotationSpeed: 60
-    angleMultOverSpeed:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
+  rotationConfigName: Default
 --- !u!114 &2122167471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37348,7 +37187,6 @@ MonoBehaviour:
   forcePointPosition: 0.25
   reverseDirection: 0
   numOfPoints: 4
-  angleInfluence: 0
   horizontalAOAOffset: 15
 --- !u!114 &2122167472
 MonoBehaviour:

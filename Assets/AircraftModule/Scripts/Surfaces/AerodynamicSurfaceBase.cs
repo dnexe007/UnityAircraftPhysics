@@ -2,7 +2,6 @@ using System;
 using System.Drawing;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public abstract class AerodynamicSurfaceBase : MonoBehaviour
 {
@@ -39,9 +38,10 @@ public abstract class AerodynamicSurfaceBase : MonoBehaviour
 	{
 		Vector3 rotatedUp = Vector3.Slerp(
 			transform.up,
-			transform.forward * (RotationAngle > 0 ? -1 : 1),
+			transform.forward * (RotationAngle > 0 ? 1 : -1),
 			Mathf.Abs(RotationAngle) / 90
 		);
+
 
 		int pointIndex = 0;
 		foreach (WingPoint point in pointsGenerator.GetPoints())
@@ -56,6 +56,7 @@ public abstract class AerodynamicSurfaceBase : MonoBehaviour
 
 			float pointLift = GetLift(movementData) * point.forceMult;
 			Vector3 pointUp = Vector3.Slerp(transform.up, rotatedUp, rotationInfluence);
+
 
 			Rb.AddForceAtPosition(pointLift * pointUp, point.position);
 

@@ -3886,7 +3886,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputType: 2
   invertInput: 1
-  rotationConfigName: Default
+  rotationConfigName: Yaw
 --- !u!114 &187028980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3906,7 +3906,8 @@ MonoBehaviour:
   forcePointPosition: 0.25
   reverseDirection: 0
   numOfPoints: 4
-  horizontalAOAOffset: 15
+  horizontalAOAOffsetValue: 0.4
+  calculatedHorizontalAOAOffset: 13.309955
 --- !u!114 &187028981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9623,7 +9624,8 @@ MonoBehaviour:
   forcePointPosition: 0.25
   reverseDirection: 1
   numOfPoints: 4
-  horizontalAOAOffset: 15
+  horizontalAOAOffsetValue: 0.4
+  calculatedHorizontalAOAOffset: -14.157923
 --- !u!114 &535118672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13261,7 +13263,8 @@ MonoBehaviour:
   forcePointPosition: 0.25
   reverseDirection: 0
   numOfPoints: 7
-  horizontalAOAOffset: 15
+  horizontalAOAOffsetValue: 0.4
+  calculatedHorizontalAOAOffset: 15.316065
 --- !u!114 &771659062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17526,7 +17529,8 @@ MonoBehaviour:
   forcePointPosition: 0.25
   reverseDirection: 0
   numOfPoints: 4
-  horizontalAOAOffset: 15
+  horizontalAOAOffsetValue: 0.4
+  calculatedHorizontalAOAOffset: 14.157923
 --- !u!114 &998827677
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23716,7 +23720,8 @@ MonoBehaviour:
   forcePointPosition: 0.25
   reverseDirection: 1
   numOfPoints: 7
-  horizontalAOAOffset: 15
+  horizontalAOAOffsetValue: 0.4
+  calculatedHorizontalAOAOffset: -15.316065
 --- !u!114 &1454007651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37167,7 +37172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputType: 2
   invertInput: 1
-  rotationConfigName: Default
+  rotationConfigName: Yaw
 --- !u!114 &2122167471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37187,7 +37192,8 @@ MonoBehaviour:
   forcePointPosition: 0.25
   reverseDirection: 0
   numOfPoints: 4
-  horizontalAOAOffset: 15
+  horizontalAOAOffsetValue: 0.4
+  calculatedHorizontalAOAOffset: 13.309955
 --- !u!114 &2122167472
 MonoBehaviour:
   m_ObjectHideFlags: 0

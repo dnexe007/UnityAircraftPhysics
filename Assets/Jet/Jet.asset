@@ -88,26 +88,26 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 1
-          inSlope: -0.006666668
-          outSlope: -0.006666668
+          inSlope: -0.018379409
+          outSlope: -0.018379409
           tangentMode: 34
           weightedMode: 0
           inWeight: 0
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 15
-          value: 0.9
-          inSlope: -0.015086485
-          outSlope: -0.015086485
-          tangentMode: 0
+          time: 15.090912
+          value: 0.72263795
+          inSlope: -0.015775012
+          outSlope: -0.015775012
+          tangentMode: 34
           weightedMode: 0
-          inWeight: 0.34597605
+          inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 30
-          value: 0.54435426
-          inSlope: -0.023709714
-          outSlope: -0.023709714
+          time: 31.0177
+          value: 0.51287234
+          inSlope: -0.013170616
+          outSlope: -0.013170616
           tangentMode: 34
           weightedMode: 0
           inWeight: 0.33333334
@@ -224,6 +224,33 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+  - name: Yaw
+    maxRotationAngle: 15
+    rotationSpeed: 75
+    angleMultOverSpeed:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
   surfaceConfigs:
   - surfaceName: Default
     liftAnchor:
@@ -297,30 +324,21 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 1
-          inSlope: -0.006666668
-          outSlope: -0.006666668
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
           inWeight: 0
-          outWeight: 0.33333334
+          outWeight: 0
         - serializedVersion: 3
-          time: 15
-          value: 0.9
-          inSlope: -0.015086485
-          outSlope: -0.015086485
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0.34597605
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 25
-          value: 0.4
-          inSlope: -0.049999997
-          outSlope: -0.049999997
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
+          inWeight: 0
+          outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4

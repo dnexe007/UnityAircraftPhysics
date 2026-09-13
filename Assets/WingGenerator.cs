@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class WingGenerator : MonoBehaviour
 {
 	[SerializeField] [Min(0)] private float edgeZ = 1;
@@ -17,14 +18,14 @@ public class WingGenerator : MonoBehaviour
 
 	[SerializeField] [Range(2, 20)] private int numOfPoints = 4;
 
-	[SerializeField] [Range(0, 89)] private float horizontalAOAOffset;
+	[SerializeField][Range(0, 1)] private float horizontalAOAOffsetValue;
+
+	[SerializeField] private float calculatedHorizontalAOAOffset;
+
 
 	public int NumOfPoints => numOfPoints;
 
-
-	public float HorizontalAOAOffset => horizontalAOAOffset * (reverseDirection ? -1 : 1);
-
-
+	public float HorizontalAOAOffset => calculatedHorizontalAOAOffset;
 
 	private Vector3 BaseFront => transform.position; 
 	private Vector3 BaseBack => transform.TransformPoint(
@@ -37,27 +38,44 @@ public class WingGenerator : MonoBehaviour
 		new(edgeX * (reverseDirection ? -1 : 1), 0, -edgeZ - edgeWidth)
 	);
 
+	private Vector3 StartForcePoint => Vector3.Lerp(BaseFront, BaseBack, forcePointPosition);
+	private Vector3 EndForcePoint => Vector3.Lerp(EdgeFront, EdgeBack, forcePointPosition);
+
+	private void OnValidate()
+	{
+		float calculatedSweepAngle = Vector3.Angle(
+			transform.forward,
+			EndForcePoint - StartForcePoint
+		) - 90;
+
+		calculatedHorizontalAOAOffset = Mathf.Lerp(
+			0,
+			calculatedSweepAngle,
+			horizontalAOAOffsetValue
+		) * (reverseDirection ? -1 : 1);
+	}
 
 	public IEnumerable<WingPoint> GetPoints()
 	{
+		Vector3 startPoint = StartForcePoint;
+		Vector3 endPoint = EndForcePoint;
+
 		float widthSum = (baseWidth + edgeWidth) / 2 * NumOfPoints;
 
 		for (int i = 0; i < NumOfPoints; i++)
 		{
 			float t = (float)i / (NumOfPoints - 1);
 
-			Vector3 front = Vector3.Lerp(BaseFront, EdgeFront, t);
-			Vector3 back = Vector3.Lerp(BaseBack, EdgeBack, t);
+			Vector3 position = Vector3.Lerp(startPoint, endPoint, t);
 
-			Vector3 position = Vector3.Lerp(front, back, forcePointPosition);
-
-			float localWidth = Vector3.Distance(front, back);
+			float localWidth = Mathf.Lerp(baseWidth, edgeWidth, t);
 
 			float forceMult = localWidth / widthSum;
 
 			yield return new(position, forceMult);
 		}
 	}
+
 
 	private void OnDrawGizmos()
 	{
@@ -82,8 +100,8 @@ public class WingGenerator : MonoBehaviour
 			EdgeFront +
 			Vector3.Slerp(
 				transform.forward,
-				transform.right * (reverseDirection? -1: 1),
-				horizontalAOAOffset / 90
+				transform.right * Mathf.Sign(HorizontalAOAOffset),
+				Mathf.Abs(calculatedHorizontalAOAOffset) / 90
 			)
 		);
 	}

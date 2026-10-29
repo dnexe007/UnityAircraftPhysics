@@ -114,11 +114,10 @@ public abstract class AerodynamicSurfaceBase : MonoBehaviour
 	}
 
 
-	public float horizontalAOA;
 
 	private float GetHorizontalAOA(Vector3 pointLocalVelocity)
 	{
-		horizontalAOA = Mathf.Abs(
+		float horizontalAOA = Mathf.Abs(
 			AnglesOfAttack.GetHorizontalAOA(pointLocalVelocity) +
 			pointsGenerator.HorizontalAOAOffset
 		);

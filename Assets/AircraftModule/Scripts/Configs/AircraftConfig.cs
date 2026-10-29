@@ -10,7 +10,6 @@ public class AircraftConfig : ScriptableObject
 	[field: SerializeField] public WingConfig WingConfig { get; private set; } = new();
 	[field: SerializeField] public MovementDragConfig MovementDragConfig { get; private set; } = new();
 	[field: SerializeField] public AngularDragConfig AngularDragConfig { get; private set; } = new();
-	[field: SerializeField] public YawHelperConfig YawHelperConfig { get; private set; } = new();
 
 	[SerializeField] private List<SurfaceRotationConfig> surfaceRotationConfigs = new();
 
